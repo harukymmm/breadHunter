@@ -10,33 +10,43 @@
 
 ## Getting Started
 
-- リポジトリをクローンして、Yarn の依存パッケージをインストール：
+- リポジトリをクローンして、Yarn の依存パッケージをインストール（一回したら大丈夫）：
 
 ```bash
 git clone https://github.com/harukymmm/breadHunter.git
 cd pump
+```
+
+### PC 上で動作確認する場合
+
+- package.json内のmainを試したいファイルのpathに変更：
+- （下はStartScreenを試す場合の例）
+  
+```bash
+"main": "./screen/StartScreen/StartScreen.tsx",
+```
+
+- yarnを実行：
+
+```bash
 yarn
 ```
 
-### PC 上で起動する場合
-
-- iOS 向けにアプリを起動するには、次を実行：
-
-```bash
-yarn ios
-```
-
-- その他の起動オプション
+- android 向けにアプリを起動するには、次を実行：
 
 ```bash
 yarn android
+```
+
+- その他の起動オプション（多分使わない）
+
+```bash
 yarn ios
 yarn web
 ```
 
 ### スマートフォン上で動作確認する場合
 
-**NOTE: 筆者環境では動作未確認できていない**
 
 - 開発サーバを立ち上げる：
 
