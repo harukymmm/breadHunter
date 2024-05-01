@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,7 +17,6 @@ export default function StartScreen() {
   );
 }
 
-registerRootComponent(StartScreen);
 
 const styles = StyleSheet.create({
   container: {
