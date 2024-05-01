@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function StartScreen() {
+  const navigation = useNavigation();
   const { width, height } = Dimensions.get('window');
   return (
     <View style={styles.container}>
