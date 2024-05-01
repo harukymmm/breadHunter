@@ -4,7 +4,7 @@
     "slug": "breadHunter",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/breadicon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
