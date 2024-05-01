@@ -1,11 +1,17 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import { Dimensions } from 'react-native';
 
 export default function StartScreen() {
+  const { width, height } = Dimensions.get('window');
   return (
     <View style={styles.container}>
-      <Text>StartScreenです</Text>
-      <Button title="Start" onPress={() => console.log('Start')} />
+      <Image source={require('./StartScreenImage.jpg')} style={{width: width, height: height}} />
+      <View style={styles.overlay}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={{color: 'black', fontSize: 30}}>Start</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -19,4 +25,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  overlay: {
+    position: 'absolute',
+    top: 205,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    width: 170, 
+    backgroundColor: 'white',
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 5,
+    borderColor: 'black',
+  }
 });
