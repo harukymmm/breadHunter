@@ -10,6 +10,13 @@
       "image": "./assets/breadicon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+       },
+    "plugins": [
+        "expo-font",
+        {
+          "fonts":["./assets/fonts/SmileySans-Oblique.otf"]
+        }
+      ]
     },
     "assetBundlePatterns": [
       "**/*"
@@ -26,5 +33,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
+    
   }
-}
+
