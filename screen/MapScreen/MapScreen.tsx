@@ -29,7 +29,7 @@ registerRootComponent(MapScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e7d0a9',
+    backgroundColor: '#f3e2cf',
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 30,
