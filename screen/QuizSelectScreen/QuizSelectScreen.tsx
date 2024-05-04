@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 
 export default function QuizSelectScreen() {
   const [fontsLoaded, fontError] = useFonts({
-    'SmileySans-Oblique': require('./assets/fonts/SmileySans-Oblique.otf'),
+    'SmileySans-Oblique': require('../../assets/fonts/SmileySans-Oblique.otf'),
   });
 
   if (!fontsLoaded && !fontError) {

@@ -12,10 +12,12 @@
       "backgroundColor": "#ffffff"
        },
     "plugins": [
-        "expo-font",
-        {
-          "fonts":["./assets/fonts/SmileySans-Oblique.otf"]
-        }
+        [
+          "expo-font",
+          {
+            "fonts":["./assets/fonts/SmileySans-Oblique.otf"]
+          }
+        ]
       ]
     },
     "assetBundlePatterns": [
