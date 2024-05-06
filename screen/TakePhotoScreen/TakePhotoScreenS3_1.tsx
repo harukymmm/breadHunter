@@ -92,7 +92,4 @@ const styles = StyleSheet.create({
     height: '25%',
     width: '80%',
   },
-  black:{
-    color: '#332e21',
-  }
 });
