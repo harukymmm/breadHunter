@@ -10,7 +10,21 @@ export default function TakePhotoScreen() {
         <Text style={styles.headingtext}>写真判定</Text>
       </View>
       <View style={styles.graybox}></View>
-      <Button title="Start" onPress={() => console.log('Start')} />
+      <Image 
+        source={require("../../assets/S3_1.png")} 
+        style={styles.image} 
+       /> 
+      <View style={styles.buttoncontainer}>
+        <View style={styles.orangebutton}>
+          <Button title="カメラを起動する" onPress={() => console.log('Move to S3_2')}></Button>
+        </View>
+        <View style={styles.whitebutton}>
+          <Button title="前の画面に戻る" onPress={() => console.log('Move to S2')}></Button>
+          </View>
+      </View>
+      <View style={styles.odaibutton}>
+          <Button title="お題パンの確認" onPress={() => console.log('Move to S1')}></Button>
+      </View>
     </View>
   );
 }
@@ -23,7 +37,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f3e2cf',
-    alignItems: 'center',
   },
   redbox:{
     backgroundColor: '#fc3b00',
@@ -41,12 +54,43 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '0.7%'
   },
+  image:{
+    position: 'absolute',
+    top: '15%',
+    width: '80%',
+    aspectRatio: '446/323',
+    alignSelf: 'center',
+  },
   headingtext:{
     color: '#fbf7ef',
     //alignselfで見出し文字の親オブジェクト（オレンジの四角形）に合わせてセンタリング
     alignSelf: 'center',
     marginLeft: '15%',
     fontSize: 20
+  },
+  buttoncontainer:{
+    position: 'absolute',
+    top: '60%',
+    height: '25%',
+    width: '100%',
+    flexDirection: 'row'
+  },
+  orangebutton:{
+    flex: 1,
+    backgroundColor: '#ff8628',
+    justifyContent: 'center'
+  },
+  whitebutton:{
+    flex: 1,
+    backgroundColor: '#ffffff',
+    justifyContent: 'center'
+  },
+  odaibutton:{
+    position: 'absolute',
+    top: '90%',
+    alignSelf: 'center',
+    height: '25%',
+    width: '80%',
   },
   black:{
     color: '#332e21',
