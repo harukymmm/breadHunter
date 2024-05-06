@@ -11,9 +11,14 @@ export default function TakePhotoScreen() {
       </View>
       <View style={styles.graybox}></View>
       <Image 
-        source={require("../../assets/S3_1.png")} 
-        style={styles.image} 
-       /> 
+        source={require("../../assets/S3_1_character.png")} 
+        style={styles.character} 
+      />
+      <Image 
+       source={require("../../assets/S3_1_fukidashi.png")} 
+        style={styles.fukidashi}
+      />
+      <Text style={styles.serif}>パンを見つけたか！写真を撮ってくれ</Text>
       <View style={styles.buttoncontainer}>
         <View style={styles.orangebutton}>
           <Button title="カメラを起動する" onPress={() => console.log('Move to S3_2')}></Button>
@@ -54,11 +59,26 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '0.7%'
   },
-  image:{
+  fukidashi:{
     position: 'absolute',
-    top: '15%',
+    top: '13%',
     width: '80%',
-    aspectRatio: '446/323',
+    aspectRatio: '446/137',
+    alignSelf: 'center',
+  },
+  character:{
+    position: 'absolute',
+    top: '33%',
+    width: '80%',
+    aspectRatio: '446/188',
+    alignSelf: 'center',
+  },
+  serif:{
+    color:"#332e21",
+    position: 'absolute',
+    top: '16%',
+    width: '60%',
+    fontSize: 25,
     alignSelf: 'center',
   },
   headingtext:{
