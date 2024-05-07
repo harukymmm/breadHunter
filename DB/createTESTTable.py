@@ -2,7 +2,7 @@ import os
 import sqlite3
 
 # データベースファイルのパス
-db_path = "test/TEST.db"
+db_path = "test/practice.db"
 # データベースファイルに接続
 conn = sqlite3.connect(db_path)
 

@@ -2,7 +2,7 @@ import os
 import sqlite3
 
 # データベースファイルのパス
-db_path = "test/TEST.db"
+db_path = "test/practice.db"
 
 # データベースファイルが存在しない場合に作成する
 if not os.path.exists(db_path):

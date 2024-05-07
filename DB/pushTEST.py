@@ -1,7 +1,7 @@
 import sqlite3
 import os
 #DBと接続する
-db_path = 'test/TEST.db'
+db_path = 'test/practice.db'
 conn = sqlite3.connect(db_path)
 cur = conn.cursor()
 
