@@ -7,9 +7,9 @@ cur = conn.cursor()
 
 #追加するレコード
 new_records = [
-    ("あんドーナツ", "チェルキオ", "../images/チェルキオ/bread1.jpg", "A"),
-    ("プレーンフォカッチャ", "チェルキオ", "../images/チェルキオ/bread2.jpg", "B"),
-    ("お豆腐メロンパン", "チェルキオ", "../images/チェルキオ/bread3.jpg", "C")
+    ("あんドーナツ", "チェルキオ", "images/チェルキオ/bread1.jpg", "A"),
+    ("プレーンフォカッチャ", "チェルキオ", "images/チェルキオ/bread2.jpg", "B"),
+    ("お豆腐メロンパン", "チェルキオ", "images/チェルキオ/bread3.jpg", "C")
 ]
 
 # "breads"にレコードを追加
