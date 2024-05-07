@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect }from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 
 import StartScreen  from './screen/StartScreen/StartScreen';
 import QuizSelectScreen from './screen/QuizSelectScreen/QuizSelectScreen';
@@ -11,12 +11,24 @@ import ResultScreen from './screen/ResultScreen/ResultScreen';
 
 const Stack = createStackNavigator();
 
+async function loadFonts() {
+  await Font.loadAsync({
+    'SmileySans-Oblique': require('./assets/fonts/SmileySans-Oblique.ttf'),
+  });
+}
+
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    'SmileySans-Oblique':
-    require('./assets/fonts/SmileySans-Oblique.otf')
-  });
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    loadFonts().then(() => setFontsLoaded(true));
+  }, []);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     
   
