@@ -1,8 +1,7 @@
 //ボタンを実装するコンポーネント
 
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native';
-import { useFonts } from 'expo-font';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 interface Props {
     children?: React.ReactNode;   //ボタン内のテキスト文字情報
@@ -33,12 +32,6 @@ interface Props {
 const ButtonCustom = ({ 
   onClick, children, borderColor, borderWidth, color, height, width, radius, fontSize, fontColor, justifyContent, alignItems}: Props) => {
     
-    const [fontsLoaded, fontError] = useFonts({
-        'SmileySans-Oblique': require('../assets/fonts/SmileySans-Oblique.otf'),
-      });
-      if (!fontsLoaded && !fontError) {
-        return null;
-      }
     const styles = StyleSheet.create({
     button: {
         borderColor: borderColor,

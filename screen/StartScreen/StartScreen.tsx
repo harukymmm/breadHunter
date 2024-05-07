@@ -17,7 +17,9 @@ export default function StartScreen() {
         style={styles.button}
         onPress={() => navigation.navigate('QuizSelect')}
         >
-          <Text style={{color: 'black', fontSize: 30}}>Start</Text>
+          <Text style={styles.font}>
+            Start
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -44,9 +46,16 @@ const styles = StyleSheet.create({
   button: {
     width: 170, 
     backgroundColor: 'white',
-    padding: 10,
+    padding: 0,
     alignItems: 'center',
     borderRadius: 5,
     borderColor: 'black',
+  },
+  font: {
+    fontFamily: 'SmileySans-Oblique',
+    color: 'black', 
+    fontSize: 30,
+    letterSpacing: 5,
+    padding: 1
   }
 });

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-n
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import SelectFigComp from '../../components/CustomSelectComponent';
-import { useFonts } from 'expo-font';
 
 
 export default function QuizSelectScreen() {  
@@ -17,13 +16,13 @@ export default function QuizSelectScreen() {
         <View style={styles.spaceW} />{/* 空白 */}
         <SelectFigComp
          onPress={() => console.log("You press Pan!")}
-         lunk = "ランクS"
+         rank = "ランクS"
          source={require('../../assets/testPan.jpeg')}
          />
          <View style={styles.spaceW} />{/* 空白 */}
         <SelectFigComp
          onPress={() => console.log("You press Pan!")}
-         lunk = "ランクA"
+         rank = "ランクA"
          source={require('../../assets/testPan.jpeg')}
          />
          <View style={styles.spaceW} />{/* 空白 */}
@@ -33,7 +32,7 @@ export default function QuizSelectScreen() {
         <View style={styles.spaceW} />{/* 空白 */} 
         <SelectFigComp
          onPress={() => console.log("You press Pan!")}
-         lunk = "ランクC"
+         rank = "ランクC"
          source={require('../../assets/testPan.jpeg')}
          />
          <View style={styles.spaceW} />{/* 空白 */} 
@@ -44,7 +43,6 @@ export default function QuizSelectScreen() {
           <View style={styles.spaceW} />{/* 空白 */} 
           
         <View style={{flex: 0, height: 40,}} />{/* 空白 */} 
-        <Text style={{fontFamily:'SmileySans-Oblique'}}>ランクSのパンを選んでください</Text>
       </View>
 
      <View style={styles.startButton}>
@@ -52,7 +50,7 @@ export default function QuizSelectScreen() {
         borderColor="#FC3B00"
         borderWidth={5}
         color="#FF8628"
-        height={50}
+        height={70}
         onClick={() => console.log("You clicked on the START!")}
         radius={90}
         width={250}
@@ -62,8 +60,6 @@ export default function QuizSelectScreen() {
         justifyContent='center'
         alignItems='center'
       />
-        
-
      </View>
     </View>
   );

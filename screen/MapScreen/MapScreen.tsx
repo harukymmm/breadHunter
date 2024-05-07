@@ -5,11 +5,11 @@ export default function MapScreen() {
   return (
     <View style={styles.container}>
        <Image 
-        source={require("./bread_UI1.png")} 
+        source={require("../../assets/breadicon.png")} 
         style={{width: 200, height: 200, position: 'absolute', right: 10, bottom: 10 }} 
        /> 
        <Image 
-        source={require("./bread_UI2.png")} 
+        source={require("../../assets/hunter_Longmap.png")} 
         style={{width: 400, height: 400, position: 'absolute', right: 16, bottom: 350 }} 
        /> 
       <Text style={{fontSize:30, position: 'absolute', top: 745, left: 30}}>パンまであと</Text>
