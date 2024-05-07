@@ -44,7 +44,6 @@ export default function QuizSelectScreen() {
           <View style={styles.spaceW} />{/* 空白 */} 
           
         <View style={{flex: 0, height: 40,}} />{/* 空白 */} 
-        <Text style={{fontFamily:'SmileySans-Oblique'}}>ランクSのパンを選んでください</Text>
       </View>
 
      <View style={styles.startButton}>
