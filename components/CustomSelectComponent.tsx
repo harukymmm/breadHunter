@@ -1,8 +1,7 @@
 //パン選択画面で使用するパン画像、ランク、ボタンのセット
 
-import React from 'react';
-import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
-import ButtonCustom from './CustomButtonComponent'
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import ChangeColorButton from './ChangeColorButtonComp';
 import { useFonts } from 'expo-font';
 
@@ -13,7 +12,12 @@ interface Props {
 }
 
 const SelectFigComp = ({onPress, lunk, source}: Props) => {
-    
+  const [isButtonPressed, setIsButtonPressed] = useState(false); // ボタンが押されたかどうかの状態
+  const handleButtonPress = () => {
+    // ボタンが押されたときの処理
+    setIsButtonPressed(true); // ボタンが押された状態をセット
+  };
+
     const [fontsLoaded, fontError] = useFonts({
         'SmileySans-Oblique': require('../assets/fonts/SmileySans-Oblique.otf'),
       });
@@ -56,17 +60,11 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
         </TouchableOpacity>
         <View style={styles.space} />{/* 空白 */}
       <ChangeColorButton
-      borderColor="#FF8628"
       borderWidth={5}
-      color="#FBF7EF"
-      changeColor="#FF8628"
+      onClick={handleButtonPress} // ボタンが押されたときの処理を渡す
+      isPressed={isButtonPressed} // ボタンの押された状態を渡す
       height={35}
-      onClick={() => console.log("You clicked on the miniButton!")}
-      radius={90}
       width={35}
-      children="" 
-      fontColor=''
-      fontSize={0}
       />
       
       </View>

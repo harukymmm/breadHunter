@@ -1,7 +1,7 @@
 //ボタンを実装するコンポーネント
 
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet} from 'react-native';
 import { useFonts } from 'expo-font';
 
 interface Props {

@@ -1,3 +1,4 @@
+//パン詳細の画面を作るコンポーネント
 
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet, ViewStyle, View, Image } from 'react-native';
