@@ -17,7 +17,7 @@ export default function StartScreen() {
         style={styles.button}
         onPress={() => navigation.navigate('QuizSelect')}
         >
-          <Text style={{color: 'black', fontSize: 30}}>Start</Text>
+          <Text style={{fontFamily: 'SmileySans-Oblique',color: 'black', fontSize: 30}}>Start</Text>
         </TouchableOpacity>
       </View>
     </View>
