@@ -7,17 +7,7 @@ import { useFonts } from 'expo-font';
 
 
 export default function QuizSelectScreen() {  
-  
-  //フォント読み込み////////////////////////////////
-  
-  const [fontsLoaded, fontError] = useFonts({
-    'SmileySans-Oblique': require('../../assets/fonts/SmileySans-Oblique.otf'),
-  });
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
 
-  //ボタン///////////////////////////////////
 
   return (
       <View style={styles.container}>
@@ -54,6 +44,7 @@ export default function QuizSelectScreen() {
           <View style={styles.spaceW} />{/* 空白 */} 
           
         <View style={{flex: 0, height: 40,}} />{/* 空白 */} 
+        <Text style={{fontFamily:'SmileySans-Oblique'}}>ランクSのパンを選んでください</Text>
       </View>
 
      <View style={styles.startButton}>
