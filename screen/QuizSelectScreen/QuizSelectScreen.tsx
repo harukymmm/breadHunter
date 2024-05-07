@@ -46,7 +46,7 @@ export default function QuizSelectScreen() {
          lunk = "ランクC"
          source={require('../../assets/testPan.jpeg')}
          />
-         <View style={{flex: 0, width: 20,}} />{/* 空白 */} 
+         <View style={styles.spaceW} />{/* 空白 */} 
          <Image 
           source={require('../../assets/hunter_First.png')}
           style={{ width: 158, height: 200 }}
@@ -111,10 +111,6 @@ const styles = StyleSheet.create({
     flex: 0,
     width: 20,
   },
-  spaceH: {
-    flex: 0,
-    height: 20,
-  }
 });
 
 

@@ -59,6 +59,8 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
       radius={90}
       width={35}
       children="" 
+      fontColor=''
+      fontSize={0}
       justifyContent='center'
       alignItems='center'
       />

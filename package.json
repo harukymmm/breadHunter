@@ -1,7 +1,7 @@
 {
   "name": "breadhunter",
   "version": "1.0.0",
-  "main": "./screen/QuizSelectScreen/QuizSelectScreen.tsx",
+  "main": "./screen/QuizSelectScreen/QuizDetailScreen.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
