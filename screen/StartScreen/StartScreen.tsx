@@ -11,7 +11,7 @@ export default function StartScreen() {
   const { width, height } = Dimensions.get('window');
   return (
     <View style={styles.container}>
-      <Image source={require('./StartScreenImage.jpg')} style={{width: width, height: height}} />
+      <Image source={require('./homeImage.png')} style={{width: width, height: height}} />
       <View style={styles.overlay}>
         <TouchableOpacity 
         style={styles.button}
