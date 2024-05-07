@@ -1,0 +1,6 @@
+django == 4.1
+numpy
+pandas
+opencv-python
+matplotlib
+scikit-learn
