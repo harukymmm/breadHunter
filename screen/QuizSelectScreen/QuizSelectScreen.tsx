@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-n
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import SelectFigComp from '../../components/CustomSelectComponent';
-import { useFonts } from 'expo-font';
 
 
 export default function QuizSelectScreen() {  
@@ -17,13 +16,13 @@ export default function QuizSelectScreen() {
         <View style={styles.spaceW} />{/* 空白 */}
         <SelectFigComp
          onPress={() => console.log("You press Pan!")}
-         lunk = "ランクS"
+         rank = "ランクS"
          source={require('../../assets/testPan.jpeg')}
          />
          <View style={styles.spaceW} />{/* 空白 */}
         <SelectFigComp
          onPress={() => console.log("You press Pan!")}
-         lunk = "ランクA"
+         rank = "ランクA"
          source={require('../../assets/testPan.jpeg')}
          />
          <View style={styles.spaceW} />{/* 空白 */}
@@ -33,7 +32,7 @@ export default function QuizSelectScreen() {
         <View style={styles.spaceW} />{/* 空白 */} 
         <SelectFigComp
          onPress={() => console.log("You press Pan!")}
-         lunk = "ランクC"
+         rank = "ランクC"
          source={require('../../assets/testPan.jpeg')}
          />
          <View style={styles.spaceW} />{/* 空白 */} 

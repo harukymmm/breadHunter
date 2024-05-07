@@ -1,19 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
-import ButtonCustom from './CustomButtonComponent'
-import { useFonts } from 'expo-font';
+import ButtonCustom from './CustomButtonComponent';
 
 interface Props {
     onPress: () => void;
-    lunk?: React.ReactNode;
+    rank?: React.ReactNode;
     source: any;
 }
 
-const SelectFigComp = ({onPress, lunk, source}: Props) => {
+const SelectFigComp = ({onPress, rank, source}: Props) => {
     
     return (
       <View style={styles.container}>
-        <Text style= {styles.lunkText}>{lunk}</Text>
+        <Text style= {styles.rankText}>{rank}</Text>
         <TouchableOpacity onPress={onPress}>
             <Image 
             source={source}  //画像のソースをpropsから受け取る
@@ -40,7 +39,7 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
   }
 
   const styles = StyleSheet.create({
-    lunkText: {
+    rankText: {
         fontFamily: 'SmileySans-Oblique',
         fontSize: 25,
         color: '#332E21',
