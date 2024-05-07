@@ -21,6 +21,8 @@ RUN mkdir /workspace
 ADD . /workspace
 WORKDIR /workspace
 
+RUN pip3 install torch torchvision
+
 RUN pip install -r requirements.txt
 
 
