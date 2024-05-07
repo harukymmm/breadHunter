@@ -62,6 +62,7 @@ const ButtonCustom = ({
           fontFamily: 'SmileySans-Oblique',
           fontSize: fontSize,
           color: fontColor,
+          textAlign: "center"
         }}>{children}</Text>
       </TouchableOpacity>
     );
