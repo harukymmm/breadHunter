@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-n
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import SelectFigComp from '../../components/CustomSelectComponent';
-import { useFonts } from 'expo-font';
+import HukidashiCustom from '../../components/HukidashiComponent';
 
 
 export default function QuizSelectScreen() {  
@@ -14,37 +14,51 @@ export default function QuizSelectScreen() {
        <View style={{flex: 0, height: 50,}} />{/* 空白 */} 
       
       <View style={styles.figContainerF}>
-        <View style={styles.spaceW} />{/* 空白 */}
+        
         <SelectFigComp
          onPress={() => console.log("You press Pan!")}
-         lunk = "ランクS"
+         lunk = "S"
          source={require('../../assets/testPan.jpeg')}
          />
-         <View style={styles.spaceW} />{/* 空白 */}
+         
+         <View style={styles.spaceW} />{/* 空白 */} 
+
         <SelectFigComp
          onPress={() => console.log("You press Pan!")}
-         lunk = "ランクA"
+         lunk = "A"
          source={require('../../assets/testPan.jpeg')}
          />
-         <View style={styles.spaceW} />{/* 空白 */}
+         
       </View>
 
       <View style={styles.figContainerS}>
-        <View style={styles.spaceW} />{/* 空白 */} 
+        
         <SelectFigComp
          onPress={() => console.log("You press Pan!")}
-         lunk = "ランクC"
+         lunk = "C"
          source={require('../../assets/testPan.jpeg')}
          />
-         <View style={styles.spaceW} />{/* 空白 */} 
+        <View style={{flex: 0, width: 10}} />{/* 空白 */} 
+        
+        <View style={styles.character}>
+        <HukidashiCustom
+        height={60}
+        width={180}
+        radius={15}
+        fontSize={15}
+        fontColor='#332E21'
+        justifyContent='center'
+        alignItems='center'
+        >
+          気になるパンを選んでくれ{'\n'}探すのはその次だ
+        </HukidashiCustom>
          <Image 
           source={require('../../assets/hunter_First.png')}
-          style={{ width: 158, height: 200 }}
+          style={{ width: 150, height: 200 }}
+          resizeMode="contain"
           />
-          <View style={styles.spaceW} />{/* 空白 */} 
-          
-        <View style={{flex: 0, height: 40,}} />{/* 空白 */} 
-        <Text style={{fontFamily:'SmileySans-Oblique'}}>ランクSのパンを選んでください</Text>
+        </View>
+        
       </View>
 
      <View style={styles.startButton}>
@@ -74,29 +88,37 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor:'#F3E2CF',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-end',
   },
 
   figContainerF: {
     flex: 0,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     flexWrap: 'wrap', //行を超える場合折り返す
     marginBottom: 20,
+  },
+  character: {
+    flex: 0,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end', // 右寄せ
+    marginBottom: 0,
   },
   figContainerS: {
     flex: 0,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
+    alignItems: 'center', // 右寄せ
     flexWrap: 'wrap', //行を超える場合折り返す
-    marginBottom: 20,
+    marginBottom: 0,
   },
   startButton: {
     flex: 0,
     flexDirection: 'row',
     alignItems: 'center',
   justifyContent: 'center', // 水平方向の中央に配置する
-  marginBottom: 0,
+  marginBottom: 20,
   },
   spaceW: {
     flex: 0,

@@ -1,6 +1,9 @@
+//パン選択画面で使用するパン画像、ランク、ボタンのセット
+
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
 import ButtonCustom from './CustomButtonComponent'
+import ChangeColorButton from './ChangeColorButtonComp';
 import { useFonts } from 'expo-font';
 
 interface Props {
@@ -26,7 +29,9 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
             textAlign: 'center',
         },
         container: {
-            flex: 1,
+            flex: 0,
+            height: 230,
+            width: 160,
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
@@ -42,7 +47,7 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
 
     return (
       <View style={styles.container}>
-      <Text style= {styles.lunkText}>{lunk}</Text>
+      <Text style= {styles.lunkText}>ランク{lunk}</Text>
         <TouchableOpacity onPress={onPress}>
             <Image 
             source={source}  //画像のソースをpropsから受け取る
@@ -50,10 +55,11 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
             />
         </TouchableOpacity>
         <View style={styles.space} />{/* 空白 */}
-      <ButtonCustom
+      <ChangeColorButton
       borderColor="#FF8628"
       borderWidth={5}
       color="#FBF7EF"
+      changeColor="#FF8628"
       height={35}
       onClick={() => console.log("You clicked on the miniButton!")}
       radius={90}
@@ -61,8 +67,6 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
       children="" 
       fontColor=''
       fontSize={0}
-      justifyContent='center'
-      alignItems='center'
       />
       
       </View>
