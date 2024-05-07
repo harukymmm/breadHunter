@@ -52,7 +52,7 @@ export default function QuizSelectScreen() {
         borderColor="#FC3B00"
         borderWidth={5}
         color="#FF8628"
-        height={50}
+        height={70}
         onClick={() => console.log("You clicked on the START!")}
         radius={90}
         width={250}
@@ -62,8 +62,6 @@ export default function QuizSelectScreen() {
         justifyContent='center'
         alignItems='center'
       />
-        
-
      </View>
     </View>
   );

@@ -11,13 +11,6 @@ interface Props {
 
 const SelectFigComp = ({onPress, lunk, source}: Props) => {
     
-    const [fontsLoaded, fontError] = useFonts({
-        'SmileySans-Oblique': require('../assets/fonts/SmileySans-Oblique.otf'),
-      });
-      if (!fontsLoaded && !fontError) {
-        return null;
-      }
-    
     return (
       <View style={styles.container}>
         <Text style= {styles.lunkText}>{lunk}</Text>
@@ -37,8 +30,8 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
           radius={90}
           width={35}
           children="" 
-          fontColor=''
-          fontSize={0}
+          fontColor="#FBF7EF"
+          fontSize={1}
           justifyContent='center'
           alignItems='center'
         />
