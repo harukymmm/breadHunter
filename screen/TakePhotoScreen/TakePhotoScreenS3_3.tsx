@@ -31,7 +31,7 @@ export default function TakePhotoScreen() {
         style={styles.bread}
         />
       <Image
-        source={require("../../assets/hunter_Longmap.png")} 
+        source={require("../../assets/hunter_Check.png")} 
         style={styles.character}
          />
       </View>

@@ -59,7 +59,7 @@ const ChooseBread = ({
                 <View style={styles.button}>
                 <TouchableOpacity onPress={onPress}>
                     <Image
-                    source={require('../assets/breadicon.png')}
+                    source={require('../assets/icon_Close.png')}
                     style={{width: 30, height: 30}}
                     />
                 </TouchableOpacity>
