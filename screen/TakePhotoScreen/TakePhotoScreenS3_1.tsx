@@ -61,7 +61,7 @@ export default function TakePhotoScreen() {
       >前の画面に{'\n'}戻る
       </ButtonCustom>
       </View>
-      <View style={styles.chackButton}>
+      <View style={styles.checkButton}>
       <ButtonCustom
         borderColor="#FF8628"
         borderWidth={5}
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   justifyContent: 'center', // 水平方向の中央に配置する
   marginBottom: 15,
   },
-  chackButton:{
+  checkButton:{
     flex: 0,
     flexDirection: 'row',
     alignItems: 'center',

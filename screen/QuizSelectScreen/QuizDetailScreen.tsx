@@ -10,7 +10,7 @@ return (
     <View style={styles.spaceH} />{/* 空白 */}
     <ChooseBread
     source={require('../../assets/testPan.jpeg')}
-    lunk= "ランクS"
+    lunk= "S"
     detail="ここにパンの説明が入ります"
     long={0.5}   //距離
     onPress={() => console.log("You press Close Bottun!")}

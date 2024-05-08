@@ -11,75 +11,72 @@ export default function QuizSelectScreen() {
 
   return (
       <View style={styles.container}>
-       <View style={{flex: 0, height: 50,}} />{/* 空白 */} 
+          <View style={{flex: 0, height: 50,}} />{/* 空白 */} 
       
-      <View style={styles.figContainerF}>
+        <View style={styles.figContainerF}>
         
-        <SelectFigComp
-         onPress={() => console.log("You press Pan!")}
-         lunk = "S"
-         source={require('../../assets/testPan.jpeg')}
-         />
+          <SelectFigComp
+            onPress={() => console.log("You press Pan!")}
+            lunk = "S"
+            source={require('../../assets/testPan.jpeg')}
+            />
          
-         <View style={styles.spaceW} />{/* 空白 */} 
+          <View style={styles.spaceW} />{/* 空白 */} 
 
-        <SelectFigComp
-         onPress={() => console.log("You press Pan!")}
-         lunk = "A"
-         source={require('../../assets/testPan.jpeg')}
-         />
-         
-      </View>
-
-      <View style={styles.figContainerS}>
-        
-        <SelectFigComp
-         onPress={() => console.log("You press Pan!")}
-         lunk = "C"
-         source={require('../../assets/testPan.jpeg')}
-         />
-        <View style={{flex: 0, width: 10}} />{/* 空白 */} 
-        
-        <View style={styles.character}>
-        <HukidashiCustom
-        height={60}
-        width={180}
-        radius={15}
-        fontSize={15}
-        fontColor='#332E21'
-        justifyContent='center'
-        alignItems='center'
-        >
-          気になるパンを選んでくれ{'\n'}探すのはその次だ
-        </HukidashiCustom>
-         <Image 
-          source={require('../../assets/hunter_First.png')}
-          style={{ width: 150, height: 200 }}
-          resizeMode="contain"
+          <SelectFigComp
+          onPress={() => console.log("You press Pan!")}
+          lunk = "A"
+          source={require('../../assets/testPan.jpeg')}
           />
+         
+         </View>
+
+        <View style={styles.figContainerS}>
+        
+          <SelectFigComp
+          onPress={() => console.log("You press Pan!")}
+          lunk = "C"
+          source={require('../../assets/testPan.jpeg')}
+          />
+         <View style={{flex: 0, width: 10}} />{/* 空白 */} 
+        
+          <View style={styles.character}>
+            <HukidashiCustom
+            height={60}
+            width={180}
+            radius={15}
+            fontSize={15}
+            fontColor='#332E21'
+            justifyContent='center'
+            alignItems='center'
+            >
+              気になるパンを選んでくれ{'\n'}探すのはその次だ
+            </HukidashiCustom>
+            <Image 
+              source={require('../../assets/hunter_First.png')}
+              style={{ width: 150, height: 200 }}
+              resizeMode="contain"
+              />
+          </View>
         </View>
-        
-      </View>
 
-     <View style={styles.startButton}>
-      <ButtonCustom
-        borderColor="#FC3B00"
-        borderWidth={5}
-        color="#FF8628"
-        height={50}
-        onClick={() => console.log("You clicked on the START!")}
-        radius={90}
-        width={250}
-        children="START" 
-        fontSize={30}
-        fontColor='#FBF7EF'
-        justifyContent='center'
-        alignItems='center'
-      />
-        
-
+          <View style={styles.startButton}>
+            <ButtonCustom
+              borderColor="#FC3B00"
+              borderWidth={5}
+              color="#FF8628"
+              height={50}
+              onClick={() => console.log("You clicked on the START!")}
+              radius={90}
+              width={250}
+              children="START" 
+              fontSize={30}
+              fontColor='#FBF7EF'
+              justifyContent='center'
+              alignItems='center'
+            />
+          </View>
      </View>
-    </View>
   );
 
 }

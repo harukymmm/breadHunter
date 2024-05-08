@@ -69,7 +69,7 @@ const ChooseBread = ({
             source={source}  //画像のソースをpropsから受け取る
             style={{ width: 300, height: 300}}
             />
-                <Text style= {styles.lunkText}>{lunk}</Text>
+                <Text style= {styles.lunkText}>ランク{lunk}</Text>
                 <Text style = {styles.detailText}>{detail}</Text>
                 <Text style = {styles.detailText}>ここから{long}km</Text>
                 
