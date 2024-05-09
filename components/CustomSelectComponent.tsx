@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import ChangeColorButton from './ChangeColorButtonComp';
-import { useFonts } from 'expo-font';
+
 
 interface Props {
     onPress: () => void;
@@ -18,12 +18,6 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
     setIsButtonPressed(true); // ボタンが押された状態をセット
   };
 
-    const [fontsLoaded, fontError] = useFonts({
-        'SmileySans-Oblique': require('../assets/fonts/SmileySans-Oblique.otf'),
-      });
-      if (!fontsLoaded && !fontError) {
-        return null;
-      }
     
      const styles = StyleSheet.create({
         lunkText: {

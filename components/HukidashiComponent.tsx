@@ -2,7 +2,6 @@
 
 import React from "react";
 import { View, Text, StyleSheet, ViewStyle } from 'react-native';
-import { useFonts } from 'expo-font';
 
 interface Props {
     children?: React.ReactNode;   //テキスト文字情報
@@ -18,12 +17,6 @@ interface Props {
 const HukidashiCustom = ({ 
    children, height, width, radius, fontSize, fontColor, justifyContent, alignItems}: Props) => {
     
-    const [fontsLoaded, fontError] = useFonts({
-        'SmileySans-Oblique': require('../assets/fonts/SmileySans-Oblique.otf'),
-      });
-      if (!fontsLoaded && !fontError) {
-        return null;
-      }
     const styles = StyleSheet.create({
     container: {
         backgroundColor: "#FBF7EF",

@@ -41,8 +41,7 @@ export default function MapScreen() {
               fontColor='#332E21'
               justifyContent='center'
               alignItems='center'
-            >
-             </DistanceView>
+            />
               </View>
           <ButtonCustom
             onClick={() => console.log("Push 戻るボタン")}
