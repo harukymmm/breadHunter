@@ -1,24 +1,82 @@
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import ButtonCustom from "../../components/CustomButtonComponent";
+import HukidashiCustom from '../../components/HukidashiComponent';
+import Colorhukidashi from '../../components/ColorHukidashi';
 
 export default function MapScreen() {
   return (
     <View style={styles.container}>
+      <Colorhukidashi
+              children='パン付近に到着！'
+              height={50} 
+              width={500}
+              radius={0}
+              borderColor=''
+              borderWidth={0}
+              color='#FF8628'
+              fontSize={25} 
+              fontColor='#FBF7EF'
+              justifyContent='center'
+              alignItems='center'
+            />
+       <View style = {styles.mapzoon}>
        <Image 
-        source={require("./bread_UI4.png")} 
-        style={{width: 200, height: 200, position: 'absolute', left: 10, bottom: 10 }} 
+        source={require("../../assets/breadicon.png")}  
+        style={styles.mapimage}
        /> 
-       <Image 
-        source={require("./bread_UI3.png")} 
-        style={{width: 400, height: 400, position: 'absolute', right: 16, bottom: 350 }} 
+       </View>
+       <View style={styles.characterContainer}>
+          <Image 
+        source={require("../../assets/hunter_Near.png")} 
+        style={styles.character} 
        /> 
-      <Text style={{fontSize:30, position: 'absolute', bottom: 250, right: 30}}>この中のどこかにパンが！</Text>
-      <View style={{width: 120, position:'absolute', bottom: 150, right:30}}>
-        <Button title="パン発見!" onPress={() => console.log('更新しました')}/>
-      </View>
-      <View style={{width: 120, position:'absolute', bottom: 100, right:30}}>
-        <Button title="諦めるか…" onPress={() => console.log('更新しました')}/>
-      </View>
+       <View style={ styles.buttonContainer }>
+              <View style={ styles.hukidasi }>
+              <HukidashiCustom
+              children='この中のどこかにパンが...'
+              height={50} 
+              width={220}
+              radius={5}
+              fontSize={20} 
+              fontColor='#332E21'
+              justifyContent='center'
+              alignItems='center'
+            />
+              </View>
+              <ButtonCustom
+            onClick={() => console.log("Push パン発見ボタン")}
+            children="パン発見！"
+            borderColor='#FF8628'
+            borderWidth={5}
+            color='#FF8628'
+            height={45}
+            radius={90}
+            width={180}
+            fontSize={18}
+            fontColor="#FBF7EF"
+            justifyContent='center'
+            alignItems='center'
+          />
+          <View style={{flex: 0, height: 10,}} />{/* 空白 */} 
+              <ButtonCustom
+            onClick={() => console.log("Push 諦めるボタン")}
+            children="諦める"
+            borderColor='#FF8628'
+            borderWidth={5}
+            color="#FBF7EF"
+            height={45}
+            radius={90}
+            width={180}
+            fontSize={18}
+            fontColor='#FF8628'
+            justifyContent='center'
+            alignItems='center'
+            />
+          
+        </View>
+       
+       </View>
     </View>
   );
 }
@@ -30,7 +88,59 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f3e2cf',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 30,
+    justifyContent: 'flex-end', 
+    paddingHorizontal: 10, // 左右の余白を追加
+  },
+  mapzoon: {
+    flex: 0,
+    width: 350,
+    height: 350,
+    backgroundColor: "#FBF7EF", 
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center', 
+    marginBottom: 10,
+  },
+  mapimage: {
+    flex: 0,
+    width: 300,
+    height: 300,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center', 
+  },
+  hukidasi:{
+    flex: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center', 
+    marginBottom: 30,
+  },
+  characterContainer:{
+  flex: 0,
+  flexDirection: 'row',
+  alignItems:'flex-end',
+  justifyContent: 'flex-end', 
+  marginBottom: 0,
+  },
+  character: {
+    flex: 1,
+    width: 200,
+    height: 200,
+    alignSelf: 'center',
+    alignItems: 'flex-end', // 要素を右揃え
+    resizeMode: 'contain', 
+    flexDirection: 'row',
+    justifyContent: 'flex-end', 
+    zIndex: 999,
+  },
+  buttonContainer: {
+    flex: 1,
+    alignSelf: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center', 
+    alignItems: 'flex-end', // 要素を右揃え
+    marginBottom: 35,
   },
 });
