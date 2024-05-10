@@ -43,13 +43,13 @@ export default function MapScreen() {
               alignItems='center'
             />
               </View>
-          <ButtonCustom
-            onClick={() => console.log("Push 戻るボタン")}
+              <ButtonCustom
+            onClick={() => console.log("Push パン選択に戻るボタン")}
             children="パン選択に戻る"
             borderColor='#FF8628'
             borderWidth={5}
             color="#FBF7EF"
-            height={50}
+            height={45}
             radius={90}
             width={150}
             fontSize={18}
@@ -57,6 +57,22 @@ export default function MapScreen() {
             justifyContent='center'
             alignItems='center'
           />
+          <View style={{flex: 0, height: 5,}} />{/* 空白 */} 
+              <ButtonCustom
+            onClick={() => console.log("Push 諦めるボタン")}
+            children="諦める"
+            borderColor='#FF8628'
+            borderWidth={5}
+            color="#FBF7EF"
+            height={45}
+            radius={90}
+            width={150}
+            fontSize={18}
+            fontColor='#FF8628'
+            justifyContent='center'
+            alignItems='center'
+            />
+          
         </View>
        <Image 
         source={require("../../assets/hunter_Longmap.png")} 
@@ -108,14 +124,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center', 
-    marginBottom: 50,
+    marginBottom: 30,
   },
   characterContainer:{
   flex: 0,
   flexDirection: 'row',
   alignItems:'flex-end',
   justifyContent: 'flex-end', 
-  marginBottom: 10,
+  marginBottom: 0,
   },
   character: {
     flex: 1,
