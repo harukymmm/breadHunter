@@ -3,6 +3,7 @@ import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import HukidashiCustom from '../../components/HukidashiComponent';
 import Colorhukidashi from '../../components/ColorHukidashi';
+import MapView from 'react-native-maps';
 
 export default function MapScreenNearBakery() {
   return (
@@ -21,10 +22,16 @@ export default function MapScreenNearBakery() {
         alignItems='center'
       />
       <View style = {styles.mapzoon}>
-       <Image 
-        source={require("../../assets/breadicon.png")}  
-        style={styles.mapimage}
-       /> 
+        <MapView
+            style={styles.mapimage}
+            initialRegion={{
+              latitude: 35.0252986,
+              longitude: 135.781654,
+              latitudeDelta: 0.003,
+              longitudeDelta: 0.003,
+            }}
+            zoomEnabled={false}
+        /> 
       </View>
        <View style={styles.characterContainer}>
           <Image 
@@ -91,8 +98,8 @@ const styles = StyleSheet.create({
   },
   mapzoon: {
     flex: 0,
-    width: 350,
-    height: 350,
+    width: 375,
+    height: 375,
     backgroundColor: "#FBF7EF", 
     alignSelf: 'center',
     flexDirection: 'row',
@@ -102,8 +109,8 @@ const styles = StyleSheet.create({
   },
   mapimage: {
     flex: 0,
-    width: 300,
-    height: 300,
+    width: 350,
+    height: 350,
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'center', 

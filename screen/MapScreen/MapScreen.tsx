@@ -2,16 +2,23 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
+import MapView from 'react-native-maps';
 
 export default function MapScreen() {
 
   return (
     <View style={styles.container}>
        <View style = {styles.mapzoon}>
-          <Image 
-            source={require("../../assets/breadicon.png")}  
-            style={styles.mapimage}
-          /> 
+       <MapView
+          style={styles.mapimage}
+          initialRegion={{
+            latitude: 35.0252986,
+            longitude: 135.781654,
+            latitudeDelta: 0.003,
+            longitudeDelta: 0.003,
+          }}
+          zoomEnabled={false}
+        />
        </View>
        <View style={styles.reloadbutton}>
           <ButtonCustom
@@ -94,8 +101,8 @@ const styles = StyleSheet.create({
   },
   mapzoon: {
     flex: 0,
-    width: 350,
-    height: 350,
+    width: 375,
+    height: 375,
     backgroundColor: "#FBF7EF", 
     alignSelf: 'center',
     flexDirection: 'row',
@@ -105,8 +112,8 @@ const styles = StyleSheet.create({
   },
   mapimage: {
     flex: 0,
-    width: 300,
-    height: 300,
+    width: 350,
+    height: 350,
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'center', 
