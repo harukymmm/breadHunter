@@ -4,14 +4,13 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import ChangeColorButton from './ChangeColorButtonComp';
 
-
 interface Props {
     onPress: () => void;
-    lunk?: React.ReactNode;
+    rank?: React.ReactNode;
     source: any;
 }
 
-const SelectFigComp = ({onPress, lunk, source}: Props) => {
+const SelectFigComp = ({onPress, rank, source}: Props) => {
   const [isButtonPressed, setIsButtonPressed] = useState(false); // ボタンが押されたかどうかの状態
   const handleButtonPress = () => {
     // ボタンが押されたときの処理
@@ -45,7 +44,7 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
 
     return (
       <View style={styles.container}>
-      <Text style= {styles.lunkText}>ランク{lunk}</Text>
+      <Text style= {styles.rankText}>ランク{rank}</Text>
         <TouchableOpacity onPress={onPress}>
             <Image 
             source={source}  //画像のソースをpropsから受け取る
@@ -60,10 +59,31 @@ const SelectFigComp = ({onPress, lunk, source}: Props) => {
       height={35}
       width={35}
       />
-      
       </View>
     );
   }
+
+  const styles = StyleSheet.create({
+    rankText: {
+        fontFamily: 'SmileySans-Oblique',
+        fontSize: 25,
+        color: '#332E21',
+        textAlign: 'center',
+    },
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor:'#FBF7EF', //背景色
+        borderColor: '#FBF7EF', // 白色の背景枠
+        borderWidth: 5, // 枠の太さ
+          },
+    space: {
+        flex: 0,
+        height: 5
+          }
+    });
 
   
   export default SelectFigComp;

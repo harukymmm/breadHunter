@@ -18,3 +18,10 @@ services:
     volumes:
       - ./python:/python
 
+  sqlite:
+    container_name: DB
+    tty: true
+    build: ./DB
+    volumes:
+      - ./DB:/sqlite
+
