@@ -5,3 +5,8 @@ export type StackParamList = {
   TakePhoto: undefined;
   Result: undefined;
 };
+
+export type MapStack = {
+  MapDefault: undefined;
+  NearBakery: undefined;
+};

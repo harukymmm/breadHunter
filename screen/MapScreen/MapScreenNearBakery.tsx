@@ -8,74 +8,72 @@ export default function MapScreenNearBakery() {
   return (
     <View style={styles.container}>
       <Colorhukidashi
-              children='パン付近に到着！'
-              height={50} 
-              width={500}
-              radius={0}
-              borderColor=''
-              borderWidth={0}
-              color='#FF8628'
-              fontSize={25} 
-              fontColor='#FBF7EF'
-              justifyContent='center'
-              alignItems='center'
-            />
-       <View style = {styles.mapzoon}>
+        children='パン付近に到着！'
+        height={50} 
+        width={500}
+        radius={0}
+        borderColor=''
+        borderWidth={0}
+        color='#FF8628'
+        fontSize={25} 
+        fontColor='#FBF7EF'
+        justifyContent='center'
+        alignItems='center'
+      />
+      <View style = {styles.mapzoon}>
        <Image 
         source={require("../../assets/breadicon.png")}  
         style={styles.mapimage}
        /> 
-       </View>
+      </View>
        <View style={styles.characterContainer}>
           <Image 
-        source={require("../../assets/hunter_Near.png")} 
-        style={styles.character} 
-       /> 
-       <View style={ styles.buttonContainer }>
+            source={require("../../assets/hunter_Near.png")} 
+            style={styles.character} 
+          /> 
+          <View style={ styles.buttonContainer }>
               <View style={ styles.hukidasi }>
-              <HukidashiCustom
-              children='この中のどこかにパンが...'
-              height={50} 
-              width={220}
-              radius={5}
-              fontSize={20} 
-              fontColor='#332E21'
-              justifyContent='center'
-              alignItems='center'
-            />
+                <HukidashiCustom
+                  children='この中のどこかにパンが...'
+                  height={50} 
+                  width={220}
+                  radius={5}
+                  fontSize={20} 
+                  fontColor='#332E21'
+                  justifyContent='center'
+                  alignItems='center'
+                />
               </View>
               <ButtonCustom
-            onClick={() => console.log("Push パン発見ボタン")}
-            children="パン発見！"
-            borderColor='#FF8628'
-            borderWidth={5}
-            color='#FF8628'
-            height={45}
-            radius={90}
-            width={180}
-            fontSize={18}
-            fontColor="#FBF7EF"
-            justifyContent='center'
-            alignItems='center'
-          />
-          <View style={{flex: 0, height: 10,}} />{/* 空白 */} 
+                onClick={() => console.log("Push パン発見ボタン")}
+                children="パン発見！"
+                borderColor='#FF8628'
+                borderWidth={5}
+                color='#FF8628'
+                height={45}
+                radius={90}
+                width={180}
+                fontSize={18}
+                fontColor="#FBF7EF"
+                justifyContent='center'
+                alignItems='center'
+              />
+              <View style={{flex: 0, height: 10,}} />{/* 空白 */} 
               <ButtonCustom
-            onClick={() => console.log("Push 諦めるボタン")}
-            children="諦める"
-            borderColor='#FF8628'
-            borderWidth={5}
-            color="#FBF7EF"
-            height={45}
-            radius={90}
-            width={180}
-            fontSize={18}
-            fontColor='#FF8628'
-            justifyContent='center'
-            alignItems='center'
-            />
-          
-        </View>
-       
+                onClick={() => console.log("Push 諦めるボタン")}
+                children="諦める"
+                borderColor='#FF8628'
+                borderWidth={5}
+                color="#FBF7EF"
+                height={45}
+                radius={90}
+                width={180}
+                fontSize={18}
+                fontColor='#FF8628'
+                justifyContent='center'
+                alignItems='center'
+              />
+          </View>
        </View>
     </View>
   );
