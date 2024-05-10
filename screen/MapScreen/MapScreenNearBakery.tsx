@@ -4,7 +4,7 @@ import ButtonCustom from "../../components/CustomButtonComponent";
 import HukidashiCustom from '../../components/HukidashiComponent';
 import Colorhukidashi from '../../components/ColorHukidashi';
 
-export default function MapScreen() {
+export default function MapScreenNearBakery() {
   return (
     <View style={styles.container}>
       <Colorhukidashi
@@ -81,7 +81,7 @@ export default function MapScreen() {
   );
 }
 
-registerRootComponent(MapScreen);
+registerRootComponent(MapScreenNearBakery);
 
 const styles = StyleSheet.create({
   container: {
