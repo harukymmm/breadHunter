@@ -7,12 +7,6 @@ import HukidashiCustom from '../../components/HukidashiComponent';
 export default function TakePhotoScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.redbox}></View>
-      <View style={styles.orangebox}>
-        <Text style={styles.headingtext}>写真判定</Text>
-      </View>
-      <View style={styles.graybox}>
-      </View>
       <View style={styles.fukidashi}>
       <HukidashiCustom
       height={90}
@@ -91,29 +85,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  redbox:{
-    flex: 0,
-    backgroundColor: '#fc3b00',
-    width: '100%',
-    height: '3%'
-  },
-  orangebox:{
-    flex: 0,
-    flexDirection: 'row',
-    backgroundColor: '#ff8628',
-    width: '100%',
-    height: '8.5%'
-  },
-  graybox:{
-    flex: 0,
-    backgroundColor: '#d6cfbd',
-    width: '100%',
-    height: '0.7%'
-  },
   fukidashi:{
     flex: 0,
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 40,
+    marginBottom: 10,
   },
   character:{
     flex: 0,

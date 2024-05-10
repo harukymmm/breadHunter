@@ -7,17 +7,12 @@ import ButtonCustom from "../../components/CustomButtonComponent";
 export default function TakePhotoScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.redbox}></View>
-      <View style={styles.orangebox}>
-        <Text style={styles.headingtext}>写真判定</Text>
-      </View>
-      <View style={styles.graybox}></View>
       <View style={styles.fukidashi}>
         <HukidashiCustom
         height={90}
         width={250}
         radius={15}
-        fontSize={20}
+        fontSize={25}
         fontColor='#332E21'
         justifyContent='center'
         alignItems='center'
@@ -37,16 +32,16 @@ export default function TakePhotoScreen() {
       </View>
       <View style={styles.okbutton}>
         <ButtonCustom
-        borderColor='#fc3b00'
+        borderColor="#FF8628"
         borderWidth={5}
-        color="#FBF7EF"
+        color="#FF8628"
         height={80}
         onClick={() => console.log("Push OKボタン")}
-        radius={90}
+        radius={45}
         width={300}
         children="OK!" 
         fontSize={25}
-        fontColor='#fc3b00'
+        fontColor="#FBF7EF"
         justifyContent='center'
         alignItems='center'
       />
@@ -96,34 +91,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f3e2cf',
   },
-  redbox:{
-    backgroundColor: '#fc3b00',
-    width: '100%',
-    height: '3%'
-  },
-  orangebox:{
-    flexDirection: 'row',
-    backgroundColor: '#ff8628',
-    width: '100%',
-    height: '8.5%'
-  },
-  graybox:{
-    backgroundColor: '#d6cfbd',
-    width: '100%',
-    height: '0.7%'
-  },
   fukidashi:{
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center', // 水平方向の中央に配置する
-    marginTop: 0,
-    marginBottom: 25,
+    marginTop: 50,
+    marginBottom: 5,
   },
   images:{
     flex: 0,
     width: 350,
-    height: 200,
+    height: 300,
     alignSelf: 'center',
     resizeMode: 'contain', 
     flexDirection: 'row',
@@ -132,18 +111,18 @@ const styles = StyleSheet.create({
   },
   bread:{
     flex: 0,
-    width: 230,
-    height: 230,
+    width: 250,
+    height: 250,
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around', 
-    marginBottom: 20,
+    marginBottom: 0,
   },
   character:{
     flex: 0,
     width: 100,
     height: 200,
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
     resizeMode: 'contain', 
     flexDirection: 'column',
     justifyContent: 'flex-end', 
