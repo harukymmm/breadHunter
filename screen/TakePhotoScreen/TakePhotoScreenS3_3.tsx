@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import HukidashiCustom from '../../components/HukidashiComponent';
+import ButtonCustom from "../../components/CustomButtonComponent";
 
 //Viewという要素を作ってそこにstyleを適用する
 export default function TakePhotoScreen() {
@@ -10,25 +12,76 @@ export default function TakePhotoScreen() {
         <Text style={styles.headingtext}>写真判定</Text>
       </View>
       <View style={styles.graybox}></View>
-      <Image 
-       source={require("../../assets/S3_1_fukidashi.png")} 
-        style={styles.fukidashi}
-      />
-      <Text style={styles.serif}>この写真を使うか？</Text>
-      <Image 
-        source={require("../../assets/hunter_Longmap.png")} 
-        style={styles.character} 
-      />
-      <View style={styles.buttoncontainer}>
-        <View style={styles.orangebutton}>
-          <Button title="前の画面に戻る" onPress={() => console.log('Move to S3_2')}></Button>
-        </View>
-        <View style={styles.whitebutton}>
-          <Button title="写真を参照" onPress={() => console.log('move to Photo folder')}></Button>
-          </View>
+      <View style={styles.fukidashi}>
+        <HukidashiCustom
+        height={90}
+        width={250}
+        radius={15}
+        fontSize={20}
+        fontColor='#332E21'
+        justifyContent='center'
+        alignItems='center'
+        >
+        この写真を使うか?
+        </HukidashiCustom>
+      </View>
+      <View style={styles.images}>
+      <Image
+        source={require('../../assets/testPan.jpeg')}
+        style={styles.bread}
+        />
+      <Image
+        source={require("../../assets/hunter_Check.png")} 
+        style={styles.character}
+         />
       </View>
       <View style={styles.okbutton}>
-          <Button title="OK!" onPress={() => console.log('Move to result')}></Button>
+        <ButtonCustom
+        borderColor='#fc3b00'
+        borderWidth={5}
+        color="#FBF7EF"
+        height={80}
+        onClick={() => console.log("Push OKボタン")}
+        radius={90}
+        width={300}
+        children="OK!" 
+        fontSize={25}
+        fontColor='#fc3b00'
+        justifyContent='center'
+        alignItems='center'
+      />
+      </View>
+        <View style={styles.buttoncontainer}>
+        <ButtonCustom
+        borderColor="#FF8628"
+        borderWidth={5}
+        color="#FBF7EF"
+        height={120}
+        onClick={() => console.log("Push 戻るボタン")}
+        radius={45}
+        width={120}
+        children="戻る" 
+        fontSize={25}
+        fontColor='#FF8628'
+        justifyContent='center'
+        alignItems='center'
+      />
+      <View style={{flex: 0, width: 10}} />{/* 空白 */} 
+      <ButtonCustom
+        borderColor="#FF8628"
+        borderWidth={5}
+        color="#FBF7EF"
+        height={120}
+        onClick={() => console.log("Push ライブラリボタン")}
+        radius={45}
+        width={120}
+        children="ライブラリから選択" 
+        fontSize={25}
+        fontColor='#FF8628'
+        justifyContent='center'
+        alignItems='center'
+      />
+      
       </View>
     </View>
   );
@@ -60,27 +113,41 @@ const styles = StyleSheet.create({
     height: '0.7%'
   },
   fukidashi:{
-    position: 'absolute',
-    top: '14%',
-    height: '10%',
-    width: '80%',
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center', // 水平方向の中央に配置する
+    marginTop: 0,
+    marginBottom: 25,
+  },
+  images:{
+    flex: 0,
+    width: 350,
+    height: 200,
     alignSelf: 'center',
+    resizeMode: 'contain', 
+    flexDirection: 'row',
+    justifyContent: 'space-around', 
+    marginBottom: 15,
+  },
+  bread:{
+    flex: 0,
+    width: 230,
+    height: 230,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around', 
+    marginBottom: 20,
   },
   character:{
-    position: 'absolute',
-    top: '30%',
-    left: '60%',
-    height: '20%',
-    width: '35%',
-    aspectRatio: '738/620'
-  },
-  serif:{
-    color:"#332e21",
-    position: 'absolute',
-    top: '16%',
-    width: '60%',
-    fontSize: 25,
+    flex: 0,
+    width: 100,
+    height: 200,
     alignSelf: 'center',
+    resizeMode: 'contain', 
+    flexDirection: 'column',
+    justifyContent: 'flex-end', 
+    marginBottom: 0,
   },
   headingtext:{
     color: '#fbf7ef',
@@ -89,29 +156,24 @@ const styles = StyleSheet.create({
     marginLeft: '15%',
     fontSize: 20
   },
-  buttoncontainer:{
-    position: 'absolute',
-    top: '75%',
-    height: '17%',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly'
-  },
+
   orangebutton:{
     width: '30%',
     backgroundColor: '#ff8628',
     justifyContent: 'center'
   },
-  whitebutton:{
-    width: '30%',
-    backgroundColor: '#ffffff',
-    justifyContent: 'center'
-  },
   okbutton:{
-    position: 'absolute',
-    top: '65%',
-    alignSelf: 'center',
-    height: '25%',
-    width: '80%',
+    flex: 0,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center', // 水平方向の中央に配置する
+    marginBottom: 15,
+  },
+  buttoncontainer:{
+    flex: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center', // 水平方向の中央に配置する
+    marginBottom: 15,
   },
 });

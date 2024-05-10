@@ -1,7 +1,7 @@
 //ボタンを実装するコンポーネント
 
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 interface Props {
     children?: React.ReactNode;   //ボタン内のテキスト文字情報
@@ -55,6 +55,7 @@ const ButtonCustom = ({
           fontFamily: 'SmileySans-Oblique',
           fontSize: fontSize,
           color: fontColor,
+          textAlign: "center"
         }}>{children}</Text>
       </TouchableOpacity>
     );

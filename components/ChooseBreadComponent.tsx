@@ -1,3 +1,4 @@
+//パン詳細の画面を作るコンポーネント
 
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
@@ -22,11 +23,21 @@ const ChooseBread = ({ onPress, source, rank, detail, long}: Props) => {
             </TouchableOpacity>
             </View> 
             <View style={styles.container}>
+                <View style={styles.button}>
+                <TouchableOpacity onPress={onPress}>
+                    <Image
+                    source={require('../assets/icon_Close.png')}
+                    style={{width: 30, height: 30}}
+                    />
+                </TouchableOpacity>
+                </View> 
+                <View style={styles.container}>
                 <Image 
-                source={source}  //画像のソースをpropsから受け取る
-                style={{ width: 300, height: 300}}
-                />
-                <Text style= {styles.rankText}>{rank}</Text>
+            source={source}  //画像のソースをpropsから受け取る
+            style={{ width: 300, height: 300}}
+            />
+                <Text style= {styles.rankText}>ランク{rank}</Text>
+
                 <Text style = {styles.detailText}>{detail}</Text>
                 <Text style = {styles.detailText}>ここから{long}km</Text> 
             </View>
