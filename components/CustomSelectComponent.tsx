@@ -17,31 +17,6 @@ const SelectFigComp = ({onPress, rank, source}: Props) => {
     setIsButtonPressed(true); // ボタンが押された状態をセット
   };
 
-    
-     const styles = StyleSheet.create({
-        lunkText: {
-            fontFamily: 'SmileySans-Oblique',
-            fontSize: 25,
-            color: '#332E21',
-            textAlign: 'center',
-        },
-        container: {
-            flex: 0,
-            height: 230,
-            width: 160,
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor:'#FBF7EF', //背景色
-            borderColor: '#FBF7EF', // 白色の背景枠
-            borderWidth: 5, // 枠の太さ
-              },
-        space: {
-            flex: 0,
-            height: 5
-              }
-        });
-
     return (
       <View style={styles.container}>
       <Text style= {styles.rankText}>ランク{rank}</Text>
