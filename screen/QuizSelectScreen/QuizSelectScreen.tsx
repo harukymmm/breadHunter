@@ -12,12 +12,11 @@ export default function QuizSelectScreen() {
   return (
       <View style={styles.container}>
           <View style={{flex: 0, height: 50,}} />{/* 空白 */} 
-      
-        <View style={styles.figContainerF}>
+          <View style={styles.figContainerF}>
         
           <SelectFigComp
             onPress={() => console.log("You press Pan!")}
-            lunk = "S"
+            rank = "S"
             source={require('../../assets/testPan.jpeg')}
             />
          
@@ -25,7 +24,7 @@ export default function QuizSelectScreen() {
 
           <SelectFigComp
           onPress={() => console.log("You press Pan!")}
-          lunk = "A"
+          rank = "A"
           source={require('../../assets/testPan.jpeg')}
           />
          
@@ -35,7 +34,7 @@ export default function QuizSelectScreen() {
         
           <SelectFigComp
           onPress={() => console.log("You press Pan!")}
-          lunk = "C"
+          rank = "C"
           source={require('../../assets/testPan.jpeg')}
           />
          <View style={{flex: 0, width: 10}} />{/* 空白 */} 
