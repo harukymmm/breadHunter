@@ -41,7 +41,6 @@ const ChooseBread = ({ onPress, source, rank, detail, long}: Props) => {
                 </View>
                 <View style={styles.spaceW} />{/* 空白 */}
         </View>
-        </View>
     );
     }
 
