@@ -15,12 +15,6 @@ const ChooseBread = ({ onPress, source, rank, detail, long}: Props) => {
     return (
         <View style={styles.container}>
             <View style={styles.button}>
-            <TouchableOpacity onPress={onPress}>
-                <Image
-                source={require('../assets/breadicon.png')}
-                style={{width: 30, height: 30}}
-                />
-            </TouchableOpacity>
             </View> 
             <View style={styles.container}>
                 <View style={styles.button}>
@@ -42,6 +36,7 @@ const ChooseBread = ({ onPress, source, rank, detail, long}: Props) => {
                 <Text style = {styles.detailText}>ここから{long}km</Text> 
             </View>
         <View style={styles.spaceW} />{/* 空白 */}
+        </View>
         </View>
     );
     }
