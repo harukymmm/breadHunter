@@ -15,27 +15,31 @@ const ChooseBread = ({ onPress, source, rank, detail, long}: Props) => {
     return (
         <View style={styles.container}>
             <View style={styles.button}>
-            </View> 
-            <View style={styles.container}>
-                <View style={styles.button}>
                 <TouchableOpacity onPress={onPress}>
                     <Image
-                    source={require('../assets/icon_Close.png')}
+                    source={require('../assets/breadicon.png')}
                     style={{width: 30, height: 30}}
                     />
                 </TouchableOpacity>
+            </View> 
+            <View style={styles.container}>
+                <View style={styles.button}>
+                    <TouchableOpacity onPress={onPress}>
+                        <Image
+                        source={require('../assets/icon_Close.png')}
+                        style={{width: 30, height: 30}}
+                        />
+                    </TouchableOpacity>
                 </View> 
-                <View style={styles.container}>
-                <Image 
-            source={source}  //画像のソースをpropsから受け取る
-            style={{ width: 300, height: 300}}
-            />
-                <Text style= {styles.rankText}>ランク{rank}</Text>
-
-                <Text style = {styles.detailText}>{detail}</Text>
-                <Text style = {styles.detailText}>ここから{long}km</Text> 
-            </View>
-        <View style={styles.spaceW} />{/* 空白 */}
+                    <Image 
+                        source={source}  //画像のソースをpropsから受け取る
+                        style={{ width: 300, height: 300}}
+                    />
+                    <Text style= {styles.rankText}>ランク{rank}</Text>
+                    <Text style = {styles.detailText}>{detail}</Text>
+                    <Text style = {styles.detailText}>ここから{long}km</Text> 
+                </View>
+                <View style={styles.spaceW} />{/* 空白 */}
         </View>
         </View>
     );
