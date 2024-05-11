@@ -6,6 +6,7 @@ import Colorhukidashi from '../../components/ColorHukidashi';
 export default function ResultScreen() {
   return (
     <View style={styles.container}>
+      <View style={styles.hukidashi}>
         <Colorhukidashi
               children='正解！'
               height={50} 
@@ -19,10 +20,12 @@ export default function ResultScreen() {
               justifyContent='center'
               alignItems='center'
             />
+            </View>
       <QuizAnswer
       imageSource = {require('../../assets/testPan.jpeg')}
-      breadPlace = "美味しいパン屋"
-      breadName = "美味しいパン"
+      breadPlace = "ルンダンショコラ白梅町店"
+      breadName = "ゴルゴンゾーラトマト"
+      judgeImage={require('../../assets/symbol_Complete.png')}
       />
     </View>
   );
@@ -32,9 +35,13 @@ registerRootComponent(ResultScreen);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0,
     backgroundColor: '#F3E2CF',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  hukidashi: {
+    marginTop: 20,
+    marginBottom: 10,
+  }
 });
