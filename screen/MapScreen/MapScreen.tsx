@@ -1,10 +1,28 @@
+import {useState} from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
 import MapView from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
 
 export default function MapScreen() {
+  const [region, setRegion] = useState();
+
+  const updateLocation = () => {
+    Geolocation.getCurrentPosition(
+      position => {
+        const { latitude, longitude } = position.coords;
+        setRegion({
+          ...region,
+          latitude,
+          longitude,
+        });
+      },
+      error => console.log(error),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -22,7 +40,7 @@ export default function MapScreen() {
        </View>
        <View style={styles.reloadbutton}>
           <ButtonCustom
-          onClick={() => console.log("Push 現在地更新ボタン")}
+          onClick={() => updateLocation()}
           children="現在地更新"
           borderColor="#FBF7EF"
           borderWidth={3}
