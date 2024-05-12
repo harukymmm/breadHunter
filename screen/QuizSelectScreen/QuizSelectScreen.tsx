@@ -4,6 +4,7 @@ import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import SelectFigComp from '../../components/CustomSelectComponent';
 import HukidashiCustom from '../../components/HukidashiComponent';
+import Colorhukidashi from '../../components/ColorHukidashi';
 
 
 export default function QuizSelectScreen() {  
@@ -11,7 +12,21 @@ export default function QuizSelectScreen() {
 
   return (
       <View style={styles.container}>
-          <View style={{flex: 0, height: 50,}} />{/* 空白 */} 
+          <View style={styles.hukidashiTop}>
+              <Colorhukidashi
+              children='お題の選択'
+              height={55} 
+              width={500}
+              radius={0}
+              borderColor='#FF8628'
+              borderWidth={3}
+              color='#FBF7EF'
+              fontSize={25} 
+              fontColor='#FF8628'
+              justifyContent='center'
+              alignItems='center'
+              />
+            </View>
               <View style={styles.figContainerF}>
             
               <SelectFigComp
@@ -63,6 +78,21 @@ export default function QuizSelectScreen() {
 
           <View style={styles.startButton}>
             <ButtonCustom
+                borderColor="#FF8628"
+                borderWidth={5}
+                color='#FBF7EF'
+                height={50}
+                onClick={() => console.log("You clicked リロードボタン")}
+                radius={90}
+                width={50}
+                children="" 
+                fontSize={30}
+                fontColor='#FBF7EF'
+                justifyContent='center'
+                alignItems='center'
+              />
+            <View style={{flex: 0, width: 5}} />{/* 空白 */} 
+            <ButtonCustom
               borderColor="#FC3B00"
               borderWidth={5}
               color="#FF8628"
@@ -89,7 +119,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingHorizontal: 10, // 左右の余白を追加
   },
-
+  hukidashiTop: {
+    marginTop: 20,
+    marginBottom: 10,
+  },
   figContainerF: {
     flex: 0,
     flexDirection: 'row',
