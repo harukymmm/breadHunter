@@ -8,74 +8,74 @@ export default function TakePhotoScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.fukidashi}>
-        <HukidashiCustom
-        height={90}
-        width={250}
-        radius={15}
-        fontSize={25}
-        fontColor='#332E21'
-        justifyContent='center'
-        alignItems='center'
-        >
-        この写真を使うか?
-        </HukidashiCustom>
+          <HukidashiCustom
+            height={90}
+            width={250}
+            radius={15}
+            fontSize={25}
+            fontColor='#332E21'
+            justifyContent='center'
+            alignItems='center'
+            >
+            この写真を使うか?
+          </HukidashiCustom>
       </View>
       <View style={styles.images}>
-      <Image
-        source={require('../../assets/testPan.jpeg')}
-        style={styles.bread}
-        />
-      <Image
-        source={require("../../assets/hunter_Check.png")} 
-        style={styles.character}
-         />
-      </View>
+        <Image
+          source={require('../../assets/testPan.jpeg')}
+          style={styles.bread}
+          />
+        <Image
+          source={require("../../assets/hunter_Check.png")} 
+          style={styles.character}
+          />
+      </View> 
       <View style={styles.okbutton}>
-        <ButtonCustom
-        borderColor="#FF8628"
-        borderWidth={5}
-        color="#FF8628"
-        height={80}
-        onClick={() => console.log("Push OKボタン")}
-        radius={45}
-        width={300}
-        children="OK!" 
-        fontSize={25}
-        fontColor="#FBF7EF"
-        justifyContent='center'
-        alignItems='center'
-      />
+          <ButtonCustom
+            borderColor="#FF8628"
+            borderWidth={5}
+            color="#FF8628"
+            height={80}
+            onClick={() => console.log("Push OKボタン")}
+            radius={45}
+            width={300}
+            children="OK!" 
+            fontSize={25}
+            fontColor="#FBF7EF"
+            justifyContent='center'
+            alignItems='center'
+          />
       </View>
-        <View style={styles.buttoncontainer}>
+      <View style={styles.buttoncontainer}>
         <ButtonCustom
-        borderColor="#FF8628"
-        borderWidth={5}
-        color="#FBF7EF"
-        height={120}
-        onClick={() => console.log("Push 戻るボタン")}
-        radius={45}
-        width={120}
-        children="戻る" 
-        fontSize={25}
-        fontColor='#FF8628'
-        justifyContent='center'
-        alignItems='center'
-      />
+          borderColor="#FF8628"
+          borderWidth={5}
+          color="#FBF7EF"
+          height={120}
+          onClick={() => console.log("Push 戻るボタン")}
+          radius={45}
+          width={120}
+          children="戻る" 
+          fontSize={25}
+          fontColor='#FF8628'
+          justifyContent='center'
+          alignItems='center'
+        />
       <View style={{flex: 0, width: 10}} />{/* 空白 */} 
-      <ButtonCustom
-        borderColor="#FF8628"
-        borderWidth={5}
-        color="#FBF7EF"
-        height={120}
-        onClick={() => console.log("Push ライブラリボタン")}
-        radius={45}
-        width={120}
-        children="ライブラリから選択" 
-        fontSize={25}
-        fontColor='#FF8628'
-        justifyContent='center'
-        alignItems='center'
-      />
+        <ButtonCustom
+          borderColor="#FF8628"
+          borderWidth={5}
+          color="#FBF7EF"
+          height={120}
+          onClick={() => console.log("Push ライブラリボタン")}
+          radius={45}
+          width={120}
+          children="ライブラリから選択" 
+          fontSize={25}
+          fontColor='#FF8628'
+          justifyContent='center'
+          alignItems='center'
+        />
       
       </View>
     </View>
@@ -134,12 +134,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginLeft: '15%',
     fontSize: 20
-  },
-
-  orangebutton:{
-    width: '30%',
-    backgroundColor: '#ff8628',
-    justifyContent: 'center'
   },
   okbutton:{
     flex: 0,

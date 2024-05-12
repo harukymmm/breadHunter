@@ -19,21 +19,21 @@ const SelectFigComp = ({onPress, rank, source}: Props) => {
 
     return (
       <View style={styles.container}>
-      <Text style= {styles.rankText}>ランク{rank}</Text>
-        <TouchableOpacity onPress={onPress}>
-            <Image 
-            source={source}  //画像のソースをpropsから受け取る
-            style={{ width: 150, height: 150}}
-            />
-        </TouchableOpacity>
-        <View style={styles.space} />{/* 空白 */}
-      <ChangeColorButton
-      borderWidth={5}
-      onClick={handleButtonPress} // ボタンが押されたときの処理を渡す
-      isPressed={isButtonPressed} // ボタンの押された状態を渡す
-      height={35}
-      width={35}
-      />
+        <Text style= {styles.rankText}>ランク{rank}</Text>
+              <TouchableOpacity onPress={onPress}>
+                  <Image 
+                  source={source}  //画像のソースをpropsから受け取る
+                  style={{ width: 150, height: 150}}
+                  />
+              </TouchableOpacity>
+             <View style={styles.space} />{/* 空白 */}
+              <ChangeColorButton
+              borderWidth={5}
+              onClick={handleButtonPress} // ボタンが押されたときの処理を渡す
+              isPressed={isButtonPressed} // ボタンの押された状態を渡す
+              height={35}
+              width={35}
+              />
       </View>
     );
   }

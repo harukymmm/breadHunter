@@ -67,9 +67,9 @@ const QuizAnswer = ({
             width: '50%', // テキストのコンテナーの幅を調整
         },
         symbolContainer: {
-        position: 'absolute', // 画像をテキストに重ね合わせるため
-        bottom: 0, // テキストの下に配置
-        right: 0, // テキストの右端に配置
+            position: 'absolute', // 画像をテキストに重ね合わせるため
+            bottom: 0, // テキストの下に配置
+            right: 0, // テキストの右端に配置
         },
         symbol: {
             opacity: 0.3,

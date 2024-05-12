@@ -7,20 +7,20 @@ export default function QuizDetailScreen() {
   
 return (
   <View style={styles.container}>
+
     <View style={styles.spaceH} />{/* 空白 */}
-    <ChooseBread
-    source={require('../../assets/testPan.jpeg')}
-    rank= "S"
-    detail="ここにパンの説明が入ります"
-    long={0.5}   //距離
-    onPress={() => console.log("You press Close Bottun!")}
-    ></ChooseBread>
+
+      <ChooseBread
+          source={require('../../assets/testPan.jpeg')}
+          rank= "S"
+          detail="ここにパンの説明が入ります"
+          long={0.5}   //距離
+          onPress={() => console.log("You press Close Bottun!")}
+      ></ChooseBread>
+
   </View>
 )
 }
-
-
-
 
 const styles = StyleSheet.create({
   container: {
