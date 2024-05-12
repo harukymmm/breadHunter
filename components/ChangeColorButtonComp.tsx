@@ -1,6 +1,7 @@
 //押すと色の変わるボタンを実装するコンポーネント、コンソールログに押されたかどうかの表示が出る
 //CustomSelectComponent専用にしても良い
 //ボタンの状態は isPressed という状態変数によって管理される
+//フォント呼び出しあり
 
 import React, { useState } from "react";
 import { TouchableOpacity, Text, StyleSheet, View} from 'react-native';
@@ -23,13 +24,13 @@ const ChangeColorButton = ({
       });
       if (!fontsLoaded && !fontError) {
         return null;
-      }
+      };
 
       const [isPressed, setIsPressed] = useState(false); // ボタンが押されたかどうかの状態
       
       const handlePress = () => {
-        onClick(); // onClickプロップを呼び出します
-        setIsPressed(!isPressed); // ボタンの状態を切り替えます
+        onClick(); // onClickプロップを呼び出し
+        setIsPressed(!isPressed); // ボタンの状態を切り替え
         console.log(!isPressed ? 'ボタンが押されました' : 'ボタンはまだ押されていません');
         
     };
@@ -38,7 +39,7 @@ const ChangeColorButton = ({
     button: {
         borderColor: "#FF8628",
         borderWidth: borderWidth,
-        backgroundColor: isPressed ? "#FF8628" : "#FBF7EF", // ボタンが押された場合は異なる色を使用します
+        backgroundColor: isPressed ? "#FF8628" : "#FBF7EF", // ボタンが押された場合は異なる色を使用
         height: height,
         width: width,
         borderRadius: 90,
@@ -51,7 +52,7 @@ const ChangeColorButton = ({
     return (
       <TouchableOpacity 
         style={styles.button}
-        onPress={handlePress} // カスタムのhandlePress関数を使用します
+        onPress={handlePress} // カスタムのhandlePress関数を使用
         >
       </TouchableOpacity>
     );

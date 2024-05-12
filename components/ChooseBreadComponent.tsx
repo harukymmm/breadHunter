@@ -1,7 +1,9 @@
 //パン詳細の画面を作るコンポーネント
+//フォント呼び出しあり
 
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
+import { useFonts } from 'expo-font';
 
 interface Props { 
     source: any; //画像ソース
@@ -12,17 +14,16 @@ interface Props {
 }
 
 const ChooseBread = ({ onPress, source, rank, detail, long}: Props) => {
+
+    const [fontsLoaded, fontError] = useFonts({
+        'SmileySans-Oblique': require('../assets/fonts/SmileySans-Oblique.otf'),
+      });
+      if (!fontsLoaded && !fontError) {
+        return null;
+      };
+
     return (
         <View style={styles.container}>
-            <View style={styles.button}>
-                <TouchableOpacity onPress={onPress}>
-                    <Image
-                    source={require('../assets/breadicon.png')}
-                    style={{width: 30, height: 30}}
-                    />
-                </TouchableOpacity>
-            </View> 
-            <View style={styles.container}>
                 <View style={styles.button}>
                     <TouchableOpacity onPress={onPress}>
                         <Image
@@ -37,8 +38,7 @@ const ChooseBread = ({ onPress, source, rank, detail, long}: Props) => {
                     />
                     <Text style= {styles.rankText}>ランク{rank}</Text>
                     <Text style = {styles.detailText}>{detail}</Text>
-                    <Text style = {styles.detailText}>ここから{long}km</Text> 
-                </View>
+                    <Text style = {styles.detailText}>ここから{long}km</Text>
                 <View style={styles.spaceW} />{/* 空白 */}
         </View>
     );

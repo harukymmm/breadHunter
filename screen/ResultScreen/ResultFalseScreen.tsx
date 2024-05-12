@@ -6,6 +6,7 @@ import Colorhukidashi from '../../components/ColorHukidashi';
 export default function ResultScreen() {
   return (
     <View style={styles.container}>
+
       <View style={styles.hukidashi}>
         <Colorhukidashi
               children='不正解...'
@@ -20,13 +21,15 @@ export default function ResultScreen() {
               justifyContent='center'
               alignItems='center'
             />
-            </View>
+        </View>
+
       <QuizAnswer
-      imageSource = {require('../../assets/testPan.jpeg')}
-      breadPlace = "ルンダンショコラ白梅町店"
-      breadName = "ゴルゴンゾーラトマト"
-      judgeImage={require('../../assets/symbol_Failed.png')}
+          imageSource = {require('../../assets/testPan.jpeg')}
+          breadPlace = "ルンダンショコラ白梅町店"
+          breadName = "ゴルゴンゾーラトマト"
+          judgeImage={require('../../assets/symbol_Failed.png')}
       />
+      
     </View>
   );
 }

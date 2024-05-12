@@ -1,7 +1,9 @@
 //ふきだしを実装するコンポーネント
+//フォント呼び出しあり
 
 import React from "react";
 import { View, Text, StyleSheet, ViewStyle } from 'react-native';
+import { useFonts } from 'expo-font';
 
 interface Props {
     children?: React.ReactNode;   //テキスト文字情報
@@ -29,7 +31,14 @@ const HukidashiCustom = ({
         padding: 10, // 必要に応じてパディング（内側の余白）を追加
       },
     });
-  
+
+    const [fontsLoaded, fontError] = useFonts({
+      'SmileySans-Oblique': require('../assets/fonts/SmileySans-Oblique.otf'),
+    });
+    if (!fontsLoaded && !fontError) {
+      return null;
+    };
+    
     return (
       <View style = {styles.container}>
         <Text style={{

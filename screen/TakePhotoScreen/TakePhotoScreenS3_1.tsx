@@ -8,76 +8,77 @@ export default function TakePhotoScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.fukidashi}>
-      <HukidashiCustom
-      height={90}
-      width={250}
-      radius={15}
-      fontSize={20}
-      fontColor='#332E21'
-      justifyContent='center'
-      alignItems='center'
-      >
-      パンを見つけたか！{'\n'}写真を撮ってくれ
-      </HukidashiCustom>
+        <HukidashiCustom
+          height={90}
+          width={250}
+          radius={15}
+          fontSize={20}
+          fontColor='#332E21'
+          justifyContent='center'
+          alignItems='center'
+          >
+          パンを見つけたか！{'\n'}写真を撮ってくれ
+        </HukidashiCustom>
       </View>
       <Image 
         source={require("../../assets/hunter_TakePhoto.png")} 
         style={styles.character} 
       />
       <View style={styles.buttoncontainer}>
-      <ButtonCustom
-        borderColor="#FF8628"
-        borderWidth={5}
-        color="#FF8628"
-        height={230}
-        onClick={() => console.log("You clicked on カメラ起動!")}
-        radius={0}
-        width={200}
-        fontSize={25}
-        fontColor='#FBF7EF'
-        justifyContent='center'
-        alignItems='center'
-      >カメラを{'\n'}起動する
-        </ButtonCustom>
+        <ButtonCustom
+          borderColor="#FF8628"
+          borderWidth={5}
+          color="#FF8628"
+          height={230}
+          onClick={() => console.log("You clicked on カメラ起動!")}
+          radius={0}
+          width={200}
+          fontSize={25}
+          fontColor='#FBF7EF'
+          justifyContent='center'
+          alignItems='center'
+        >カメラを{'\n'}起動する
+          </ButtonCustom>
 
-      <ButtonCustom
-        borderColor="#FBF7EF"
-        borderWidth={5}
-        color="#FBF7EF"
-        height={230}
-        onClick={() => console.log("You clicked on 前の画面に戻る")}
-        radius={0}
-        width={200}
-        fontSize={25}
-        fontColor='#FF8628'
-        justifyContent='center'
-        alignItems='center'
-      >前の画面に{'\n'}戻る
-      </ButtonCustom>
+          <ButtonCustom
+            borderColor="#FBF7EF"
+            borderWidth={5}
+            color="#FBF7EF"
+            height={230}
+            onClick={() => console.log("You clicked on 前の画面に戻る")}
+            radius={0}
+            width={200}
+            fontSize={25}
+            fontColor='#FF8628'
+            justifyContent='center'
+            alignItems='center'
+          >前の画面に{'\n'}戻る
+          </ButtonCustom>
       </View>
+      
       <View style={styles.checkButton}>
-      <ButtonCustom
-        borderColor="#FF8628"
-        borderWidth={5}
-        color="#FBF7EF"
-        height={50}
-        onClick={() => console.log("Push お題パンの確認")}
-        radius={90}
-        width={300}
-        children="お題パンの確認" 
-        fontSize={25}
-        fontColor='#FF8628'
-        justifyContent='center'
-        alignItems='center'
-      />
+        <ButtonCustom
+          borderColor="#FF8628"
+          borderWidth={5}
+          color="#FBF7EF"
+          height={50}
+          onClick={() => console.log("Push お題パンの確認")}
+          radius={90}
+          width={300}
+          children="お題パンの確認" 
+          fontSize={25}
+          fontColor='#FF8628'
+          justifyContent='center'
+          alignItems='center'
+        />
       </View>
       
     </View>
   );
 
 }
-//containerは背景 flexは重み比率 justifycontentはflexdirection方向(デフォ縦)に位置揃える
-//alignitemsはflexdirection方向と別の軸（デフォ横）でそろえる
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -98,26 +99,19 @@ const styles = StyleSheet.create({
     resizeMode: 'contain', 
     marginBottom: 10,
   },
-  headingtext:{
-    color: '#fbf7ef',
-    //alignselfで見出し文字の親オブジェクト（オレンジの四角形）に合わせてセンタリング
-    alignSelf: 'center',
-    marginLeft: '15%',
-    fontSize: 20
-  },
   buttoncontainer:{
     flex: 0,
     flexDirection: 'row',
     alignItems: 'center',
-  justifyContent: 'center', // 水平方向の中央に配置する
-  marginBottom: 15,
+    justifyContent: 'center', // 水平方向の中央に配置する
+    marginBottom: 15,
   },
   checkButton:{
     flex: 0,
     flexDirection: 'row',
     alignItems: 'center',
-  justifyContent: 'center', // 水平方向の中央に配置する
-  marginBottom: 20,
+    justifyContent: 'center', // 水平方向の中央に配置する
+    marginBottom: 20,
   }
 });
 

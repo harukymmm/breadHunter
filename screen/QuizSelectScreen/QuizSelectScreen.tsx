@@ -12,52 +12,55 @@ export default function QuizSelectScreen() {
   return (
       <View style={styles.container}>
           <View style={{flex: 0, height: 50,}} />{/* 空白 */} 
-          <View style={styles.figContainerF}>
-        
-          <SelectFigComp
+              <View style={styles.figContainerF}>
+            
+              <SelectFigComp
+                onPress={() => console.log("You press Pan!")}
+                rank = "S"
+                source={require('../../assets/testPan.jpeg')}
+                />
+            
+                  <View style={styles.spaceW} />{/* 空白 */} 
+
+              <SelectFigComp
+              onPress={() => console.log("You press Pan!")}
+              rank = "A"
+              source={require('../../assets/testPan.jpeg')}
+              />
+            
+            </View>
+
+          <View style={styles.figContainerS}>
+          
+            <SelectFigComp
             onPress={() => console.log("You press Pan!")}
-            rank = "S"
+            rank = "C"
             source={require('../../assets/testPan.jpeg')}
             />
-         
-          <View style={styles.spaceW} />{/* 空白 */} 
 
-          <SelectFigComp
-          onPress={() => console.log("You press Pan!")}
-          rank = "A"
-          source={require('../../assets/testPan.jpeg')}
-          />
-         
-         </View>
+              <View style={{flex: 0, width: 10}} />{/* 空白 */} 
+          
+            <View style={styles.character}>
+              <HukidashiCustom
+              height={60}
+              width={180}
+              radius={15}
+              fontSize={15}
+              fontColor='#332E21'
+              justifyContent='center'
+              alignItems='center'
+              >
+                気になるパンを選んでくれ{'\n'}探すのはその次だ
+              </HukidashiCustom>
+              
+              <Image 
+                source={require('../../assets/hunter_First.png')}
+                style={{ width: 150, height: 200 }}
+                resizeMode="contain"
+                />
 
-        <View style={styles.figContainerS}>
-        
-          <SelectFigComp
-          onPress={() => console.log("You press Pan!")}
-          rank = "C"
-          source={require('../../assets/testPan.jpeg')}
-          />
-         <View style={{flex: 0, width: 10}} />{/* 空白 */} 
-        
-          <View style={styles.character}>
-            <HukidashiCustom
-            height={60}
-            width={180}
-            radius={15}
-            fontSize={15}
-            fontColor='#332E21'
-            justifyContent='center'
-            alignItems='center'
-            >
-              気になるパンを選んでくれ{'\n'}探すのはその次だ
-            </HukidashiCustom>
-            <Image 
-              source={require('../../assets/hunter_First.png')}
-              style={{ width: 150, height: 200 }}
-              resizeMode="contain"
-              />
-          </View>
-        </View>
+              </View>
+            </View>
 
           <View style={styles.startButton}>
             <ButtonCustom
@@ -85,6 +88,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#F3E2CF',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    paddingHorizontal: 10, // 左右の余白を追加
   },
 
   figContainerF: {
