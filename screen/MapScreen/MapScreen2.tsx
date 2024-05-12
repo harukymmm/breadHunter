@@ -38,20 +38,19 @@ export default function MapScreen() {
 
                     <View style={ styles.hukidasi }>
                         <HukidashiCustom
-                            children='この中のどこかにパンが...'
+                            children='どの店に入るか決めたか？'
                             height={50} 
                             width={220}
                             radius={5}
                             fontSize={18} 
-                            fontColor='#332E21'
                             justifyContent='center'
                             alignItems='center'
                           />
                       </View>
 
                 <ButtonCustom
-                    onClick={() => console.log("Push パン発見ボタン")}
-                    children="パン発見！"
+                    onClick={() => console.log("Push 店に入るボタン")}
+                    children="店に入る"
                     borderColor='#FF8628'
                     borderWidth={5}
                     color='#FF8628'

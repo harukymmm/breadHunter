@@ -46,7 +46,6 @@ export default function QuizSelectScreen() {
               width={180}
               radius={15}
               fontSize={15}
-              fontColor='#332E21'
               justifyContent='center'
               alignItems='center'
               >

@@ -13,7 +13,6 @@ export default function TakePhotoScreen() {
             width={250}
             radius={15}
             fontSize={25}
-            fontColor='#332E21'
             justifyContent='center'
             alignItems='center'
             >

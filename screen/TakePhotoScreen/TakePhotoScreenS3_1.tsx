@@ -13,7 +13,6 @@ export default function TakePhotoScreen() {
           width={250}
           radius={15}
           fontSize={20}
-          fontColor='#332E21'
           justifyContent='center'
           alignItems='center'
           >
@@ -60,12 +59,27 @@ export default function TakePhotoScreen() {
         <ButtonCustom
           borderColor="#FF8628"
           borderWidth={5}
-          color="#FBF7EF"
+          color="#FF8628"
           height={50}
           onClick={() => console.log("Push お題パンの確認")}
           radius={90}
           width={300}
           children="お題パンの確認" 
+          fontSize={25}
+          fontColor="#FBF7EF"
+          justifyContent='center'
+          alignItems='center'
+        />
+        <View style={{flex: 0, height: 5}} />{/* 空白 */} 
+         <ButtonCustom
+          borderColor="#FF8628"
+          borderWidth={5}
+          color="#FBF7EF"
+          height={50}
+          onClick={() => console.log("Push 買えなかったボタン")}
+          radius={90}
+          width={300}
+          children="買えなかった..." 
           fontSize={25}
           fontColor='#FF8628'
           justifyContent='center'
@@ -108,10 +122,10 @@ const styles = StyleSheet.create({
   },
   checkButton:{
     flex: 0,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center', // 水平方向の中央に配置する
-    marginBottom: 20,
+    marginBottom: 10,
   }
 });
 
