@@ -5,7 +5,7 @@ import Colorhukidashi from '../../components/ColorHukidashi';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from '../../components/CustomButtonComponent';
 
-export default function ResultScreen() {
+export default function ResultCorrectScreen() {
   return (
     <View style={styles.container}>
           <View style={styles.hukidashiTop}>
@@ -71,7 +71,7 @@ export default function ResultScreen() {
   );
 }
 
-registerRootComponent(ResultScreen);
+registerRootComponent(ResultCorrectScreen);
 
 const styles = StyleSheet.create({
   container: {

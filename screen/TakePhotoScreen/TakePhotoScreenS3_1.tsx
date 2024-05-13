@@ -4,7 +4,7 @@ import ButtonCustom from "../../components/CustomButtonComponent";
 import HukidashiCustom from '../../components/HukidashiComponent';
 
 //Viewという要素を作ってそこにstyleを適用する
-export default function TakePhotoScreen() {
+export default function TakePhotoScreenF() {
   return (
     <View style={styles.container}>
       <View style={styles.fukidashi}>
@@ -131,4 +131,4 @@ const styles = StyleSheet.create({
 
 
 
-registerRootComponent(TakePhotoScreen)
+registerRootComponent(TakePhotoScreenF)

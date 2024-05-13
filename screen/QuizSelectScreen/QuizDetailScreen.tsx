@@ -8,10 +8,10 @@ import { useRoute } from '@react-navigation/native';
 import { QuizParamList } from './routeQuizSelect'
 import { NavigationProp } from '@react-navigation/native';
 
-type Navigation = NavigationProp<QuizParamList>;
+type NavigationK = NavigationProp<QuizParamList>;
 
 export default function QuizDetailScreen() {
-  const navigation = useNavigation<Navigation>();
+  const navigationK = useNavigation<NavigationK>();
   //QuizSelectScreenから渡された変数breadId
   const route = useRoute();
   const { breadId } = route.params;
@@ -26,7 +26,7 @@ return (
           rank= {breadId.toString()}
           detail="ここにパンの説明が入ります"
           long={0.5}   //距離
-          onPress={() => navigation.navigate('QuizSelect')}
+          onPress={() => navigationK.navigate('QuizSelect')}
       ></ChooseBread>
 
   </View>

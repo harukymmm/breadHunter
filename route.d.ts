@@ -3,5 +3,7 @@ export type StackParamList = {
   QuizSelect: undefined;
   Map: undefined;
   TakePhoto: undefined;
-  Result: undefined;
+  ResultCorrect: undefined;
+  ResultFalse: undefined;
+  ResultGiveUp: undefined;
 };

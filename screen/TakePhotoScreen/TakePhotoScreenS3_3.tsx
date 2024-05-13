@@ -4,7 +4,7 @@ import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 
 //Viewという要素を作ってそこにstyleを適用する
-export default function TakePhotoScreen() {
+export default function TakePhotoScreenL() {
   return (
     <View style={styles.container}>
       <View style={styles.fukidashi}>
@@ -81,7 +81,7 @@ export default function TakePhotoScreen() {
   );
 }
 
-registerRootComponent(TakePhotoScreen);
+registerRootComponent(TakePhotoScreenL);
 
 //containerは背景 flexは重み比率 justifycontentはflexdirection方向(デフォ縦)に位置揃える
 //alignitemsはflexdirection方向と別の軸（デフォ横）でそろえる

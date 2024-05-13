@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-n
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
 import { QuizParamList } from './routeQuizSelect';
+import { StackParamList} from '../../route'
 import { NavigationProp } from '@react-navigation/native';
 
 import ButtonCustom from "../../components/CustomButtonComponent";
@@ -10,11 +11,15 @@ import SelectFigComp from '../../components/CustomSelectComponent';
 import HukidashiCustom from '../../components/HukidashiComponent'; 
 import Colorhukidashi from '../../components/ColorHukidashi';
 
-type Navigation = NavigationProp<QuizParamList>;
+//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
+type NavigationK = NavigationProp<QuizParamList>;
+type NavigationP = NavigationProp<StackParamList>;
 
 
 export default function QuizSelectScreen() {  
-  const navigation = useNavigation<Navigation>();
+  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+  const navigationK = useNavigation<NavigationK>();
+  const navigationP = useNavigation<NavigationP>();
   
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
   // 使用された数値を追跡するための配列
@@ -54,6 +59,7 @@ const handleStartButtonPress = () => {
   // START ボタンが押された時の処理
   console.log("START button pressed!");
   // ここで画面遷移等の処理を追加する
+  navigationP.navigate('Map')
 };
 
   return (
@@ -77,7 +83,7 @@ const handleStartButtonPress = () => {
             
               <SelectFigComp
                 onPress={() => 
-                  navigation.navigate('QuizDetail',{
+                  navigationK.navigate('QuizDetail',{
                     breadId: usedNumbers[0],
                   })
                 }
@@ -91,7 +97,7 @@ const handleStartButtonPress = () => {
 
               <SelectFigComp
               onPress={() => 
-                navigation.navigate('QuizDetail',{
+                navigationK.navigate('QuizDetail',{
                   breadId: usedNumbers[1],
                 })
               }
@@ -107,7 +113,7 @@ const handleStartButtonPress = () => {
           
               <SelectFigComp
               onPress={() => 
-                navigation.navigate('QuizDetail',{
+                navigationK.navigate('QuizDetail',{
                   breadId: usedNumbers[2],
                 })
               }

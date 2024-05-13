@@ -1,9 +1,21 @@
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import { useNavigation } from '@react-navigation/native';
+import { StackParamList } from '../../route';
+import { MapParamList } from './routeMap';
+import { NavigationProp } from '@react-navigation/native';
+
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
 
+//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
+type NavigationP = NavigationProp<StackParamList>;
+type NavigationK = NavigationProp<MapParamList>;
+
 export default function MapScreen() {
+  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+  const navigationP = useNavigation<NavigationP>();
+  const navigationK = useNavigation<NavigationK>();
 
   return (
     <View style={styles.container}>
@@ -50,7 +62,7 @@ export default function MapScreen() {
                 </View>
 
                 <ButtonCustom
-                    onClick={() => console.log("Push パン選択に戻るボタン")}
+                    onClick={() => navigationP.navigate('QuizSelect')}
                     children="パン選択に戻る"
                     borderColor='#FF8628'
                     borderWidth={5}
@@ -67,7 +79,7 @@ export default function MapScreen() {
               <View style={{flex: 0, height: 5,}} />{/* 空白 */} 
 
                 <ButtonCustom
-                    onClick={() => console.log("Push 諦めるボタン")}
+                    onClick={() => navigationP.navigate('ResultGiveUp')}
                     children="諦める"
                     borderColor='#FF8628'
                     borderWidth={5}

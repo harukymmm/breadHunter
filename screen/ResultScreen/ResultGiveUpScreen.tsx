@@ -4,8 +4,14 @@ import QuizAnswer from '../../components/QuizAnswerComponent';
 import Colorhukidashi from '../../components/ColorHukidashi';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from '../../components/CustomButtonComponent';
+import { useNavigation } from '@react-navigation/native';
+import { StackParamList } from '../../route';
+import { NavigationProp } from '@react-navigation/native';
 
-export default function ResultScreen() {
+type NavigationP = NavigationProp<StackParamList>;
+
+export default function ResultGiveUpScreen() {
+  const navigationP = useNavigation<NavigationP>();
   return (
     <View style={styles.container}>
           <View style={styles.hukidashiTop}>
@@ -57,7 +63,7 @@ export default function ResultScreen() {
           borderWidth={5}
           color="#FBF7EF"
           height={50}
-          onClick={() => console.log("Push スタート画面に戻るボタン")}
+          onClick={() => navigationP.navigate('Start')}
           radius={90}
           width={300}
           children="スタート画面に戻る" 
@@ -71,7 +77,7 @@ export default function ResultScreen() {
   );
 }
 
-registerRootComponent(ResultScreen);
+registerRootComponent(ResultGiveUpScreen);
 
 const styles = StyleSheet.create({
   container: {
