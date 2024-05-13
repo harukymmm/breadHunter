@@ -10,6 +10,7 @@ import QuizDetailScreen from './screen/QuizSelectScreen/QuizDetailScreen';
 import MapScreen from './screen/MapScreen/MapScreen';
 import MapScreen2 from './screen/MapScreen/MapScreen2';
 import TakePhotoScreenF from './screen/TakePhotoScreen/TakePhotoScreenS3_1';
+import BreadDetailScreen from './screen/TakePhotoScreen/BreadDetailScreen';
 import TakePhotoScreenL from './screen/TakePhotoScreen/TakePhotoScreenS3_3';
 import ResultCorrectScreen from './screen/ResultScreen/ResultCorrectScreen';
 import ResultFalseScreen from './screen/ResultScreen/ResultFalseScreen';
@@ -48,6 +49,7 @@ export default function App() {
         <Stack.Screen name="Map" component={MapScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Map2" component={MapScreen2} options={{ headerShown: false }} />
         <Stack.Screen name="TakePhotoF" component={TakePhotoScreenF} options={{ headerShown: false }} />
+        <Stack.Screen name="BreadDetail" component={BreadDetailScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TakePhotoL" component={TakePhotoScreenL} options={{ headerShown: false }} />
         <Stack.Screen name="ResultCorrect" component={ResultCorrectScreen} options={{ headerShown: false }} />
         <Stack.Screen name="ResultFalse" component={ResultFalseScreen} options={{ headerShown: false }} />

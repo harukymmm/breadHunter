@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
 import { StackParamList } from '../../route';
@@ -93,11 +93,14 @@ export default function MapScreen() {
                     alignItems='center'
                 />
             </View>
-
+      
+      {/* 絵を押すとマップ2へ遷移（応急処置） */} 
+      <TouchableOpacity onPress={() => navigationK.navigate('Map2')}> 
        <Image 
         source={require("../../assets/hunter_Longmap.png")} 
         style={styles.character} 
        /> 
+       </TouchableOpacity>
        
        </View>
       </View>

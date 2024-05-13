@@ -2,9 +2,20 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import HukidashiCustom from '../../components/HukidashiComponent';
+import { useNavigation } from '@react-navigation/native';
+import { StackParamList } from '../../route';
+import { PhotoParamList } from './routePhoto';
+import { NavigationProp } from '@react-navigation/native';
 
-//Viewという要素を作ってそこにstyleを適用する
+//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
+type NavigationP = NavigationProp<StackParamList>;
+type NavigationK = NavigationProp<PhotoParamList>;
+
 export default function TakePhotoScreenF() {
+    //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+    const navigationP = useNavigation<NavigationP>();
+    const navigationK = useNavigation<NavigationK>();
+
   return (
     <View style={styles.container}>
       <View style={styles.fukidashi}>
@@ -16,7 +27,7 @@ export default function TakePhotoScreenF() {
           justifyContent='center'
           alignItems='center'
           >
-          パンを見つけたか！{'\n'}写真を撮ってくれ
+          パンを見つけたら{'\n'}写真を撮ってくれ
         </HukidashiCustom>
       </View>
       <Image 
@@ -24,12 +35,16 @@ export default function TakePhotoScreenF() {
         style={styles.character} 
       />
       <View style={styles.buttoncontainer}>
+        
+  {/* 押すとPhotoLへ遷移（応急処置） */} 
         <ButtonCustom
           borderColor="#FF8628"
           borderWidth={5}
           color="#FF8628"
           height={230}
-          onClick={() => console.log("You clicked on カメラ起動!")}
+          onClick={() => 
+            navigationK.navigate('TakePhotoL')
+          }
           radius={0}
           width={200}
           fontSize={25}
@@ -44,7 +59,7 @@ export default function TakePhotoScreenF() {
             borderWidth={5}
             color="#FBF7EF"
             height={230}
-            onClick={() => console.log("You clicked on 前の画面に戻る")}
+            onClick={() => navigationP.navigate('Map2')}
             radius={0}
             width={200}
             fontSize={25}
@@ -61,7 +76,7 @@ export default function TakePhotoScreenF() {
           borderWidth={5}
           color="#FF8628"
           height={50}
-          onClick={() => console.log("Push お題パンの確認")}
+          onClick={() => navigationK.navigate('BreadDetail',{breadId: 1})}
           radius={90}
           width={300}
           children="お題パンの確認" 
@@ -76,7 +91,7 @@ export default function TakePhotoScreenF() {
           borderWidth={5}
           color="#FBF7EF"
           height={50}
-          onClick={() => console.log("Push 買えなかったボタン")}
+          onClick={() => navigationP.navigate('ResultGiveUp')}
           radius={90}
           width={300}
           children="買えなかった..." 

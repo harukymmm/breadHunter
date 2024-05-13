@@ -1,10 +1,22 @@
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import { useNavigation } from '@react-navigation/native';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import HukidashiCustom from '../../components/HukidashiComponent';
 import Colorhukidashi from '../../components/ColorHukidashi';
+import { StackParamList } from '../../route';
+import { MapParamList } from './routeMap';
+import { NavigationProp } from '@react-navigation/native';
+
+//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
+type NavigationP = NavigationProp<StackParamList>;
+type NavigationK = NavigationProp<MapParamList>;
 
 export default function MapScreen2() {
+  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+  const navigationP = useNavigation<NavigationP>();
+  const navigationK = useNavigation<NavigationK>();
+
   return (
     <View style={styles.container}>
       <Colorhukidashi
@@ -49,7 +61,7 @@ export default function MapScreen2() {
                       </View>
 
                 <ButtonCustom
-                    onClick={() => console.log("Push 店に入るボタン")}
+                    onClick={() => navigationP.navigate('TakePhotoF')}
                     children="店に入る"
                     borderColor='#FF8628'
                     borderWidth={5}
@@ -66,7 +78,7 @@ export default function MapScreen2() {
                 <View style={{flex: 0, height: 10,}} />{/* 空白 */} 
 
                 <ButtonCustom
-                    onClick={() => console.log("Push 諦めるボタン")}
+                    onClick={() => navigationP.navigate('ResultGiveUp')}
                     children="諦める"
                     borderColor='#FF8628'
                     borderWidth={5}
