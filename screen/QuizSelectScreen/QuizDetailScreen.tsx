@@ -3,7 +3,18 @@ import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-n
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import  ChooseBread from "../../components/ChooseBreadComponent";
 
+import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { QuizParamList } from './routeQuizSelect'
+import { NavigationProp } from '@react-navigation/native';
+
+type Navigation = NavigationProp<QuizParamList>;
+
 export default function QuizDetailScreen() {
+  const navigation = useNavigation<Navigation>();
+  //QuizSelectScreenから渡された変数breadId
+  const route = useRoute();
+  const { breadId } = route.params;
   
 return (
   <View style={styles.container}>
@@ -12,10 +23,10 @@ return (
 
       <ChooseBread
           source={require('../../assets/testPan.jpeg')}
-          rank= "S"
+          rank= {breadId.toString()}
           detail="ここにパンの説明が入ります"
           long={0.5}   //距離
-          onPress={() => console.log("You press Close Bottun!")}
+          onPress={() => navigation.navigate('QuizSelect')}
       ></ChooseBread>
 
   </View>

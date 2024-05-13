@@ -1,14 +1,45 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import { useNavigation } from '@react-navigation/native';
+import { QuizParamList } from './routeQuizSelect';
+import { NavigationProp } from '@react-navigation/native';
+
 import ButtonCustom from "../../components/CustomButtonComponent";
 import SelectFigComp from '../../components/CustomSelectComponent';
-import HukidashiCustom from '../../components/HukidashiComponent';
+import HukidashiCustom from '../../components/HukidashiComponent'; 
 import Colorhukidashi from '../../components/ColorHukidashi';
+
+type Navigation = NavigationProp<QuizParamList>;
 
 
 export default function QuizSelectScreen() {  
+  const navigation = useNavigation<Navigation>();
+  // 使用された数値を追跡するための配列
+  const [usedNumbers, setUsedNumbers] = useState<number[]>([]);
 
+  // コンポーネントがマウントされた時に乱数を生成する
+  useEffect(() => {
+    generateRandomNumbers();
+  }, []);
+
+  // 乱数を生成する関数
+  const generateRandomNumbers = () => {
+    const breadIdA = generateUniqueRandomNumber(usedNumbers);
+    const breadIdB = generateUniqueRandomNumber(usedNumbers.concat(breadIdA)); // breadIdAと重複しないように
+    const breadIdC = generateUniqueRandomNumber(usedNumbers.concat(breadIdA, breadIdB)); // breadIdAとbreadIdBと重複しないように
+    // 生成した乱数を配列に追加
+    setUsedNumbers([breadIdA, breadIdB, breadIdC]);
+  };
+
+  // 0から999までのランダムな整数を生成する関数
+  const generateUniqueRandomNumber = (usedNumbers: number[]): number => {
+    let randomNumber;
+    do {
+      randomNumber = Math.floor(Math.random() * 1000);
+    } while (usedNumbers.includes(randomNumber));
+    return randomNumber;
+  };
 
   return (
       <View style={styles.container}>
@@ -30,7 +61,11 @@ export default function QuizSelectScreen() {
               <View style={styles.figContainerF}>
             
               <SelectFigComp
-                onPress={() => console.log("You press Pan!")}
+                onPress={() => 
+                  navigation.navigate('QuizDetail',{
+                    breadId: usedNumbers[0],
+                  })
+                }
                 rank = "S"
                 source={require('../../assets/testPan.jpeg')}
                 />
@@ -38,7 +73,11 @@ export default function QuizSelectScreen() {
                   <View style={styles.spaceW} />{/* 空白 */} 
 
               <SelectFigComp
-              onPress={() => console.log("You press Pan!")}
+              onPress={() => 
+                navigation.navigate('QuizDetail',{
+                  breadId: usedNumbers[1],
+                })
+              }
               rank = "A"
               source={require('../../assets/testPan.jpeg')}
               />
@@ -48,7 +87,11 @@ export default function QuizSelectScreen() {
           <View style={styles.figContainerS}>
           
             <SelectFigComp
-            onPress={() => console.log("You press Pan!")}
+            onPress={() => 
+              navigation.navigate('QuizDetail',{
+                breadId: usedNumbers[2],
+              })
+            }
             rank = "C"
             source={require('../../assets/testPan.jpeg')}
             />
@@ -82,7 +125,7 @@ export default function QuizSelectScreen() {
                 borderWidth={5}
                 color='#FBF7EF'
                 height={50}
-                onClick={() => console.log("You clicked リロードボタン")}
+                onClick={() => generateRandomNumbers()} // 乱数を再生成する関数を呼び出す
                 radius={90}
                 width={50}
                 children="" 
