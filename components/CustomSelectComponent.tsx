@@ -10,14 +10,17 @@ interface Props {
     source: any;
     isChangeColorButtonPressed: boolean;
     setIsChangeColorButtonPressed: React.Dispatch<React.SetStateAction<boolean>>;
+    setSelectedBreadId: React.Dispatch<React.SetStateAction<number | null>>;
+    breadId: number;
 }
 
-const SelectFigComp = ({onPress, rank, source, isChangeColorButtonPressed, setIsChangeColorButtonPressed}: Props) => {
+const SelectFigComp = ({onPress, rank, source, isChangeColorButtonPressed, setIsChangeColorButtonPressed, setSelectedBreadId, breadId}: Props) => {
   const [isButtonPressed, setIsButtonPressed] = useState(false); // ボタンが押されたかどうかの状態
   const handleButtonPress = () => {
     // ChangeColorButton の押下状態を更新
     setIsChangeColorButtonPressed(!isChangeColorButtonPressed);
-
+    // 選択されたパンのIDを記録
+    setSelectedBreadId(breadId);
 };
 
     return (

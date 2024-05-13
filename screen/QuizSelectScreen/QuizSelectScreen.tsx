@@ -44,12 +44,15 @@ export default function QuizSelectScreen() {
     } while (usedNumbers.includes(randomNumber));
     return randomNumber;
   };
+///////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////小ボタンの選択とStartボタン//////////////////////////////
+
 // ChangeColorButton の状態を管理する関数
 const [isChangeColorButtonPressed, setIsChangeColorButtonPressed] = useState(false);
+// BreadIdの状態を管理する関数
+const [selectedBreadId, setSelectedBreadId] = useState<number | null>(null);
 
-// START ボタンが押されるかどうかを制御する関数
+// START ボタンが押された時の処理
 const handleStartButtonPress = () => {
   // ChangeColorButton が押された状態でなければ何もしない
   if (!isChangeColorButtonPressed) {
@@ -59,7 +62,7 @@ const handleStartButtonPress = () => {
   // START ボタンが押された時の処理
   console.log("START button pressed!");
   // ここで画面遷移等の処理を追加する
-  navigationP.navigate('Map')
+  navigationP.navigate('Map', { breadId: selectedBreadId })
 };
 
   return (
@@ -91,6 +94,8 @@ const handleStartButtonPress = () => {
                 source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
+                breadId={usedNumbers[0]} // ランダムな数字を割り当てる
+                setSelectedBreadId={setSelectedBreadId}
                 />
             
                   <View style={styles.spaceW} />{/* 空白 */} 
@@ -105,6 +110,8 @@ const handleStartButtonPress = () => {
               source={require('../../assets/testPan.jpeg')}
               isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
               setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
+              breadId={usedNumbers[1]} // ランダムな数字を割り当てる
+              setSelectedBreadId={setSelectedBreadId}
               />
             
             </View>
@@ -121,6 +128,8 @@ const handleStartButtonPress = () => {
               source={require('../../assets/testPan.jpeg')}
               isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
               setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
+              breadId={usedNumbers[2]} // ランダムな数字を割り当てる
+              setSelectedBreadId={setSelectedBreadId}
               />
 
               <View style={{flex: 0, width: 10}} />{/* 空白 */} 

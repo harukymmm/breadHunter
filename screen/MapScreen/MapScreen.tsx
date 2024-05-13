@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackParamList } from '../../route';
 import { MapParamList } from './routeMap';
 import { NavigationProp } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
@@ -16,6 +17,10 @@ export default function MapScreen() {
   //Pはフォルダ間の遷移、Kはフォルダ内の遷移
   const navigationP = useNavigation<NavigationP>();
   const navigationK = useNavigation<NavigationK>();
+
+  //QuizSelectScreenから渡された変数breadId
+  const route = useRoute();
+  const { breadId } = route.params;
 
   return (
     <View style={styles.container}>
@@ -48,9 +53,9 @@ export default function MapScreen() {
           
           <View style={ styles.buttonContainer }>
               
-                <View style={ styles.distance }>
+                <View style={ styles.distance }> 
                   <DistanceView 
-                      long={20}
+                      long={breadId}
                       height={80} 
                       width={150}
                       radius={5}
@@ -59,7 +64,7 @@ export default function MapScreen() {
                       justifyContent='center'
                       alignItems='center'
                 />
-                </View>
+                </View>{/* breadIdを距離表示のところに表示（応急処置）*/}
 
                 <ButtonCustom
                     onClick={() => navigationP.navigate('QuizSelect')}
