@@ -10,19 +10,19 @@ export default function ResultFalseScreen() {
     <View style={styles.container}>
           <View style={styles.hukidashiTop}>
               <Colorhukidashi
-              children='不正解...'
-              height={55} 
-              width={500}
-              radius={0}
-              borderColor='#FF8628'
-              borderWidth={3}
-              color='#FBF7EF'
-              fontSize={25} 
-              fontColor='#FF8628'
-              justifyContent='center'
-              alignItems='center'
+                children='不正解...'
+                height={55} 
+                width={500}
+                radius={0}
+                borderColor='#FF8628'
+                borderWidth={3}
+                color='#FBF7EF'
+                fontSize={25} 
+                fontColor='#FF8628'
+                justifyContent='center'
+                alignItems='center'
               />
-            </View>
+          </View>
 
       <QuizAnswer
         imageSource = {require('../../assets/testPan.jpeg')}
@@ -33,9 +33,9 @@ export default function ResultFalseScreen() {
 
         <View style={styles.characterContainer}>
         <View style={{flex: 0, width: 30,}} />{/* 空白 */} 
-             <Image 
-                  source={require("../../assets/hunter_Wrong.png")} 
-                  style={styles.character} 
+            <Image 
+              source={require("../../assets/hunter_Wrong.png")} 
+              style={styles.character} 
             /> 
             <View style={ styles.hukidasi }>
                 <HukidashiCustom
@@ -45,9 +45,9 @@ export default function ResultFalseScreen() {
                   fontSize={18}  
                   justifyContent='center'
                   alignItems='center'
-                  >
-                    違ったか...{'\n'}また探してみよう
-                  </HukidashiCustom>
+                >
+                  違ったか...{'\n'}また探してみよう
+                </HukidashiCustom>
             </View>
             <View style={{flex: 0, width: 30,}} />{/* 空白 */}  
         </View>

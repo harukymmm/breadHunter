@@ -10,19 +10,19 @@ export default function ResultCorrectScreen() {
     <View style={styles.container}>
           <View style={styles.hukidashiTop}>
               <Colorhukidashi
-                    children='正解！'
-                    height={55} 
-                    width={500}
-                    radius={0}
-                    borderColor=''
-                    borderWidth={0}
-                    color='#FF8628'
-                    fontSize={25} 
-                    fontColor='#FBF7EF'
-                    justifyContent='center'
-                    alignItems='center'
-                />
-            </View>
+                children='正解！'
+                height={55} 
+                width={500}
+                radius={0}
+                borderColor=''
+                borderWidth={0}
+                color='#FF8628'
+                fontSize={25} 
+                fontColor='#FBF7EF'
+                justifyContent='center'
+                alignItems='center'
+              />
+          </View>
 
       <QuizAnswer
         imageSource = {require('../../assets/testPan.jpeg')}
@@ -34,9 +34,9 @@ export default function ResultCorrectScreen() {
         <View style={styles.characterContainer}>
         <View style={{flex: 0, width: 30,}} />{/* 空白 */} 
              <Image 
-                  source={require("../../assets/hunter_Correct.png")} 
-                  style={styles.character} 
-            /> 
+                source={require("../../assets/hunter_Correct.png")} 
+                style={styles.character} 
+              /> 
             <View style={ styles.hukidasi }>
                 <HukidashiCustom
                   height={80} 
@@ -45,9 +45,9 @@ export default function ResultCorrectScreen() {
                   fontSize={18}  
                   justifyContent='center'
                   alignItems='center'
-                  >
-                    やったな！{'\n'}また次も頼む
-                  </HukidashiCustom>
+                >
+                  やったな！{'\n'}また次も頼む
+                </HukidashiCustom>
             </View>
             <View style={{flex: 0, width: 30,}} />{/* 空白 */}  
         </View>

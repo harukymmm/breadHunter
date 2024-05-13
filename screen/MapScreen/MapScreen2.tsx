@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
 import ButtonCustom from "../../components/CustomButtonComponent";
@@ -20,18 +20,18 @@ export default function MapScreen2() {
   return (
     <View style={styles.container}>
       <Colorhukidashi
-              children='パン付近に到着！'
-              height={50} 
-              width={500}
-              radius={0}
-              borderColor=''
-              borderWidth={0}
-              color='#FF8628'
-              fontSize={25} 
-              fontColor='#FBF7EF'
-              justifyContent='center'
-              alignItems='center'
-            />
+        children='パン付近に到着！'
+        height={50} 
+        width={500}
+        radius={0}
+        borderColor=''
+        borderWidth={0}
+        color='#FF8628'
+        fontSize={25} 
+        fontColor='#FBF7EF'
+        justifyContent='center'
+        alignItems='center'
+      />
 
        <View style = {styles.mapzoon}>
           <Image 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import  ChooseBread from "../../components/ChooseBreadComponent";
 
@@ -23,7 +23,7 @@ return (
 
       <ChooseBread
           source={require('../../assets/testPan.jpeg')}
-          rank= {breadId.toString()}
+          rank= {breadId.toString()}  //rank内にbreadIdを表示（応急処置）
           detail="ここにパンの説明が入ります"
           long={0.5}   //距離
           onPress={() => navigationK.navigate('QuizSelect')}
