@@ -25,7 +25,7 @@ return (
           source={require('../../assets/testPan.jpeg')}
           rank= {breadId.toString()}
           detail="ここにパンの説明が入ります"
-          long={0.5}   //距離
+          long={0}   //距離
           onPress={() => navigationK.navigate('TakePhotoF')}
       ></ChooseBread>
 
