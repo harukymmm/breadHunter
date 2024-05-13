@@ -15,14 +15,14 @@ type Navigation = NavigationProp<QuizParamList>;
 
 export default function QuizSelectScreen() {  
   const navigation = useNavigation<Navigation>();
+  
+  ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
   // 使用された数値を追跡するための配列
   const [usedNumbers, setUsedNumbers] = useState<number[]>([]);
-
   // コンポーネントがマウントされた時に乱数を生成する
   useEffect(() => {
     generateRandomNumbers();
   }, []);
-
   // 乱数を生成する関数
   const generateRandomNumbers = () => {
     const breadIdA = generateUniqueRandomNumber(usedNumbers);
@@ -31,7 +31,6 @@ export default function QuizSelectScreen() {
     // 生成した乱数を配列に追加
     setUsedNumbers([breadIdA, breadIdB, breadIdC]);
   };
-
   // 0から999までのランダムな整数を生成する関数
   const generateUniqueRandomNumber = (usedNumbers: number[]): number => {
     let randomNumber;
@@ -40,6 +39,22 @@ export default function QuizSelectScreen() {
     } while (usedNumbers.includes(randomNumber));
     return randomNumber;
   };
+
+////////////////////////////////////小ボタンの選択とStartボタン//////////////////////////////
+// ChangeColorButton の状態を管理する関数
+const [isChangeColorButtonPressed, setIsChangeColorButtonPressed] = useState(false);
+
+// START ボタンが押されるかどうかを制御する関数
+const handleStartButtonPress = () => {
+  // ChangeColorButton が押された状態でなければ何もしない
+  if (!isChangeColorButtonPressed) {
+    console.log("ChangeColorButton must be pressed first!");
+    return;
+  }
+  // START ボタンが押された時の処理
+  console.log("START button pressed!");
+  // ここで画面遷移等の処理を追加する
+};
 
   return (
       <View style={styles.container}>
@@ -68,6 +83,8 @@ export default function QuizSelectScreen() {
                 }
                 rank = "S"
                 source={require('../../assets/testPan.jpeg')}
+                isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
+                setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
                 />
             
                   <View style={styles.spaceW} />{/* 空白 */} 
@@ -80,21 +97,25 @@ export default function QuizSelectScreen() {
               }
               rank = "A"
               source={require('../../assets/testPan.jpeg')}
+              isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
+              setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
               />
             
             </View>
 
           <View style={styles.figContainerS}>
           
-            <SelectFigComp
-            onPress={() => 
-              navigation.navigate('QuizDetail',{
-                breadId: usedNumbers[2],
-              })
-            }
-            rank = "C"
-            source={require('../../assets/testPan.jpeg')}
-            />
+              <SelectFigComp
+              onPress={() => 
+                navigation.navigate('QuizDetail',{
+                  breadId: usedNumbers[2],
+                })
+              }
+              rank = "C"
+              source={require('../../assets/testPan.jpeg')}
+              isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
+              setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
+              />
 
               <View style={{flex: 0, width: 10}} />{/* 空白 */} 
           
@@ -140,7 +161,7 @@ export default function QuizSelectScreen() {
               borderWidth={5}
               color="#FF8628"
               height={50}
-              onClick={() => console.log("You clicked on the START!")}
+              onClick={() => handleStartButtonPress()} // START ボタンが押されたときの処理
               radius={90}
               width={250}
               children="START" 
