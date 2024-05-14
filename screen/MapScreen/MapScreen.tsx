@@ -1,21 +1,38 @@
 import {useState} from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import { useNavigation } from '@react-navigation/native';
+import { StackParamList } from '../../route';
+import { MapParamList } from './routeMap';
+import { NavigationProp } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
 import MapView from 'react-native-maps';
 
+//遷移の型指定　
+type Navigation = NavigationProp<StackParamList>;
+
 export default function MapScreen() {
-const [region, setRegion] = useState({
+  
+  const [region, setRegion] = useState({
     latitude: 35.0252986,
     longitude: 135.781654,
     latitudeDelta: 0.003,
     longitudeDelta: 0.003,
   });
 
+  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+  const navigation = useNavigation<Navigation>();
+
+  //QuizSelectScreenから渡された変数breadId
+  const route = useRoute();
+  const { breadId } = route.params;
 
   return (
     <View style={styles.container}>
+
        <View style = {styles.mapzoon}>
           <MapView
             style={styles.mapimage}
@@ -27,6 +44,7 @@ const [region, setRegion] = useState({
           source={require('../../assets/arrow_N.png')}
           />
        </View>
+
        <View style={styles.reloadbutton}>
           <ButtonCustom
           onClick={() => console.log("Push 現在地更新ボタン")}
@@ -58,7 +76,7 @@ const [region, setRegion] = useState({
                 />
               </View>
               <ButtonCustom
-                onClick={() => console.log("Push パン選択に戻るボタン")}
+                onClick={() => navigation.navigate('QuizSelect')}
                 children="パン選択に戻る"
                 borderColor='#FF8628'
                 borderWidth={5}
@@ -73,7 +91,7 @@ const [region, setRegion] = useState({
               />
               <View style={{flex: 0, height: 5,}} />{/* 空白 */} 
               <ButtonCustom
-                onClick={() => console.log("Push 諦めるボタン")}
+                onClick={() => navigation.navigate('ResultGiveUp')}
                 children="諦める"
                 borderColor='#FF8628'
                 borderWidth={5}

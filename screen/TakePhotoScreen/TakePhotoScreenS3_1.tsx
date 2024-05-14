@@ -2,88 +2,112 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import HukidashiCustom from '../../components/HukidashiComponent';
+import { useNavigation } from '@react-navigation/native';
+import { StackParamList } from '../../route';
+import { PhotoParamList } from './routePhoto';
+import { NavigationProp } from '@react-navigation/native';
 
-//Viewという要素を作ってそこにstyleを適用する
-export default function TakePhotoScreen() {
+//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
+type NavigationP = NavigationProp<StackParamList>;
+type NavigationK = NavigationProp<PhotoParamList>;
+
+export default function TakePhotoScreenF() {
+    //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+    const navigationP = useNavigation<NavigationP>();
+    const navigationK = useNavigation<NavigationK>();
+
   return (
     <View style={styles.container}>
-      <View style={styles.redbox}></View>
-      <View style={styles.orangebox}>
-        <Text style={styles.headingtext}>写真判定</Text>
-      </View>
-      <View style={styles.graybox}>
-      </View>
       <View style={styles.fukidashi}>
-      <HukidashiCustom
-      height={90}
-      width={250}
-      radius={15}
-      fontSize={20}
-      fontColor='#332E21'
-      justifyContent='center'
-      alignItems='center'
-      >
-      パンを見つけたか！{'\n'}写真を撮ってくれ
-      </HukidashiCustom>
+        <HukidashiCustom
+          height={90}
+          width={250}
+          radius={15}
+          fontSize={20}
+          justifyContent='center'
+          alignItems='center'
+          >
+          パンを見つけたら{'\n'}写真を撮ってくれ
+        </HukidashiCustom>
       </View>
       <Image 
         source={require("../../assets/hunter_TakePhoto.png")} 
         style={styles.character} 
       />
       <View style={styles.buttoncontainer}>
-      <ButtonCustom
-        borderColor="#FF8628"
-        borderWidth={5}
-        color="#FF8628"
-        height={230}
-        onClick={() => console.log("You clicked on カメラ起動!")}
-        radius={0}
-        width={200}
-        fontSize={25}
-        fontColor='#FBF7EF'
-        justifyContent='center'
-        alignItems='center'
-      >カメラを{'\n'}起動する
-        </ButtonCustom>
+        
+  {/* 押すとPhotoLへ遷移（応急処置） */} 
+        <ButtonCustom
+          borderColor="#FF8628"
+          borderWidth={5}
+          color="#FF8628"
+          height={230}
+          onClick={() => 
+            navigationK.navigate('TakePhotoL')
+          }
+          radius={0}
+          width={200}
+          fontSize={25}
+          fontColor='#FBF7EF'
+          justifyContent='center'
+          alignItems='center'
+        >カメラを{'\n'}起動する
+          </ButtonCustom>
 
-      <ButtonCustom
-        borderColor="#FBF7EF"
-        borderWidth={5}
-        color="#FBF7EF"
-        height={230}
-        onClick={() => console.log("You clicked on 前の画面に戻る")}
-        radius={0}
-        width={200}
-        fontSize={25}
-        fontColor='#FF8628'
-        justifyContent='center'
-        alignItems='center'
-      >前の画面に{'\n'}戻る
-      </ButtonCustom>
+          <ButtonCustom
+            borderColor="#FBF7EF"
+            borderWidth={5}
+            color="#FBF7EF"
+            height={230}
+            onClick={() => navigationP.navigate('Map2')}
+            radius={0}
+            width={200}
+            fontSize={25}
+            fontColor='#FF8628'
+            justifyContent='center'
+            alignItems='center'
+          >前の画面に{'\n'}戻る
+          </ButtonCustom>
       </View>
+      
       <View style={styles.checkButton}>
-      <ButtonCustom
-        borderColor="#FF8628"
-        borderWidth={5}
-        color="#FBF7EF"
-        height={50}
-        onClick={() => console.log("Push お題パンの確認")}
-        radius={90}
-        width={300}
-        children="お題パンの確認" 
-        fontSize={25}
-        fontColor='#FF8628'
-        justifyContent='center'
-        alignItems='center'
-      />
+        <ButtonCustom
+          borderColor="#FF8628"
+          borderWidth={5}
+          color="#FF8628"
+          height={50}
+          onClick={() => navigationK.navigate('BreadDetail',{breadId: 1})}
+          radius={90}
+          width={300}
+          children="お題パンの確認" 
+          fontSize={25}
+          fontColor="#FBF7EF"
+          justifyContent='center'
+          alignItems='center'
+        />
+        <View style={{flex: 0, height: 5}} />{/* 空白 */} 
+         <ButtonCustom
+          borderColor="#FF8628"
+          borderWidth={5}
+          color="#FBF7EF"
+          height={50}
+          onClick={() => navigationP.navigate('ResultGiveUp')}
+          radius={90}
+          width={300}
+          children="買えなかった..." 
+          fontSize={25}
+          fontColor='#FF8628'
+          justifyContent='center'
+          alignItems='center'
+        />
       </View>
       
     </View>
   );
 
 }
-//containerは背景 flexは重み比率 justifycontentはflexdirection方向(デフォ縦)に位置揃える
-//alignitemsはflexdirection方向と別の軸（デフォ横）でそろえる
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -91,29 +115,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  redbox:{
-    flex: 0,
-    backgroundColor: '#fc3b00',
-    width: '100%',
-    height: '3%'
-  },
-  orangebox:{
-    flex: 0,
-    flexDirection: 'row',
-    backgroundColor: '#ff8628',
-    width: '100%',
-    height: '8.5%'
-  },
-  graybox:{
-    flex: 0,
-    backgroundColor: '#d6cfbd',
-    width: '100%',
-    height: '0.7%'
-  },
   fukidashi:{
     flex: 0,
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 40,
+    marginBottom: 10,
   },
   character:{
     flex: 0,
@@ -123,29 +128,22 @@ const styles = StyleSheet.create({
     resizeMode: 'contain', 
     marginBottom: 10,
   },
-  headingtext:{
-    color: '#fbf7ef',
-    //alignselfで見出し文字の親オブジェクト（オレンジの四角形）に合わせてセンタリング
-    alignSelf: 'center',
-    marginLeft: '15%',
-    fontSize: 20
-  },
   buttoncontainer:{
     flex: 0,
     flexDirection: 'row',
     alignItems: 'center',
-  justifyContent: 'center', // 水平方向の中央に配置する
-  marginBottom: 15,
+    justifyContent: 'center', // 水平方向の中央に配置する
+    marginBottom: 15,
   },
   checkButton:{
     flex: 0,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
-  justifyContent: 'center', // 水平方向の中央に配置する
-  marginBottom: 20,
+    justifyContent: 'center', // 水平方向の中央に配置する
+    marginBottom: 10,
   }
 });
 
 
 
-registerRootComponent(TakePhotoScreen)
+registerRootComponent(TakePhotoScreenF)

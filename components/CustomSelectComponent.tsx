@@ -8,32 +8,38 @@ interface Props {
     onPress: () => void;
     rank?: React.ReactNode;
     source: any;
+    isChangeColorButtonPressed: boolean;
+    setIsChangeColorButtonPressed: React.Dispatch<React.SetStateAction<boolean>>;
+    setSelectedBreadId: React.Dispatch<React.SetStateAction<number | null>>;
+    breadId: number;
 }
 
-const SelectFigComp = ({onPress, rank, source}: Props) => {
+const SelectFigComp = ({onPress, rank, source, isChangeColorButtonPressed, setIsChangeColorButtonPressed, setSelectedBreadId, breadId}: Props) => {
   const [isButtonPressed, setIsButtonPressed] = useState(false); // ボタンが押されたかどうかの状態
   const handleButtonPress = () => {
-    // ボタンが押されたときの処理
-    setIsButtonPressed(true); // ボタンが押された状態をセット
-  };
+    // ChangeColorButton の押下状態を更新
+    setIsChangeColorButtonPressed(!isChangeColorButtonPressed);
+    // 選択されたパンのIDを記録
+    setSelectedBreadId(breadId);
+};
 
     return (
       <View style={styles.container}>
-      <Text style= {styles.rankText}>ランク{rank}</Text>
-        <TouchableOpacity onPress={onPress}>
-            <Image 
-            source={source}  //画像のソースをpropsから受け取る
-            style={{ width: 150, height: 150}}
-            />
-        </TouchableOpacity>
-        <View style={styles.space} />{/* 空白 */}
-      <ChangeColorButton
-      borderWidth={5}
-      onClick={handleButtonPress} // ボタンが押されたときの処理を渡す
-      isPressed={isButtonPressed} // ボタンの押された状態を渡す
-      height={35}
-      width={35}
-      />
+        <Text style= {styles.rankText}>ランク{rank}</Text>
+              <TouchableOpacity onPress={onPress}>
+                  <Image 
+                  source={source}  //画像のソースをpropsから受け取る
+                  style={{ width: 150, height: 150}}
+                  />
+              </TouchableOpacity>
+             <View style={styles.space} />{/* 空白 */}
+              <ChangeColorButton
+              borderWidth={5}
+              onClick={handleButtonPress} // ボタンが押されたときの処理を渡す
+              isPressed={isChangeColorButtonPressed} // ボタンの押された状態を渡す
+              height={35}
+              width={35}
+              />
       </View>
     );
   }

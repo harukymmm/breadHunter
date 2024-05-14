@@ -1,5 +1,7 @@
 //Mapscreen用、距離を外部から渡すふきだし
+//フォント読み込みあり
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { useFonts } from 'expo-font';
 
 interface Props {
     long: number;    //距離
@@ -32,6 +34,13 @@ const DistanceView = ({long, height, width, radius, fontSize, fontColor, justify
             textAlign: "center"
         }
         });
+    
+    const [fontsLoaded, fontError] = useFonts({
+          'SmileySans-Oblique': require('../assets/fonts/SmileySans-Oblique.otf'),
+        });
+        if (!fontsLoaded && !fontError) {
+          return null;
+        };
     
     return (
         <View style = {styles.container}>
