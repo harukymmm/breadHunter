@@ -8,7 +8,7 @@ import StartScreen  from './screen/StartScreen/StartScreen';
 import QuizSelectScreen from './screen/QuizSelectScreen/QuizSelectScreen';
 import QuizDetailScreen from './screen/QuizSelectScreen/QuizDetailScreen';
 import MapScreen from './screen/MapScreen/MapScreen';
-import MapScreen2 from './screen/MapScreen/MapScreen2';
+import MapScreenNearBakery from './screen/MapScreen/MapScreenNearBakery';
 import TakePhotoScreenF from './screen/TakePhotoScreen/TakePhotoScreenS3_1';
 import BreadDetailScreen from './screen/TakePhotoScreen/BreadDetailScreen';
 import TakePhotoScreenL from './screen/TakePhotoScreen/TakePhotoScreenS3_3';
@@ -47,7 +47,7 @@ export default function App() {
         <Stack.Screen name="QuizSelect" component={QuizSelectScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="QuizDetail" component={QuizDetailScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="MapDefault" component={MapScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="NearBakery" component={MapScreen2} options={{ headerShown: false }} />
+        <Stack.Screen name="NearBakery" component={MapScreenNearBakery} options={{ headerShown: false }} />
         <Stack.Screen name="TakePhotoF" component={TakePhotoScreenF} options={{ headerShown: false }} />
         <Stack.Screen name="BreadDetail" component={BreadDetailScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TakePhotoL" component={TakePhotoScreenL} options={{ headerShown: false }} />

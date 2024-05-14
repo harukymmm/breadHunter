@@ -1,11 +1,19 @@
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import { useNavigation } from '@react-navigation/native';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import HukidashiCustom from '../../components/HukidashiComponent';
 import Colorhukidashi from '../../components/ColorHukidashi';
 import MapView from 'react-native-maps';
+import { StackParamList } from '../../route';
+import { NavigationProp } from '@react-navigation/native';
+
+type Navigation = NavigationProp<StackParamList>;
 
 export default function MapScreenNearBakery() {
+  
+  const navigation = useNavigation<Navigation>();
+
   return (
     <View style={styles.container}>
       <Colorhukidashi
@@ -52,7 +60,7 @@ export default function MapScreenNearBakery() {
                 />
               </View>
               <ButtonCustom
-                onClick={() => console.log("Push パン発見ボタン")}
+                onClick={() => navigation.navigate('TakePhotoF')}
                 children="パン発見！"
                 borderColor='#FF8628'
                 borderWidth={5}
@@ -67,7 +75,7 @@ export default function MapScreenNearBakery() {
               />
               <View style={{flex: 0, height: 10,}} />{/* 空白 */} 
               <ButtonCustom
-                onClick={() => console.log("Push 諦めるボタン")}
+                onClick={() => navigation.navigate('ResultGiveUp')}
                 children="諦める"
                 borderColor='#FF8628'
                 borderWidth={5}
