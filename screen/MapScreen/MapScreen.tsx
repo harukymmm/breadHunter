@@ -4,7 +4,6 @@ import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
 import MapView from 'react-native-maps';
-import Geolocation from '@react-native-community/geolocation';
 
 export default function MapScreen() {
 const [region, setRegion] = useState({
@@ -14,33 +13,23 @@ const [region, setRegion] = useState({
     longitudeDelta: 0.003,
   });
 
-  const updateLocation = () => {
-    Geolocation.getCurrentPosition(
-      position => {
-        const { latitude, longitude } = position.coords;
-        setRegion({
-          ...region,
-          latitude,
-          longitude,
-        });
-      },
-      error => console.log(error),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
-  };
 
   return (
     <View style={styles.container}>
        <View style = {styles.mapzoon}>
-       <MapView
-          style={styles.mapimage}
-          initialRegion={region}
-          zoomEnabled={false}
-        />
+          <MapView
+            style={styles.mapimage}
+            initialRegion={region}
+            zoomEnabled={false}
+          />
+          <Image
+          style={styles.overlayImage}
+          source={require('../../assets/arrow_N.png')}
+          />
        </View>
        <View style={styles.reloadbutton}>
           <ButtonCustom
-          onClick={() => updateLocation()}
+          onClick={() => console.log("Push 現在地更新ボタン")}
           children="現在地更新"
           borderColor="#FBF7EF"
           borderWidth={3}
@@ -135,6 +124,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'center', 
+  },
+  overlayImage: {
+    position: 'absolute',
+    width: '15%',
+    height: '15%',
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
   reloadbutton:{
     flex: 0,
