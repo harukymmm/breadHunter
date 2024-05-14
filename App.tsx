@@ -39,8 +39,6 @@ export default function App() {
   }
 
   return (
-    
-  
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Start">
         <Stack.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />

@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import  ChooseBread from "../../components/ChooseBreadComponent";
-
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { StackParamList } from '../../route';

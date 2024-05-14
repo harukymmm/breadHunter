@@ -1,13 +1,13 @@
 export type StackParamList = {
   Start: undefined;
   QuizSelect: undefined;
-  QuizDetail: { breadId: number };
-  MapDefault: { breadId: number };
-  NearBakery: { breadId: number };
-  TakePhoto: { breadId: number };
-  BreadDetail: { breadId: number };
-  PhotoCheck: { breadId: number };
-  ResultCorrect: { breadId: number };
-  ResultFalse: { breadId: number };
-  ResultGiveUp: { breadId: number };
+  QuizDetail: { breadId: number | null };
+  MapDefault: { breadId: number | null };
+  NearBakery: { breadId: number | null };
+  TakePhoto: { breadId: number | null };
+  BreadDetail: { breadId: number | null };
+  PhotoCheck: { breadId: number | null };
+  ResultCorrect: { breadId: number | null };
+  ResultFalse: { breadId: number | null };
+  ResultGiveUp: { breadId: number | null };
 };
