@@ -7,7 +7,7 @@ export type StackParamList = {
   TakePhoto: { breadId: number | null };
   BreadDetail: { breadId: number | null };
   PhotoCheck: { breadId: number | null };
-  ResultCorrect: { breadId: number | null};
-  ResultFalse: { breadId: number | null};
-  ResultGiveUp: { breadId: number | null};
+  ResultCorrect: { breadId: number | null };
+  ResultFalse: { breadId: number | null };
+  ResultGiveUp: { breadId: number | null };
 };

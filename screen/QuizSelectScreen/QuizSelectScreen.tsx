@@ -3,7 +3,7 @@ import { StyleSheet, View, Image } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
 import { StackParamList} from '../../route'
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationProp, useRoute, RouteProp } from '@react-navigation/native';
 
 import ButtonCustom from "../../components/CustomButtonComponent";
 import SelectFigComp from '../../components/CustomSelectComponent';
@@ -17,7 +17,8 @@ type Navigation = NavigationProp<StackParamList>;
 export default function QuizSelectScreen() {  
   //Pはフォルダ間の遷移、Kはフォルダ内の遷移
   const navigation = useNavigation<Navigation>();
-  
+  const route = useRoute<RouteProp<StackParamList, 'QuizSelect'>>();
+
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
   // 0から999までのランダムな整数を生成する関数
   const generateUniqueRandomNumber = (usedNumbers: number[]): number => {
