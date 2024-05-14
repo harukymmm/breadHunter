@@ -3,10 +3,9 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
 import { StackParamList } from '../../route';
-import { MapParamList } from './routeMap';
 import { NavigationProp } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
-
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
 import MapView from 'react-native-maps';
@@ -15,6 +14,10 @@ import MapView from 'react-native-maps';
 type Navigation = NavigationProp<StackParamList>;
 
 export default function MapScreen() {
+
+  const navigation = useNavigation<Navigation>();
+  const route = useRoute<RouteProp<StackParamList, 'MapDefault'>>();
+  const { breadId } = route.params;
   
   const [region, setRegion] = useState({
     latitude: 35.0252986,
@@ -23,12 +26,6 @@ export default function MapScreen() {
     longitudeDelta: 0.003,
   });
 
-  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
-  const navigation = useNavigation<Navigation>();
-
-  //QuizSelectScreenから渡された変数breadId
-  const route = useRoute();
-  const { breadId } = route.params;
 
   return (
     <View style={styles.container}>
@@ -91,7 +88,7 @@ export default function MapScreen() {
               />
               <View style={{flex: 0, height: 5,}} />{/* 空白 */} 
               <ButtonCustom
-                onClick={() => navigation.navigate('ResultGiveUp')}
+                onClick={() => navigation.navigate('ResultGiveUp', {breadId: breadId})}
                 children="諦める"
                 borderColor='#FF8628'
                 borderWidth={5}
