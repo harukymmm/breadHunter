@@ -11,13 +11,12 @@ interface Props {
     width: number;         //幅
     radius: number;        //角の丸さ
     fontSize: number;     //フォントサイズ
-    fontColor: string;    //フォントの色
     justifyContent: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
     alignItems: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 }
 
 const HukidashiCustom = ({ 
-   children, height, width, radius, fontSize, fontColor, justifyContent, alignItems}: Props) => {
+   children, height, width, radius, fontSize, justifyContent, alignItems}: Props) => {
     
     const styles = StyleSheet.create({
     container: {
@@ -44,7 +43,7 @@ const HukidashiCustom = ({
         <Text style={{
           fontFamily: 'SmileySans-Oblique',
           fontSize: fontSize,
-          color: fontColor,
+          color: '#332E21',
           textAlign: "center"
         }}>{children}</Text>
       </View>

@@ -1,9 +1,26 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import { useNavigation } from '@react-navigation/native';
+import { StackParamList } from '../../route';
+import { MapParamList } from './routeMap';
+import { NavigationProp } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
 
+//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
+type NavigationP = NavigationProp<StackParamList>;
+type NavigationK = NavigationProp<MapParamList>;
+
 export default function MapScreen() {
+  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+  const navigationP = useNavigation<NavigationP>();
+  const navigationK = useNavigation<NavigationK>();
+
+  //QuizSelectScreenから渡された変数breadId
+  const route = useRoute();
+  const { breadId } = route.params;
 
   return (
     <View style={styles.container}>
@@ -36,9 +53,9 @@ export default function MapScreen() {
           
           <View style={ styles.buttonContainer }>
               
-                <View style={ styles.distance }>
+                <View style={ styles.distance }> 
                   <DistanceView 
-                      long={20}
+                      long={breadId}
                       height={80} 
                       width={150}
                       radius={5}
@@ -47,10 +64,10 @@ export default function MapScreen() {
                       justifyContent='center'
                       alignItems='center'
                 />
-                </View>
+                </View>{/* breadIdを距離表示のところに表示（応急処置）*/}
 
                 <ButtonCustom
-                    onClick={() => console.log("Push パン選択に戻るボタン")}
+                    onClick={() => navigationP.navigate('QuizSelect')}
                     children="パン選択に戻る"
                     borderColor='#FF8628'
                     borderWidth={5}
@@ -67,7 +84,7 @@ export default function MapScreen() {
               <View style={{flex: 0, height: 5,}} />{/* 空白 */} 
 
                 <ButtonCustom
-                    onClick={() => console.log("Push 諦めるボタン")}
+                    onClick={() => navigationP.navigate('ResultGiveUp')}
                     children="諦める"
                     borderColor='#FF8628'
                     borderWidth={5}
@@ -81,11 +98,14 @@ export default function MapScreen() {
                     alignItems='center'
                 />
             </View>
-
+      
+      {/* 絵を押すとマップ2へ遷移（応急処置） */} 
+      <TouchableOpacity onPress={() => navigationK.navigate('Map2')}> 
        <Image 
         source={require("../../assets/hunter_Longmap.png")} 
         style={styles.character} 
        /> 
+       </TouchableOpacity>
        
        </View>
       </View>

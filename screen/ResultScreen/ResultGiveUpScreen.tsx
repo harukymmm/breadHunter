@@ -4,21 +4,27 @@ import QuizAnswer from '../../components/QuizAnswerComponent';
 import Colorhukidashi from '../../components/ColorHukidashi';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from '../../components/CustomButtonComponent';
+import { useNavigation } from '@react-navigation/native';
+import { StackParamList } from '../../route';
+import { NavigationProp } from '@react-navigation/native';
 
-export default function ResultCorrectScreen() {
+type NavigationP = NavigationProp<StackParamList>;
+
+export default function ResultGiveUpScreen() {
+  const navigationP = useNavigation<NavigationP>();
   return (
     <View style={styles.container}>
           <View style={styles.hukidashiTop}>
               <Colorhukidashi
-                children='正解！'
+                children='探索終了'
                 height={55} 
                 width={500}
                 radius={0}
-                borderColor=''
-                borderWidth={0}
-                color='#FF8628'
+                borderColor='#FF8628'
+                borderWidth={3}
+                color='#FBF7EF'
                 fontSize={25} 
-                fontColor='#FBF7EF'
+                fontColor='#FF8628'
                 justifyContent='center'
                 alignItems='center'
               />
@@ -28,15 +34,15 @@ export default function ResultCorrectScreen() {
         imageSource = {require('../../assets/testPan.jpeg')}
         breadPlace = "ルンダンショコラ白梅町店"
         breadName = "ゴルゴンゾーラトマト"
-        judgeImage={require('../../assets/symbol_Complete.png')}
+        judgeImage={require('../../assets/symbol_Failed.png')}
       />
 
         <View style={styles.characterContainer}>
         <View style={{flex: 0, width: 30,}} />{/* 空白 */} 
-             <Image 
-                source={require("../../assets/hunter_Correct.png")} 
-                style={styles.character} 
-              /> 
+            <Image 
+              source={require("../../assets/hunter_Wrong.png")} 
+              style={styles.character} 
+            /> 
             <View style={ styles.hukidasi }>
                 <HukidashiCustom
                   height={80} 
@@ -46,7 +52,7 @@ export default function ResultCorrectScreen() {
                   justifyContent='center'
                   alignItems='center'
                 >
-                  やったな！{'\n'}また次も頼む
+                  答えはこれらしい{'\n'}また探してみよう
                 </HukidashiCustom>
             </View>
             <View style={{flex: 0, width: 30,}} />{/* 空白 */}  
@@ -57,7 +63,7 @@ export default function ResultCorrectScreen() {
           borderWidth={5}
           color="#FBF7EF"
           height={50}
-          onClick={() => console.log("Push スタート画面に戻るボタン")}
+          onClick={() => navigationP.navigate('Start')}
           radius={90}
           width={300}
           children="スタート画面に戻る" 
@@ -71,7 +77,7 @@ export default function ResultCorrectScreen() {
   );
 }
 
-registerRootComponent(ResultCorrectScreen);
+registerRootComponent(ResultGiveUpScreen);
 
 const styles = StyleSheet.create({
   container: {
@@ -89,8 +95,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems:'center',
     justifyContent:'center', 
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 15,
+    marginBottom: 15,
   },
   character: {
     flex: 1,

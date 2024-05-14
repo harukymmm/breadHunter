@@ -1,25 +1,37 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
+import { useNavigation } from '@react-navigation/native';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import HukidashiCustom from '../../components/HukidashiComponent';
 import Colorhukidashi from '../../components/ColorHukidashi';
+import { StackParamList } from '../../route';
+import { MapParamList } from './routeMap';
+import { NavigationProp } from '@react-navigation/native';
 
-export default function MapScreen() {
+//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
+type NavigationP = NavigationProp<StackParamList>;
+type NavigationK = NavigationProp<MapParamList>;
+
+export default function MapScreen2() {
+  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+  const navigationP = useNavigation<NavigationP>();
+  const navigationK = useNavigation<NavigationK>();
+
   return (
     <View style={styles.container}>
       <Colorhukidashi
-              children='パン付近に到着！'
-              height={50} 
-              width={500}
-              radius={0}
-              borderColor=''
-              borderWidth={0}
-              color='#FF8628'
-              fontSize={25} 
-              fontColor='#FBF7EF'
-              justifyContent='center'
-              alignItems='center'
-            />
+        children='パン付近に到着！'
+        height={50} 
+        width={500}
+        radius={0}
+        borderColor=''
+        borderWidth={0}
+        color='#FF8628'
+        fontSize={25} 
+        fontColor='#FBF7EF'
+        justifyContent='center'
+        alignItems='center'
+      />
 
        <View style = {styles.mapzoon}>
           <Image 
@@ -38,20 +50,19 @@ export default function MapScreen() {
 
                     <View style={ styles.hukidasi }>
                         <HukidashiCustom
-                            children='この中のどこかにパンが...'
+                            children='どの店に入るか決めたか？'
                             height={50} 
                             width={220}
                             radius={5}
                             fontSize={18} 
-                            fontColor='#332E21'
                             justifyContent='center'
                             alignItems='center'
                           />
                       </View>
 
                 <ButtonCustom
-                    onClick={() => console.log("Push パン発見ボタン")}
-                    children="パン発見！"
+                    onClick={() => navigationP.navigate('TakePhotoF')}
+                    children="店に入る"
                     borderColor='#FF8628'
                     borderWidth={5}
                     color='#FF8628'
@@ -67,7 +78,7 @@ export default function MapScreen() {
                 <View style={{flex: 0, height: 10,}} />{/* 空白 */} 
 
                 <ButtonCustom
-                    onClick={() => console.log("Push 諦めるボタン")}
+                    onClick={() => navigationP.navigate('ResultGiveUp')}
                     children="諦める"
                     borderColor='#FF8628'
                     borderWidth={5}
@@ -88,7 +99,7 @@ export default function MapScreen() {
   );
 }
 
-registerRootComponent(MapScreen);
+registerRootComponent(MapScreen2);
 
 const styles = StyleSheet.create({
   container: {

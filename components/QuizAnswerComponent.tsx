@@ -1,4 +1,5 @@
 //クイズの答えセットを示すコンポーネント
+//フォント読み出しあり
 
 import React from "react";
 import { Text, StyleSheet, View, Image, Animated } from 'react-native';

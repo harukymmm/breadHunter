@@ -2,9 +2,21 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
+import { useNavigation } from '@react-navigation/native';
+import { StackParamList } from '../../route';
+import { PhotoParamList } from './routePhoto';
+import { NavigationProp } from '@react-navigation/native';
+
+//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
+type NavigationP = NavigationProp<StackParamList>;
+type NavigationK = NavigationProp<PhotoParamList>;
 
 //Viewという要素を作ってそこにstyleを適用する
-export default function TakePhotoScreen() {
+export default function TakePhotoScreenL() {
+  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+  const navigationP = useNavigation<NavigationP>();
+  const navigationK = useNavigation<NavigationK>();
+
   return (
     <View style={styles.container}>
       <View style={styles.fukidashi}>
@@ -13,7 +25,6 @@ export default function TakePhotoScreen() {
             width={250}
             radius={15}
             fontSize={25}
-            fontColor='#332E21'
             justifyContent='center'
             alignItems='center'
             >
@@ -52,7 +63,7 @@ export default function TakePhotoScreen() {
           borderWidth={5}
           color="#FBF7EF"
           height={120}
-          onClick={() => console.log("Push 戻るボタン")}
+          onClick={() => navigationK.navigate('TakePhotoF')}
           radius={45}
           width={120}
           children="戻る" 
@@ -82,7 +93,7 @@ export default function TakePhotoScreen() {
   );
 }
 
-registerRootComponent(TakePhotoScreen);
+registerRootComponent(TakePhotoScreenL);
 
 //containerは背景 flexは重み比率 justifycontentはflexdirection方向(デフォ縦)に位置揃える
 //alignitemsはflexdirection方向と別の軸（デフォ横）でそろえる

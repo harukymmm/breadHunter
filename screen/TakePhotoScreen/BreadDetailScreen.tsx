@@ -1,16 +1,16 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import  ChooseBread from "../../components/ChooseBreadComponent";
 
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
-import { QuizParamList } from './routeQuizSelect'
+import { PhotoParamList } from './routePhoto'
 import { NavigationProp } from '@react-navigation/native';
 
-type NavigationK = NavigationProp<QuizParamList>;
+type NavigationK = NavigationProp<PhotoParamList>;
 
-export default function QuizDetailScreen() {
+export default function BreadDetailScreen() {
   const navigationK = useNavigation<NavigationK>();
   //QuizSelectScreenから渡された変数breadId
   const route = useRoute();
@@ -23,10 +23,10 @@ return (
 
       <ChooseBread
           source={require('../../assets/testPan.jpeg')}
-          rank= {breadId.toString()}  //rank内にbreadIdを表示（応急処置）
+          rank= {breadId.toString()}
           detail="ここにパンの説明が入ります"
-          long={0.5}   //距離
-          onPress={() => navigationK.navigate('QuizSelect')}
+          long={0}   //距離
+          onPress={() => navigationK.navigate('TakePhotoF')}
       ></ChooseBread>
 
   </View>
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   }
 });
 
-registerRootComponent(QuizDetailScreen);
+registerRootComponent(BreadDetailScreen);
