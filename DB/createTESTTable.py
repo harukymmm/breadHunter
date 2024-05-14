@@ -13,11 +13,19 @@ cur = conn.cursor()
 # 主キーがid name,shop,img, difficultyの要素を持つ
 # 大文字部はSQL文。小文字でも問題ない。
 cur.execute(
-    """CREATE TABLE breads(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, shop TEXT, img TEXT, difficulty TEXT, explanation TEXT)"""
+    """CREATE TABLE rankS(id INTEGER PRIMARY KEY AUTOINCREMENT, bread_id INTEGER)"""
 )
 cur.execute(
-    """CREATE TABLE shops(shop_id INTEGER PRIMARY KEY AUTOINCREMENT, shop_name TEXT,
-    latitude TEXT, longitude TEXT)"""
+    """CREATE TABLE rankA(id INTEGER PRIMARY KEY AUTOINCREMENT, bread_id INTEGER)"""
+)
+cur.execute(
+    """CREATE TABLE rankB(id INTEGER PRIMARY KEY AUTOINCREMENT, bread_id INTEGER)"""
+)
+cur.execute(
+    """CREATE TABLE breads(id INTEGER PRIMARY KEY, name TEXT, shop_id INTEGER, img TEXT, explanation TEXT)"""
+)
+cur.execute(
+    """CREATE TABLE shops(shop_id INTEGER PRIMARY KEY , shop_name TEXT,latitude TEXT, longitude TEXT)"""
 )
 # データベースへコミット。これで変更が反映される。
 conn.commit()
