@@ -25,7 +25,6 @@ return (
           source={require('../../assets/testPan.jpeg')}
           rank= {breadId.toString()}  //rank内にbreadIdを表示（応急処置）
           detail="ここにパンの説明が入ります"
-          long={0.5}   //距離
           onPress={() => navigationK.navigate('QuizSelect')}
       ></ChooseBread>
 
