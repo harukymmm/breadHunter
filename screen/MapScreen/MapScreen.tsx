@@ -7,7 +7,12 @@ import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 
 export default function MapScreen() {
-  const [region, setRegion] = useState();
+const [region, setRegion] = useState({
+    latitude: 35.0252986,
+    longitude: 135.781654,
+    latitudeDelta: 0.003,
+    longitudeDelta: 0.003,
+  });
 
   const updateLocation = () => {
     Geolocation.getCurrentPosition(
@@ -29,12 +34,7 @@ export default function MapScreen() {
        <View style = {styles.mapzoon}>
        <MapView
           style={styles.mapimage}
-          initialRegion={{
-            latitude: 35.0252986,
-            longitude: 135.781654,
-            latitudeDelta: 0.003,
-            longitudeDelta: 0.003,
-          }}
+          initialRegion={region}
           zoomEnabled={false}
         />
        </View>
