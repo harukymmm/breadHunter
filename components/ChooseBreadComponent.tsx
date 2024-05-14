@@ -9,7 +9,7 @@ interface Props {
     source: any; //画像ソース
     rank?: React.ReactNode; //ランク
     detail?: React.ReactNode;   //パン説明
-    long: number;    //距離
+    long: number;    //距離　計算必要
     onPress: () => void;    //ボタン反応
 }
 

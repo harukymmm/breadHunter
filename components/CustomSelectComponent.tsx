@@ -4,9 +4,10 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import ChangeColorButton from './ChangeColorButtonComp';
 
+
 interface Props {
     onPress: () => void;
-    rank?: React.ReactNode;
+    rank?: React.ReactNode;//不明　数字の方が良い？
     source: any;
     isChangeColorButtonPressed: boolean;
     setIsChangeColorButtonPressed: React.Dispatch<React.SetStateAction<boolean>>;
