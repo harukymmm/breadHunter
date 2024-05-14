@@ -10,6 +10,7 @@ import ButtonCustom from "../../components/CustomButtonComponent";
 import SelectFigComp from '../../components/CustomSelectComponent';
 import HukidashiCustom from '../../components/HukidashiComponent'; 
 import Colorhukidashi from '../../components/ColorHukidashi';
+import ReturnButtonCustom from '../../components/ReturnButtonComponent';
 
 //遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
 type NavigationK = NavigationProp<QuizParamList>;
@@ -152,19 +153,8 @@ const handleStartButtonPress = () => {
            </View>
 
           <View style={styles.startButton}>
-            <ButtonCustom
-                borderColor="#FF8628"
-                borderWidth={5}
-                color='#FBF7EF'
-                height={50}
+            <ReturnButtonCustom
                 onClick={() => generateRandomNumbers()} // 乱数を再生成する関数を呼び出す
-                radius={90}
-                width={50}
-                children="" 
-                fontSize={30}
-                fontColor='#FBF7EF'
-                justifyContent='center'
-                alignItems='center'
               />
             <View style={{flex: 0, width: 5}} />{/* 空白 */} 
             <ButtonCustom
