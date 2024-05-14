@@ -1,18 +1,22 @@
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import HukidashiCustom from '../../components/HukidashiComponent';
 import Colorhukidashi from '../../components/ColorHukidashi';
 import MapView from 'react-native-maps';
 import { StackParamList } from '../../route';
 import { NavigationProp } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 
 type Navigation = NavigationProp<StackParamList>;
 
 export default function MapScreenNearBakery() {
   
   const navigation = useNavigation<Navigation>();
+  const route = useRoute<RouteProp<StackParamList, 'NearBakery'>>();
+  const { breadId } = route.params;
 
   return (
     <View style={styles.container}>
@@ -54,13 +58,12 @@ export default function MapScreenNearBakery() {
                   width={220}
                   radius={5}
                   fontSize={20} 
-                  fontColor='#332E21'
                   justifyContent='center'
                   alignItems='center'
                 />
               </View>
               <ButtonCustom
-                onClick={() => navigation.navigate('TakePhotoF')}
+                onClick={() => navigation.navigate('TakePhoto', {breadId: breadId})}
                 children="パン発見！"
                 borderColor='#FF8628'
                 borderWidth={5}
@@ -75,7 +78,7 @@ export default function MapScreenNearBakery() {
               />
               <View style={{flex: 0, height: 10,}} />{/* 空白 */} 
               <ButtonCustom
-                onClick={() => navigation.navigate('ResultGiveUp')}
+                onClick={() => navigation.navigate('ResultGiveUp', {breadId: breadId})}
                 children="諦める"
                 borderColor='#FF8628'
                 borderWidth={5}

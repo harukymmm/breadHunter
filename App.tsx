@@ -9,9 +9,9 @@ import QuizSelectScreen from './screen/QuizSelectScreen/QuizSelectScreen';
 import QuizDetailScreen from './screen/QuizSelectScreen/QuizDetailScreen';
 import MapScreen from './screen/MapScreen/MapScreen';
 import MapScreenNearBakery from './screen/MapScreen/MapScreenNearBakery';
-import TakePhotoScreenF from './screen/TakePhotoScreen/TakePhotoScreenS3_1';
+import TakePhotoScreenF from './screen/TakePhotoScreen/TakePhotoScreen';
 import BreadDetailScreen from './screen/TakePhotoScreen/BreadDetailScreen';
-import TakePhotoScreenL from './screen/TakePhotoScreen/TakePhotoScreenS3_3';
+import TakePhotoScreenL from './screen/TakePhotoScreen/PhotoCheckScreen';
 import ResultCorrectScreen from './screen/ResultScreen/ResultCorrectScreen';
 import ResultFalseScreen from './screen/ResultScreen/ResultFalseScreen';
 import ResultGiveUpScreen from './screen/ResultScreen/ResultGiveUpScreen';
@@ -48,9 +48,9 @@ export default function App() {
         <Stack.Screen name="QuizDetail" component={QuizDetailScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="MapDefault" component={MapScreen} options={{ headerShown: false }} />
         <Stack.Screen name="NearBakery" component={MapScreenNearBakery} options={{ headerShown: false }} />
-        <Stack.Screen name="TakePhotoF" component={TakePhotoScreenF} options={{ headerShown: false }} />
+        <Stack.Screen name="TakePhoto" component={TakePhotoScreenF} options={{ headerShown: false }} />
         <Stack.Screen name="BreadDetail" component={BreadDetailScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="TakePhotoL" component={TakePhotoScreenL} options={{ headerShown: false }} />
+        <Stack.Screen name="PhotoCheck" component={TakePhotoScreenL} options={{ headerShown: false }} />
         <Stack.Screen name="ResultCorrect" component={ResultCorrectScreen} options={{ headerShown: false }} />
         <Stack.Screen name="ResultFalse" component={ResultFalseScreen} options={{ headerShown: false }} />
         <Stack.Screen name="ResultGiveUp" component={ResultGiveUpScreen} options={{ headerShown: false }} />
