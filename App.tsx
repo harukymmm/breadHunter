@@ -46,8 +46,8 @@ export default function App() {
         <Stack.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />
         <Stack.Screen name="QuizSelect" component={QuizSelectScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="QuizDetail" component={QuizDetailScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="Map" component={MapScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Map2" component={MapScreen2} options={{ headerShown: false }} />
+        <Stack.Screen name="MapDefault" component={MapScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="NearBakery" component={MapScreen2} options={{ headerShown: false }} />
         <Stack.Screen name="TakePhotoF" component={TakePhotoScreenF} options={{ headerShown: false }} />
         <Stack.Screen name="BreadDetail" component={BreadDetailScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TakePhotoL" component={TakePhotoScreenL} options={{ headerShown: false }} />

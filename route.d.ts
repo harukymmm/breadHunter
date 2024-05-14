@@ -1,8 +1,8 @@
 export type StackParamList = {
   Start: undefined;
   QuizSelect: undefined;
-  Map: { breadId: number | null };
-  Map2: undefined;
+  MapDefault: { breadId: number | null };
+  NearBakery: undefined;
   TakePhotoF: undefined;
   ResultCorrect: undefined;
   ResultFalse: undefined;
