@@ -1443,7 +1443,14 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
-"@react-native/assets-registry@0.73.1":
+
+"@react-native-community/geolocation@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/geolocation/-/geolocation-3.2.1.tgz#a3c17d044215a45bcc364fdd2e66fca8927a3c4e"
+  integrity sha512-/+HNzuRl4UCMma7KK+KYL8k2nxAGuW+DGxqmqfpiqKBlCkCUbuFHaZZdqVD6jpsn9r/ghe583ECLmd9SV9I4Bw==
+
+"@react-native/assets-registry@0.73.1", "@react-native/assets-registry@~0.73.1":
+
   version "0.73.1"
   resolved "https://registry.npmjs.org/@react-native/assets-registry/-/assets-registry-0.73.1.tgz"
   integrity sha512-2FgAbU7uKM5SbbW9QptPPZx8N9Ke2L7bsHb+EhAanZjFZunA9PaYtyjUQ1s7HD+zDVqOQIvjkpXSv7Kejd2tqg==
@@ -1789,6 +1796,7 @@
   integrity sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==
   dependencies:
     "@sinonjs/commons" "^3.0.0"
+
 
 "@tootallnate/once@1":
   version "1.1.2"
@@ -3232,6 +3240,7 @@ expo-sqlite@^14.0.3:
   version "14.0.3"
   resolved "https://registry.yarnpkg.com/expo-sqlite/-/expo-sqlite-14.0.3.tgz#7d91e564b86cea09db40fd6fe0ccd79785234ffb"
   integrity sha512-H9+QXpB9ppPFeI5ZIPzIZJAdj4hgP2XJEoNe6xlhSUqcEhiq7k55Hs4mf1LX2r1JgSbIjucMEuDlMT8ntU4Pew==
+
   dependencies:
     "@expo/websql" "^1.0.1"
 
@@ -5130,6 +5139,7 @@ nopt@^5.0.0:
   dependencies:
     abbrev "1"
 
+
 normalize-path@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz"
@@ -5493,6 +5503,7 @@ pouchdb-collections@^1.0.1:
   resolved "https://registry.yarnpkg.com/pouchdb-collections/-/pouchdb-collections-1.0.1.tgz#fe63a17da977611abef7cb8026cb1a9553fd8359"
   integrity sha512-31db6JRg4+4D5Yzc2nqsRqsA2oOkZS8DpFav3jf/qVNBxusKa2ClkEIZ2bJNpaDbMfWtnuSq59p6Bn+CipPMdg==
 
+
 prebuild-install@^7.1.1:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-7.1.2.tgz#a5fd9986f5a6251fbc47e1e5c65de71e68c0a056"
@@ -5677,6 +5688,13 @@ react-native-gesture-handler@~2.14.0:
     invariant "^2.2.4"
     lodash "^4.17.21"
     prop-types "^15.7.2"
+
+react-native-maps@^1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.15.1.tgz#2a038576085ff241864ae037cb0a96beab871251"
+  integrity sha512-xdU1Qoe9pvyYx/EQwkpBuubHenSUknODjvKPNlzYJF57CPhjieMIomZL/vCupxTHKqsat2wTCt7O6AdByea5wA==
+  dependencies:
+    "@types/geojson" "^7946.0.13"
 
 react-native-reanimated@~3.6.2:
   version "3.6.3"

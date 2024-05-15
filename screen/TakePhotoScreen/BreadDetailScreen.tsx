@@ -2,18 +2,18 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import  ChooseBread from "../../components/ChooseBreadComponent";
-
+import { RouteProp } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
-import { PhotoParamList } from './routePhoto'
+import { StackParamList } from '../../route';
 import { NavigationProp } from '@react-navigation/native';
 
-type NavigationK = NavigationProp<PhotoParamList>;
+type Navigation = NavigationProp<StackParamList>;
 
 export default function BreadDetailScreen() {
-  const navigationK = useNavigation<NavigationK>();
-  //QuizSelectScreenから渡された変数breadId
-  const route = useRoute();
+
+  const navigation = useNavigation<Navigation>();
+  const route = useRoute<RouteProp<StackParamList, 'BreadDetail'>>();
   const { breadId } = route.params;
   
 return (
@@ -26,7 +26,7 @@ return (
           rank= {breadId.toString()}
           detail="ここにパンの説明が入ります"
           long={0}   //距離
-          onPress={() => navigationK.navigate('TakePhotoF')}
+          onPress={() => navigation.navigate('TakePhoto', {breadId: breadId})}
       ></ChooseBread>
 
   </View>
