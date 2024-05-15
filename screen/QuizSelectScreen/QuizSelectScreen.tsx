@@ -18,12 +18,8 @@ import ReturnButtonCustom from '../../components/ReturnButtonComponent';
 type Navigation = NavigationProp<StackParamList>;
 
 export default function QuizSelectScreen() {  
-  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
 
-  const navigationK = useNavigation<NavigationK>();
-  const navigationP = useNavigation<NavigationP>();
-  
-　　　　const navigation = useNavigation<Navigation>();
+  const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'QuizSelect'>>();
   ////////////////////////////////////数字のランダム生成と再生成/////////////////////////////
   // 0からnまでのランダムな整数を生成する関数->つまりrankの個数に応じたランダム整数を生成////////////
@@ -186,7 +182,7 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
 
-                  navigationK.navigate(
+                  navigation.navigate(
                     'QuizDetail',{breadId: bread_ids?.bread_id_S})
 
                 }
@@ -207,7 +203,7 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
 
-                  navigationK.navigate(
+                  navigation.navigate(
                     'QuizDetail',{breadId: bread_ids?.bread_id_A}
                   )
 
@@ -228,7 +224,7 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
 
-                  navigationK.navigate(
+                  navigation.navigate(
                     'QuizDetail',{breadId: bread_ids?.bread_id_B}
                   )
 
