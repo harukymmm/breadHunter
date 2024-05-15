@@ -52,7 +52,7 @@ export default function QuizSelectScreen() {
     try {
         // データベースを開く
         const db = await open({
-            filename: 'TEST.DB',
+            filename: './../../DB/test/TEST.DB',
             driver: sqlite3.Database,
         });
 
