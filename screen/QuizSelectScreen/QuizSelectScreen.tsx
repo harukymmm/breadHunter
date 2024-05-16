@@ -1,7 +1,4 @@
 import * as SQLite from 'expo-sqlite';
-
-
-
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
@@ -16,6 +13,8 @@ import Colorhukidashi from '../../components/ColorHukidashi';
 import ReturnButtonCustom from '../../components/ReturnButtonComponent';
 
 type Navigation = NavigationProp<StackParamList>;
+const db = SQLite.openDatabaseSync('../../DB/test/TEST.db')//chatGPT曰くSQLite.openDatabase()らしい？
+
 
 export default function QuizSelectScreen() {  
 
@@ -24,7 +23,6 @@ export default function QuizSelectScreen() {
   ////////////////////////////////////数字のランダム生成と再生成/////////////////////////////
   // 0からnまでのランダムな整数を生成する関数->つまりrankの個数に応じたランダム整数を生成////////////
   const generateUniqueRandomNumber = (usedNumbers: number[], n: number): number => {
-
     let randomNumber;
     do {
       randomNumber = Math.floor(Math.random() * n + 1);
@@ -35,7 +33,7 @@ export default function QuizSelectScreen() {
   // 使用された数値を追跡するための配列　usedNumbers→ランダム数を格納　breadIds→rank○テーブルのidを格納
   const [usedNumbers, setUsedNumbers] = useState<number[]>([]);
   const [Ids, setIds] = useState<{ IdS: number; IdA: number; IdB: number } | null>(null);
-　const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number} | null>(null);
+　const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
   const [bread_S, setbread_S] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
   const [bread_A, setbread_A] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
   const [bread_B, setbread_B] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
@@ -45,23 +43,20 @@ export default function QuizSelectScreen() {
     generateRandomNumbers();
   }, []);
 
-  const generateRandomNumbers = async () => {
-    try {
-        // データベースを開く
-        const db = await open({
-            filename: './../../DB/test/TEST.DB',
-            driver: sqlite3.Database,
-        });
-
+  const generateRandomNumbers = async() => {
+    try{
         // SQLクエリを実行して、各ランクの個数を取得
-        const reS = await db.get<{ count: number }>('SELECT COUNT(*) as count FROM rankS');
-        const reA = await db.get<{ count: number }>('SELECT COUNT(*) as count FROM rankA');
-        const reB = await db.get<{ count: number }>('SELECT COUNT(*) as count FROM rankB');
+        const reS = await db.getFirstAsync('SELECT COUNT(*) as count FROM rankS');
+        const reA = await db.getFirstAsync('SELECT COUNT(*) as count FROM rankA');
+        const reB = await db.getFirstAsync('SELECT COUNT(*) as count FROM rankB');
 
-        // number型に変更　numS, numA, numBはそれぞれのランクの個数
-        const numS = reS.count;
-        const numA = reA.count;
-        const numB = reB.count;
+        // number型に変更　numS, numA, numBはそれぞれのランクの個数 gptとhpで言ってることが違う
+        const numS = (reS as { count: number }).count;
+        const numA = (reA as { count: number }).count;
+        const numB = (reB as { count: number }).count;
+        // const numS = reS.rows[0]['COUNT(*)'];
+        // const numA = reA.rows[0]['COUNT(*)'];
+        // const numB = reB.rows[0]['COUNT(*)'];
         
         // ID 表示するidを生成　rankSのIdS番目を取ってくるという意味
         const IdS = generateUniqueRandomNumber(usedNumbers, numS);
@@ -71,8 +66,6 @@ export default function QuizSelectScreen() {
         // 生成した乱数を配列に追加
         setIds({ IdS, IdA, IdB });
 
-        // データベースを閉じる
-        await db.close();
     } catch (error) {
         console.error('Error fetching data:', error);
         throw error; // エラーを呼び出し元に再度スロー
@@ -98,28 +91,28 @@ useEffect(() => {
 const fetchBreadDetails = async() =>{
   if (!Ids) return;
   try {
-    const db = await open({
-      filename: 'TEST.DB',
-      driver: sqlite3.Database,
-    });
-  // 各ランクの指定されたidのbread_idをrankS・rankA・rankBテーブルから取ってくる
-  // breadIdSに対応したbread_idを取ってくる
-  const bread_id_S = await db.get<{ bread_id: number }>('SELECT bread_id FROM rankS WHERE id = ?', [Ids.IdS]);
-  const bread_id_A = await db.get<{ bread_id: number }>('SELECT bread_id FROM rankA WHERE id = ?', [Ids.IdA]);
-  const bread_id_B = await db.get<{ bread_id: number }>('SELECT bread_id FROM rankB WHERE id = ?', [Ids.IdB]);
+    // 各ランクの指定されたidのbread_idをrankS・rankA・rankBテーブルから取ってくる
+    // breadIdSに対応したbread_idを取ってくる
+    const bread_id_S_result = await db.getFirstAsync<{ bread_id: number }>('SELECT bread_id FROM rankS WHERE id = ?', [Ids.IdS]);
+    const bread_id_A_result = await db.getFirstAsync<{ bread_id: number }>('SELECT bread_id FROM rankA WHERE id = ?', [Ids.IdA]);
+    const bread_id_B_result = await db.getFirstAsync<{ bread_id: number }>('SELECT bread_id FROM rankB WHERE id = ?', [Ids.IdB]);
+    
+    const bread_id_S = bread_id_S_result ? bread_id_S_result.bread_id : 0;
+    const bread_id_A = bread_id_A_result ? bread_id_A_result.bread_id : 0;
+    const bread_id_B = bread_id_B_result ? bread_id_B_result.bread_id : 0;    
 
-  setbread_ids({ bread_id_S, bread_id_A, bread_id_B});
+    setbread_ids({ bread_id_S, bread_id_A, bread_id_B});
 
   //bread_idに対応したshop_id、imgファイルの指定、explanationを取ってきて、bread_にまとめる
-  const bread_info_S = await db.get<{ shop_id: number, img: string, explanation: string }>(
-    'SELECT shop_id, img, explanation FROM breads WHERE id = ?', [bread_id_S?.bread_id ?? 0]
-  );
-  const bread_info_A = await db.get<{ shop_id: number, img: string, explanation: string }>(
-    'SELECT shop_id, img, explanation FROM breads WHERE id = ?', [bread_id_A?.bread_id ?? 0]
-  );
-  const bread_info_B = await db.get<{ shop_id: number, img: string, explanation: string }>(
-    'SELECT shop_id, img, explanation FROM breads WHERE id = ?', [bread_id_B?.bread_id ?? 0]
-  );
+  const bread_info_S = (await db.getFirstAsync<{ shop_id: number, img: string, explanation: string }>(
+    'SELECT shop_id, img, explanation FROM breads WHERE id = ?', [bread_id_S]
+  ))?? { shop_id: 0, img: '', explanation: '' };
+  const bread_info_A = (await db.getFirstAsync<{ shop_id: number, img: string, explanation: string }>(
+    'SELECT shop_id, img, explanation FROM breads WHERE id = ?', [bread_id_A]
+  ))?? { shop_id: 0, img: '', explanation: '' };
+  const bread_info_B = (await db.getFirstAsync<{ shop_id: number, img: string, explanation: string }>(
+    'SELECT shop_id, img, explanation FROM breads WHERE id = ?', [bread_id_B]
+  ))?? { shop_id: 0, img: '', explanation: '' };
 
   //コンソールで確認
   console.log('Shop_S:', bread_info_S.shop_id);
@@ -137,8 +130,6 @@ const fetchBreadDetails = async() =>{
   setbread_B({ shop_id: bread_info_B?.shop_id ?? 0, img: bread_info_B?.img ?? '', explanation: bread_info_B?.explanation ?? '' });
 
 
-  //DBを閉じる
-  await db.close();
 
 } catch (error) {
   console.error('Error fetching data:', error);
