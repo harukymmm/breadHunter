@@ -9,6 +9,7 @@ interface Props {
     source: any; //画像ソース
     rank?: React.ReactNode; //ランク
     detail?: React.ReactNode;   //パン説明
+
     onPress: () => void;    //ボタン反応
 }
 

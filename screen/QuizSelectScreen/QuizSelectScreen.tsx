@@ -1,3 +1,4 @@
+import * as SQLite from 'expo-sqlite';
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
@@ -12,43 +13,130 @@ import Colorhukidashi from '../../components/ColorHukidashi';
 import ReturnButtonCustom from '../../components/ReturnButtonComponent';
 
 type Navigation = NavigationProp<StackParamList>;
+const db = SQLite.openDatabaseSync('../../DB/test/TEST.db')//chatGPT曰くSQLite.openDatabase()らしい？
 
 
 export default function QuizSelectScreen() {  
-  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+
   const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'QuizSelect'>>();
-
-  ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
-  // 0から999までのランダムな整数を生成する関数
-  const generateUniqueRandomNumber = (usedNumbers: number[]): number => {
+  ////////////////////////////////////数字のランダム生成と再生成/////////////////////////////
+  // 0からnまでのランダムな整数を生成する関数->つまりrankの個数に応じたランダム整数を生成////////////
+  const generateUniqueRandomNumber = (usedNumbers: number[], n: number): number => {
     let randomNumber;
     do {
-      randomNumber = Math.floor(Math.random() * 1000);
+      randomNumber = Math.floor(Math.random() * n + 1);
     } while (usedNumbers.includes(randomNumber));
     return randomNumber;
   };
-  // 使用された数値を追跡するための配列
+
+  // 使用された数値を追跡するための配列　usedNumbers→ランダム数を格納　breadIds→rank○テーブルのidを格納
   const [usedNumbers, setUsedNumbers] = useState<number[]>([]);
+  const [Ids, setIds] = useState<{ IdS: number; IdA: number; IdB: number } | null>(null);
+　const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
+  const [bread_S, setbread_S] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
+  const [bread_A, setbread_A] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
+  const [bread_B, setbread_B] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
+
   // コンポーネントがマウントされた時に乱数を生成する
   useEffect(() => {
     generateRandomNumbers();
   }, []);
-  // 重複しないように3つの乱数を生成する関数
-  const generateRandomNumbers = () => {
-    const breadIdA = generateUniqueRandomNumber(usedNumbers);
-    const breadIdB = generateUniqueRandomNumber(usedNumbers.concat(breadIdA)); // breadIdAと重複しないように
-    const breadIdC = generateUniqueRandomNumber(usedNumbers.concat(breadIdA, breadIdB)); // breadIdAとbreadIdBと重複しないように
-    // 生成した乱数を配列に追加
-    setUsedNumbers([breadIdA, breadIdB, breadIdC]);
-  };
+
+  const generateRandomNumbers = async() => {
+    try{
+        // SQLクエリを実行して、各ランクの個数を取得
+        const reS = await db.getFirstAsync('SELECT COUNT(*) as count FROM rankS');
+        const reA = await db.getFirstAsync('SELECT COUNT(*) as count FROM rankA');
+        const reB = await db.getFirstAsync('SELECT COUNT(*) as count FROM rankB');
+
+        // number型に変更　numS, numA, numBはそれぞれのランクの個数 gptとhpで言ってることが違う
+        const numS = (reS as { count: number }).count;
+        const numA = (reA as { count: number }).count;
+        const numB = (reB as { count: number }).count;
+        // const numS = reS.rows[0]['COUNT(*)'];
+        // const numA = reA.rows[0]['COUNT(*)'];
+        // const numB = reB.rows[0]['COUNT(*)'];
+        
+        // ID 表示するidを生成　rankSのIdS番目を取ってくるという意味
+        const IdS = generateUniqueRandomNumber(usedNumbers, numS);
+        const IdA = generateUniqueRandomNumber(usedNumbers, numA); 
+        const IdB = generateUniqueRandomNumber(usedNumbers, numB);
+
+        // 生成した乱数を配列に追加
+        setIds({ IdS, IdA, IdB });
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error; // エラーを呼び出し元に再度スロー
+    }
+};
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
 // ChangeColorButton の状態を管理する関数
 const [isChangeColorButtonPressed, setIsChangeColorButtonPressed] = useState(false);
-// BreadIdの状態を管理する関数
+
 const [selectedBreadId, setSelectedBreadId] = useState<number | null>(null);
+
+// breadIdsが変更されたとき(つまり表示するパンが決定した時)のみ行う
+useEffect(() => {
+  
+  if (Ids) {
+    fetchBreadDetails();
+  }
+}, [Ids]);
+
+////////////////////////// DBから要素を取ってくる関数//////////////////////////////
+const fetchBreadDetails = async() =>{
+  if (!Ids) return;
+  try {
+    // 各ランクの指定されたidのbread_idをrankS・rankA・rankBテーブルから取ってくる
+    // breadIdSに対応したbread_idを取ってくる
+    const bread_id_S_result = await db.getFirstAsync<{ bread_id: number }>('SELECT bread_id FROM rankS WHERE id = ?', [Ids.IdS]);
+    const bread_id_A_result = await db.getFirstAsync<{ bread_id: number }>('SELECT bread_id FROM rankA WHERE id = ?', [Ids.IdA]);
+    const bread_id_B_result = await db.getFirstAsync<{ bread_id: number }>('SELECT bread_id FROM rankB WHERE id = ?', [Ids.IdB]);
+    
+    const bread_id_S = bread_id_S_result ? bread_id_S_result.bread_id : 0;
+    const bread_id_A = bread_id_A_result ? bread_id_A_result.bread_id : 0;
+    const bread_id_B = bread_id_B_result ? bread_id_B_result.bread_id : 0;    
+
+    setbread_ids({ bread_id_S, bread_id_A, bread_id_B});
+
+  //bread_idに対応したshop_id、imgファイルの指定、explanationを取ってきて、bread_にまとめる
+  const bread_info_S = (await db.getFirstAsync<{ shop_id: number, img: string, explanation: string }>(
+    'SELECT shop_id, img, explanation FROM breads WHERE id = ?', [bread_id_S]
+  ))?? { shop_id: 0, img: '', explanation: '' };
+  const bread_info_A = (await db.getFirstAsync<{ shop_id: number, img: string, explanation: string }>(
+    'SELECT shop_id, img, explanation FROM breads WHERE id = ?', [bread_id_A]
+  ))?? { shop_id: 0, img: '', explanation: '' };
+  const bread_info_B = (await db.getFirstAsync<{ shop_id: number, img: string, explanation: string }>(
+    'SELECT shop_id, img, explanation FROM breads WHERE id = ?', [bread_id_B]
+  ))?? { shop_id: 0, img: '', explanation: '' };
+
+  //コンソールで確認
+  console.log('Shop_S:', bread_info_S.shop_id);
+  console.log('Image_S:', bread_info_S.img);
+  console.log('Explanation_S:', bread_info_S.explanation);
+  console.log('Shop_A:', bread_info_A.shop_id);
+  console.log('Image_A:', bread_info_A.img);
+  console.log('Explanation_A:', bread_info_A.explanation);
+  console.log('Shop_B:', bread_info_B.shop_id);
+  console.log('Image_B:', bread_info_B.img);
+  console.log('Explanation_B:', bread_info_B.explanation);
+
+  setbread_S({ shop_id: bread_info_S?.shop_id ?? 0, img: bread_info_S?.img ?? '', explanation: bread_info_S?.explanation ?? '' });
+  setbread_A({ shop_id: bread_info_A?.shop_id ?? 0, img: bread_info_A?.img ?? '', explanation: bread_info_A?.explanation ?? '' });
+  setbread_B({ shop_id: bread_info_B?.shop_id ?? 0, img: bread_info_B?.img ?? '', explanation: bread_info_B?.explanation ?? '' });
+
+
+
+} catch (error) {
+  console.error('Error fetching data:', error);
+}
+};
+
+///////////////////////////////////////////////////////////////////////////
 
 // START ボタンが押された時の処理
 const handleStartButtonPress = () => {
@@ -84,14 +172,20 @@ const handleStartButtonPress = () => {
             
               <SelectFigComp
                 onPress={() => 
+
                   navigation.navigate(
-                    'QuizDetail',{breadId: usedNumbers[0],})
+                    'QuizDetail',{breadId: bread_ids?.bread_id_S})
+
                 }
                 rank = "S"
+                //ここのコード自信ない。bread_S.imgの変数の中身がパスになっている。もしかしたらbread_S.imgのパスがうまく通らないかも
+                //source={require(bread_S.img)}
                 source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={usedNumbers[0]} // ランダムな数字を割り当てる
+
+                //breadIdとsetSecectedBreadIdの違いがわからない、どちらかだけでいい気がするがどうなのだろう
+                breadId={bread_ids?.bread_id_S}// bread_idsからbread_id_SをbreadIdに割り当てる
                 setSelectedBreadId={setSelectedBreadId}
               />
             
@@ -99,14 +193,18 @@ const handleStartButtonPress = () => {
 
               <SelectFigComp
                 onPress={() => 
+
                   navigation.navigate(
-                    'QuizDetail',{breadId: usedNumbers[1],})
+                    'QuizDetail',{breadId: bread_ids?.bread_id_A}
+                  )
+
                 }
                 rank = "A"
+                //source={require(bread_A.img)}
                 source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={usedNumbers[1]} // ランダムな数字を割り当てる
+                breadId={bread_ids?.bread_id_A}// bread_idsからbread_id_AをbreadIdに割り当てる
                 setSelectedBreadId={setSelectedBreadId}
               />
             
@@ -116,13 +214,18 @@ const handleStartButtonPress = () => {
           
               <SelectFigComp
                 onPress={() => 
-                  navigation.navigate('QuizDetail',{breadId: usedNumbers[2],})
+
+                  navigation.navigate(
+                    'QuizDetail',{breadId: bread_ids?.bread_id_B}
+                  )
+
                 }
-                rank = "C"
+                rank = "B"
+                //source={require(bread_B.img)}
                 source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={usedNumbers[2]} // ランダムな数字を割り当てる
+                breadId={bread_ids?.bread_id_B}// bread_idsからbread_id_BをbreadIdに割り当てる
                 setSelectedBreadId={setSelectedBreadId}
               />
 
