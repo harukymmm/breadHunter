@@ -28,18 +28,14 @@ export default function MapScreen() {
     longitudeDelta: 0.0024,//縮尺
   });
 
-  //京大latitude: 35.02638,
-  //longitude: 135.78082,
-
-
-
   useEffect(() => {
+    console.log(region.latitude, region.longitude);
     const distance = getDistance(region.latitude, region.longitude, goal_latitude, goal_longitude);
-    if (distance < 0.1) { // 目的地と現在地の距離が近くなると遷移
+    if (distance < 0.2) { // 目的地と現在地の距離が近くなると遷移
       navigation.navigate('NearBakery', {breadId: breadId}); 
     }
   ;
-  }, []);
+  }, [region]);
 
   const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     var radlat1 = Math.PI * lat1/180;
@@ -54,10 +50,19 @@ export default function MapScreen() {
     return dist;
   }
 
+  const updateRegion = () => {
+    setRegion({
+      latitude: 35.02638,
+      longitude: 135.78082,
+      latitudeDelta: 0.0024,
+      longitudeDelta: 0.0024,
+      //京大時計台、デモではここに遷移して試したい
+    })
+  }
+
 
   return (
     <View style={styles.container}>
-
        <View style = {styles.mapzoon}>
           <MapView
             style={styles.mapimage}
@@ -72,7 +77,7 @@ export default function MapScreen() {
 
        <View style={styles.reloadbutton}>
           <ButtonCustom
-          onClick={() => console.log("Push 現在地更新ボタン")}
+          onClick={() => updateRegion()}
           children="現在地更新"
           borderColor="#FBF7EF"
           borderWidth={3}
