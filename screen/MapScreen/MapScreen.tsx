@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
@@ -18,13 +18,41 @@ export default function MapScreen() {
   const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'MapDefault'>>();
   const { breadId } = route.params;
+  const goal_latitude = 35.02526; 
+  const goal_longitude = 135.78158;
   
   const [region, setRegion] = useState({
-    latitude: 35.0252986,
-    longitude: 135.781654,
-    latitudeDelta: 0.003,
-    longitudeDelta: 0.003,
+    latitude: 35.02886,
+    longitude: 135.77929,
+    latitudeDelta: 0.0024,
+    longitudeDelta: 0.0024,//縮尺
   });
+
+  //京大latitude: 35.02638,
+  //longitude: 135.78082,
+
+
+
+  useEffect(() => {
+    const distance = getDistance(region.latitude, region.longitude, goal_latitude, goal_longitude);
+    if (distance < 0.1) { // 目的地と現在地の距離が近くなると遷移
+      navigation.navigate('NearBakery', {breadId: breadId}); 
+    }
+  ;
+  }, []);
+
+  const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    var radlat1 = Math.PI * lat1/180;
+    var radlat2 = Math.PI * lat2/180;
+    var theta = lon1-lon2;
+    var radtheta = Math.PI * theta/180;
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    dist = Math.acos(dist);
+    dist = dist * 180/Math.PI;
+    dist = dist * 60 * 1.1515;
+    dist = dist * 1.609344;
+    return dist;
+  }
 
 
   return (
