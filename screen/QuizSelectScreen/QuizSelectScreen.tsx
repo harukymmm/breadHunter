@@ -15,7 +15,7 @@ type Navigation = NavigationProp<StackParamList>;
 
 
 export default function QuizSelectScreen() {  
-  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
+  
   const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'QuizSelect'>>();
 
