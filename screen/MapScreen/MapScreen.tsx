@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { useState, useEffect} from 'react';
+import { StyleSheet, View, Image } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
 import { StackParamList } from '../../route';
@@ -9,6 +9,7 @@ import { useRoute } from '@react-navigation/native';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
 import MapView from 'react-native-maps';
+//import Geolocation from '@react-native-community/geolocation';
 
 //遷移の型指定　
 type Navigation = NavigationProp<StackParamList>;
@@ -18,33 +19,90 @@ export default function MapScreen() {
   const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'MapDefault'>>();
   const { breadId } = route.params;
+  const goal_latitude = 35.02526; 
+  const goal_longitude = 135.78158;
   
   const [region, setRegion] = useState({
-    latitude: 35.0252986,
-    longitude: 135.781654,
-    latitudeDelta: 0.003,
-    longitudeDelta: 0.003,
+    latitude: 35.02886,
+    longitude: 135.77929,
+    latitudeDelta: 0.0024,
+    longitudeDelta: 0.0024, //縮尺
   });
+  const [angle, setAngle] = useState(0);
 
+  useEffect(() => {
+    console.log(region.latitude, region.longitude);
+    const distance = getDistance(region.latitude, region.longitude, goal_latitude, goal_longitude);
+    if (distance < 0.2) { // 目的地と現在地の距離が近くなると遷移
+      navigation.navigate('NearBakery', {breadId: breadId}); 
+    }
+  ;
+  }, [region]);
+
+  useEffect(() => {
+    const dy = goal_longitude - region.longitude;
+    const dx = goal_latitude - region.latitude;
+    const bearing = Math.atan2(dy, dx) * (180 / Math.PI);
+    setAngle(bearing);
+  }, [region, goal_latitude, goal_longitude]);
+
+  const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    var radlat1 = Math.PI * lat1/180;
+    var radlat2 = Math.PI * lat2/180;
+    var theta = lon1-lon2;
+    var radtheta = Math.PI * theta/180;
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    dist = Math.acos(dist);
+    dist = dist * 180/Math.PI;
+    dist = dist * 60 * 1.1515;
+    dist = dist * 1.609344;
+    return dist;
+  }
+
+  const updateRegion = () => {
+    setRegion({
+      latitude: 35.02638,
+      longitude: 135.78082,
+      latitudeDelta: 0.0024,
+      longitudeDelta: 0.0024,
+      //京大時計台、デモではここに遷移して試す
+      //以下位置情報取得による更新コード（仮）(動作未確認)
+      //Geolocation.getCurrentPosition(
+      //  position => {
+      //    const { latitude, longitude } = position.coords;
+      //    setRegion({
+      //      latitude,
+      //      longitude,
+      //      latitudeDelta: 0.0024,
+      //      longitudeDelta: 0.0024,
+      //    });
+      //  },
+      //   error => console.log(error),
+      //   { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    })
+  }
 
   return (
     <View style={styles.container}>
-
        <View style = {styles.mapzoon}>
           <MapView
             style={styles.mapimage}
-            initialRegion={region}
+            region={region}//なぜかエラーが出る
             zoomEnabled={false}
+            scrollEnabled={false}
           />
           <Image
-          style={styles.overlayImage}
+          style={{
+            ...styles.overlayImage,
+            transform: [{ rotate: `${angle}deg` }],
+          }}
           source={require('../../assets/arrow_N.png')}
           />
        </View>
 
        <View style={styles.reloadbutton}>
           <ButtonCustom
-          onClick={() => console.log("Push 現在地更新ボタン")}
+          onClick={() => updateRegion()}
           children="現在地更新"
           borderColor="#FBF7EF"
           borderWidth={3}
