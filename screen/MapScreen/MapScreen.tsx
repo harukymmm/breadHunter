@@ -87,8 +87,9 @@ export default function MapScreen() {
        <View style = {styles.mapzoon}>
           <MapView
             style={styles.mapimage}
-            region={region}
+            region={region}//なぜかエラーが出る
             zoomEnabled={false}
+            scrollEnabled={false}
           />
           <Image
           style={{
