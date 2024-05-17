@@ -219,6 +219,3 @@ const styles = StyleSheet.create({
     width: 20,
   },
 });
-
-
-registerRootComponent(QuizSelectScreen)

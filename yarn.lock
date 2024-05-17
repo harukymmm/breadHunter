@@ -3494,10 +3494,10 @@ expo-modules-core@1.11.13:
   dependencies:
     invariant "^2.2.4"
 
-expo-sqlite@~11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/expo-sqlite/-/expo-sqlite-11.0.0.tgz#11752c2673d89bb22920f7b6c2bf7ea2fb9fd3eb"
-  integrity sha512-cvFkBdHPuTamqobdxp3MdJ5X6HmYHgLAEg0xERNnn3Fgc3t2iQlWBqZW9Asx/I4mKX5H7Ld9wKr0Ib0TeyzX9w==
+expo-sqlite@~13.4.0:
+  version "13.4.0"
+  resolved "https://registry.yarnpkg.com/expo-sqlite/-/expo-sqlite-13.4.0.tgz#ae945622662263431aa9daee59b659255cb6a9fd"
+  integrity sha512-5f7d2EDM+pgerM33KndtX4gWw2nuVaXY68nnqx7PhkiYeyEmeNfZ29bIFtpBzNb/L5l0/DTtRxuSqftxbknFtw==
   dependencies:
     "@expo/websql" "^1.0.1"
 
@@ -5726,10 +5726,10 @@ react-native-gesture-handler@~2.14.0:
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
-react-native-maps@^1.15.1:
-  version "1.15.1"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.15.1.tgz#2a038576085ff241864ae037cb0a96beab871251"
-  integrity sha512-xdU1Qoe9pvyYx/EQwkpBuubHenSUknODjvKPNlzYJF57CPhjieMIomZL/vCupxTHKqsat2wTCt7O6AdByea5wA==
+react-native-maps@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.10.0.tgz#1b78270473f4caadc5ff8e8400285b6db9f14e12"
+  integrity sha512-Zs6lHZucEijTwkRVFyInMbPVkJ2UudDEI2fJPc8ArdzdnwDFAdL6OagqTjNRZyI1DBPHRihazfIWpy2+X1VwLg==
   dependencies:
     "@types/geojson" "^7946.0.13"
 
