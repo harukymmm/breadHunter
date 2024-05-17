@@ -28,6 +28,7 @@ export default function MapScreen() {
     latitudeDelta: 0.0024,
     longitudeDelta: 0.0024, //縮尺
   });
+  const [angle, setAngle] = useState(0);
 
   useEffect(() => {
     console.log(region.latitude, region.longitude);
@@ -37,6 +38,13 @@ export default function MapScreen() {
     }
   ;
   }, [region]);
+
+  useEffect(() => {
+    const dy = goal_longitude - region.longitude;
+    const dx = goal_latitude - region.latitude;
+    const bearing = Math.atan2(dy, dx) * (180 / Math.PI);
+    setAngle(bearing);
+  }, [region, goal_latitude, goal_longitude]);
 
   const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     var radlat1 = Math.PI * lat1/180;
@@ -83,7 +91,10 @@ export default function MapScreen() {
             zoomEnabled={false}
           />
           <Image
-          style={styles.overlayImage}
+          style={{
+            ...styles.overlayImage,
+            transform: [{ rotate: `${angle}deg` }],
+          }}
           source={require('../../assets/arrow_N.png')}
           />
        </View>
