@@ -79,7 +79,7 @@ export default function MapScreen() {
        <View style = {styles.mapzoon}>
           <MapView
             style={styles.mapimage}
-            initialRegion={region}
+            region={region}
             zoomEnabled={false}
           />
           <Image
