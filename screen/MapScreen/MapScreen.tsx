@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
 import { StackParamList } from '../../route';
@@ -9,6 +9,7 @@ import { useRoute } from '@react-navigation/native';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import DistanceView from '../../components/DistanceViewComponent';
 import MapView from 'react-native-maps';
+//import Geolocation from '@react-native-community/geolocation';
 
 //遷移の型指定　
 type Navigation = NavigationProp<StackParamList>;
@@ -25,7 +26,7 @@ export default function MapScreen() {
     latitude: 35.02886,
     longitude: 135.77929,
     latitudeDelta: 0.0024,
-    longitudeDelta: 0.0024,//縮尺
+    longitudeDelta: 0.0024, //縮尺
   });
 
   useEffect(() => {
@@ -56,10 +57,22 @@ export default function MapScreen() {
       longitude: 135.78082,
       latitudeDelta: 0.0024,
       longitudeDelta: 0.0024,
-      //京大時計台、デモではここに遷移して試したい
+      //京大時計台、デモではここに遷移して試す
+      //以下位置情報取得による更新コード（仮）(動作未確認)
+      //Geolocation.getCurrentPosition(
+      //  position => {
+      //    const { latitude, longitude } = position.coords;
+      //    setRegion({
+      //      latitude,
+      //      longitude,
+      //      latitudeDelta: 0.0024,
+      //      longitudeDelta: 0.0024,
+      //    });
+      //  },
+      //   error => console.log(error),
+      //   { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     })
   }
-
 
   return (
     <View style={styles.container}>
