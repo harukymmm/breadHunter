@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackParamList } from '../../route';
 import { NavigationProp } from '@react-navigation/native';
+import * as MediaLibrary from 'expo-media-library';
+import * as ImagePicker from 'expo-image-picker';
 
 //遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
 type Navigation = NavigationProp<StackParamList, 'PhotoCheck'>;
@@ -14,7 +17,73 @@ export default function PhotoCheckScreen() {
 
   const navigation = useNavigation<Navigation>();
   const route = useRoute();
-  const { photoUri } = route.params; // 撮影した写真のURIを受け取る
+  const { photoUri: initialPhotoUri } = route.params as { photoUri: string }; // 撮影した写真のURIを受け取る
+
+  const [photoUri, setPhotoUri] = useState(initialPhotoUri);
+  const [hasCameraPermission, setHasCameraPermission] = useState(false);
+  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(false);
+
+  //ライブラリから画像選択
+  useEffect(() => {
+    const requestPermissions = async () => {
+      const { status: cameraStatus } = await ImagePicker.requestCameraPermissionsAsync();
+      if (cameraStatus === 'granted') {
+        setHasCameraPermission(true);
+      } else {
+        Alert.alert(
+          'Permission Denied',
+          'You need to grant camera permission to use this feature.',
+          [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+        );
+      }
+    
+      const { status: mediaLibraryStatus } = await MediaLibrary.requestPermissionsAsync();
+      if (mediaLibraryStatus === 'granted') {
+        setHasMediaLibraryPermission(true);
+      } else {
+        Alert.alert(
+          'Media Library Permission Denied',
+          'You need to grant media library permission to use this feature.',
+          [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+        );
+      }
+    };
+
+    requestPermissions();
+  }, []);
+
+  const selectPictureAndSave = async () => {
+    if (!hasCameraPermission || !hasMediaLibraryPermission) {
+      Alert.alert(
+        'Permission Required',
+        'You need to grant camera and media library permissions to select pictures.',
+        [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+      );
+      return;
+    }
+
+    const options = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3] as [number, number],
+      quality: 1,
+    };
+
+    const response = await ImagePicker.launchImageLibraryAsync(options);
+    if (!response.canceled) {
+      try {
+        const assets = response.assets;
+        if (assets && assets.length > 0) {
+          const localUri = assets[0].uri;
+          setPhotoUri(localUri); // 選択された写真のURIを状態変数に保存
+          await MediaLibrary.saveToLibraryAsync(localUri);
+          console.log('Photo saved to camera roll');
+        }
+      } catch (error) {
+        console.error('Error saving photo to camera roll:', error);
+      }
+    }
+  };
 
 
   return (
@@ -78,7 +147,7 @@ export default function PhotoCheckScreen() {
           borderWidth={5}
           color="#FBF7EF"
           height={120}
-          onClick={() => console.log("Push ライブラリボタン")}
+          onClick={selectPictureAndSave}
           radius={45}
           width={120}
           children="ライブラリから選択" 

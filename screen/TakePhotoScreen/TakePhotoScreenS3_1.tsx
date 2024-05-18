@@ -104,7 +104,6 @@ export default function TakePhotoScreenF() {
       />
       <View style={styles.buttoncontainer}>
         
-  {/* 押すとPhotoLへ遷移（応急処置） */} 
         <ButtonCustom
           borderColor="#FF8628"
           borderWidth={5}
