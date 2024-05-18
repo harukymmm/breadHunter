@@ -2,20 +2,20 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackParamList } from '../../route';
-import { PhotoParamList } from './routePhoto';
 import { NavigationProp } from '@react-navigation/native';
 
 //遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
-type NavigationP = NavigationProp<StackParamList>;
-type NavigationK = NavigationProp<PhotoParamList>;
+type Navigation = NavigationProp<StackParamList, 'PhotoCheck'>;
 
 //Viewという要素を作ってそこにstyleを適用する
-export default function TakePhotoScreenL() {
-  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
-  const navigationP = useNavigation<NavigationP>();
-  const navigationK = useNavigation<NavigationK>();
+export default function PhotoCheckScreen() {
+
+  const navigation = useNavigation<Navigation>();
+  const route = useRoute();
+  const { photoUri } = route.params; // 撮影した写真のURIを受け取る
+
 
   return (
     <View style={styles.container}>
@@ -33,7 +33,7 @@ export default function TakePhotoScreenL() {
       </View>
       <View style={styles.images}>
         <Image
-          source={require('../../assets/testPan.jpeg')}
+          source={{ uri: photoUri }} // 撮影した写真を表示
           style={styles.bread}
           />
         <Image
@@ -63,7 +63,7 @@ export default function TakePhotoScreenL() {
           borderWidth={5}
           color="#FBF7EF"
           height={120}
-          onClick={() => navigationK.navigate('TakePhotoF')}
+          onClick={() => navigation.navigate('TakePhotoF')}
           radius={45}
           width={120}
           children="戻る" 
@@ -93,7 +93,7 @@ export default function TakePhotoScreenL() {
   );
 }
 
-registerRootComponent(TakePhotoScreenL);
+registerRootComponent(PhotoCheckScreen);
 
 //containerは背景 flexは重み比率 justifycontentはflexdirection方向(デフォ縦)に位置揃える
 //alignitemsはflexdirection方向と別の軸（デフォ横）でそろえる
