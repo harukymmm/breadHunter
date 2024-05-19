@@ -17,6 +17,7 @@ cur.execute("DELETE FROM shops")
 # "breads"にレコードを追加
 cur.executemany('INSERT INTO breads (name, shop, img, difficulty, explanation) VALUES (?, ?, ?, ?, ?)', new_records)
 
+
 cur.execute('INSERT INTO shops(shop_name, latitude, longitude) VALUES("チェルキオ", 35.025298579003916, 135.78165380826943)')
 
 
