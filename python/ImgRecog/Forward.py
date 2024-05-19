@@ -22,9 +22,6 @@ time=1528
 filedate=str(date)+"_"+str(time)
 print(filedate)
 
-device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
-cpu = torch.device('cpu')
-
 Channels=3
 IMG_SIZE=224
 target_epoch=120
@@ -32,7 +29,7 @@ target_epoch=120
 Classes = ["bread1", "bread2", "bread3"]
 ClassNum = len(Classes)
 
-testpath=r".\ForwardImg"
+testpath=r"./ForwardImg"
 savepath=r"."
 
 data=list(Path(testpath).glob("*.jpg"))
@@ -108,22 +105,17 @@ def evaluate(testloader, model, loss_fn, optimizer):
     # also serves to reduce unnecessary gradient computations and memory usage for tensors with requires_grad=True
     with torch.no_grad():
         for X in testloader:
-            X=X.to(device)
             pred = model(X)
             
-    pred=pred.to(cpu)
-
     #predは各クラスの確率になってる（onehotに近い）ので実際のクラス番号に戻す
     pred_class=pred.argmax(1)
     pred_class=np.array(pred_class)
     print("predicted class:", pred_class)
 
 #モデル構築
-modelpath = Path(savepath+"\\"+str(target_epoch)+"\model_weights"+filedate+".pth")
+modelpath = Path(savepath+"/model_weights"+filedate+".pth")
 epochmodel = resnet50
-epochmodel.load_state_dict(torch.load(modelpath))
-#GPUにニューラルネットワークを渡す
-epochmodel=epochmodel.to(device)
+epochmodel.load_state_dict(torch.load(modelpath, torch.device('cpu')))
 
 print("Model in Epoch", target_epoch)
 #テストデータで評価
