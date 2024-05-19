@@ -45,5 +45,3 @@ const styles = StyleSheet.create({
     height: 50,
   }
 });
-
-registerRootComponent(BreadDetailScreen);
