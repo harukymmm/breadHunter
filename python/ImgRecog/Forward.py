@@ -111,6 +111,7 @@ def evaluate(testloader, model, loss_fn, optimizer):
     pred_class=pred.argmax(1)
     pred_class=np.array(pred_class)
     print("predicted class:", Classes[pred_class[0]])
+    return Classes[pred_class[0]]
 
 #モデル構築
 modelpath = Path(savepath+"/model_weights"+filedate+".pth")
@@ -118,7 +119,10 @@ epochmodel = resnet50
 epochmodel.load_state_dict(torch.load(modelpath, torch.device('cpu')))
 
 print("Model in Epoch", target_epoch)
+
 #テストデータで評価
-evaluate(testloader, epochmodel, loss_fn, optimizer)
+def ClassifyBreadImg():
+    result=evaluate(testloader, epochmodel, loss_fn, optimizer)
+    return result
 
 print('Forwarding Complete!!!')
