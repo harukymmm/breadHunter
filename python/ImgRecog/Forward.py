@@ -1,5 +1,4 @@
 #ForwardImgというフォルダに判定したい画像を入れるとその画像のクラスを予測します
-#
 #jpgとpngしか読み込めません
 
 import glob
@@ -20,7 +19,7 @@ from torch.utils.data import DataLoader
 date=20240513
 time=1528
 filedate=str(date)+"_"+str(time)
-print(filedate)
+#print(filedate)
 
 Channels=3
 IMG_SIZE=224
@@ -35,7 +34,7 @@ savepath=r"."
 data=list(Path(testpath).glob("*.jpg"))
 if(len(data)<1):
     data=list(Path(testpath).glob("*.png"))
-print(data)
+#print(data)
 
 '''
 PytorchではDataloaderという,膨大なデータセットからでもメモリを圧迫せずに取り出せてforループにも対応するための枠組みがある
@@ -84,7 +83,7 @@ testset= MyDataset(data=data, transforms=transforms, Classes=Classes)
 
 
 testloader = DataLoader(dataset=testset,batch_size=len(testset),shuffle=False)
-print("testloader length:", len(testloader))
+#print("testloader length:", len(testloader))
 
 
 resnet50 = models.resnet50()
@@ -110,7 +109,6 @@ def evaluate(testloader, model, loss_fn, optimizer):
     #predは各クラスの確率になってる（onehotに近い）ので実際のクラス番号に戻す
     pred_class=pred.argmax(1)
     pred_class=np.array(pred_class)
-    print("predicted class:", Classes[pred_class[0]])
     return Classes[pred_class[0]]
 
 #モデル構築
@@ -118,11 +116,11 @@ modelpath = Path(savepath+"/model_weights"+filedate+".pth")
 epochmodel = resnet50
 epochmodel.load_state_dict(torch.load(modelpath, torch.device('cpu')))
 
-print("Model in Epoch", target_epoch)
+#print("Model in Epoch", target_epoch)
 
 #テストデータで評価
 def ClassifyBreadImg():
     result=evaluate(testloader, epochmodel, loss_fn, optimizer)
     return result
 
-print('Forwarding Complete!!!')
+#print('Forwarding Complete!!!')
