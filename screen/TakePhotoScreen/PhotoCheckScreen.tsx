@@ -3,20 +3,23 @@ import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackParamList } from '../../route';
 import { NavigationProp } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker';
 
-//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
+//遷移の型指定
 type Navigation = NavigationProp<StackParamList, 'PhotoCheck'>;
+
+
 
 //Viewという要素を作ってそこにstyleを適用する
 export default function PhotoCheckScreen() {
 
   const navigation = useNavigation<Navigation>();
-  const route = useRoute();
+  const route = useRoute<RouteProp<StackParamList, 'PhotoCheck'>>();
+  const { breadId } = route.params;
   const { photoUri: initialPhotoUri } = route.params as { photoUri: string }; // 撮影した写真のURIを受け取る
 
   const [photoUri, setPhotoUri] = useState(initialPhotoUri);
@@ -116,7 +119,7 @@ export default function PhotoCheckScreen() {
             borderWidth={5}
             color="#FF8628"
             height={80}
-            onClick={() => console.log("Push OKボタン")}
+            onClick={() => navigation.navigate('ResultCorrect', { breadId: breadId })}//画像認識の場合分けで遷移変更する関数作る
             radius={45}
             width={300}
             children="OK!" 
@@ -132,7 +135,7 @@ export default function PhotoCheckScreen() {
           borderWidth={5}
           color="#FBF7EF"
           height={120}
-          onClick={() => navigation.navigate('TakePhotoF')}
+          onClick={() => navigation.navigate('TakePhoto', { breadId: breadId})} 
           radius={45}
           width={120}
           children="戻る" 

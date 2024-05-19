@@ -4,8 +4,17 @@ import QuizAnswer from '../../components/QuizAnswerComponent';
 import Colorhukidashi from '../../components/ColorHukidashi';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from '../../components/CustomButtonComponent';
+import { useNavigation, NavigationProp, RouteProp, useRoute } from '@react-navigation/native';
+import { StackParamList } from '../../route';
+
+type Navigation = NavigationProp<StackParamList>;
 
 export default function ResultCorrectScreen() {
+
+  const navigation = useNavigation<Navigation>();
+  const route = useRoute<RouteProp<StackParamList, 'ResultCorrect'>>();
+  const { breadId } = route.params;
+
   return (
     <View style={styles.container}>
           <View style={styles.hukidashiTop}>
@@ -57,7 +66,7 @@ export default function ResultCorrectScreen() {
           borderWidth={5}
           color="#FBF7EF"
           height={50}
-          onClick={() => console.log("Push スタート画面に戻るボタン")}
+          onClick={() => navigation.navigate('Start')}
           radius={90}
           width={300}
           children="スタート画面に戻る" 
