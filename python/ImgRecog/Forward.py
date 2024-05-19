@@ -110,7 +110,7 @@ def evaluate(testloader, model, loss_fn, optimizer):
     #predは各クラスの確率になってる（onehotに近い）ので実際のクラス番号に戻す
     pred_class=pred.argmax(1)
     pred_class=np.array(pred_class)
-    print("predicted class:", pred_class)
+    print("predicted class:", Classes[pred_class[0]])
 
 #モデル構築
 modelpath = Path(savepath+"/model_weights"+filedate+".pth")
