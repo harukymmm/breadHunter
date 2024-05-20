@@ -32,9 +32,10 @@ bread_records = [
     (52,"チョコブレッド",5,"../../DB/image/ボロニヤ/52.jpeg","子供の甘み"),
 ]
 
+
 cur.execute("DELETE FROM shops")
 # "breads"にレコードを追加
-cur.executemany('INSERT INTO breads (name, shop, img, difficulty, explanation) VALUES (?, ?, ?, ?, ?)', bread_records)
+cur.executemany('INSERT INTO breads (id, name, shop_id, img, explanation) VALUES (?, ?, ?, ?, ?)', bread_records)
 cur.execute('INSERT INTO shops(shop_id, shop_name, latitude, longitude) VALUES(1, "チェルキオ", 35.025298579003916, 135.78165380826943)')
 cur.execute('INSERT INTO shops(shop_id, shop_name, latitude, longitude) VALUES(2, "シズヤ", 35.0095652007604, 135.768796773014)')
 cur.execute('INSERT INTO shops(shop_id, shop_name, latitude, longitude) VALUES(3, "ブリアン", 35.0536527859984, 135.764298829584)')
