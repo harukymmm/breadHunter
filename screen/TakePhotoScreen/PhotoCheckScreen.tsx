@@ -89,7 +89,7 @@ export default function PhotoCheckScreen() {
 
   //フォルダに画像を格納する関数
   const savePhotoToFolder = async (uri: string) => {
-    const folderUri = `${FileSystem.documentDirectory}python/ImgRecog/ForwardImg/`;
+    const folderUri = `${FileSystem.documentDirectory}python/ForwardImg/`;
     try {
       // Create directory if it doesn't exist
       const dirInfo = await FileSystem.getInfoAsync(folderUri);
@@ -113,7 +113,7 @@ export default function PhotoCheckScreen() {
     }
   };
 
-  //Okボタンが押されたとき動作する関数
+  //OKボタンが押されたとき動作する関数
   const handleOkButtonPress = async () => {
     await savePhotoToFolder(photoUri);
     navigation.navigate('ResultCorrect', { breadId: breadId });
