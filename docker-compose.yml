@@ -14,7 +14,16 @@ services:
   python:
     container_name: django
     tty: true
+    ports:
+     - "5001:5000"
     build: ./python
     volumes:
       - ./python:/python
+    command: flask run --host=0.0.0.0
+  sqlite:
+    container_name: DB
+    tty: true
+    build: ./DB
+    volumes:
+      - ./DB:/sqlite
 
