@@ -7,11 +7,17 @@ import ButtonCustom from '../../components/CustomButtonComponent';
 import { useNavigation } from '@react-navigation/native';
 import { StackParamList } from '../../route';
 import { NavigationProp } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 
-type NavigationP = NavigationProp<StackParamList>;
+type Navigation = NavigationProp<StackParamList>;
 
 export default function ResultGiveUpScreen() {
-  const navigationP = useNavigation<NavigationP>();
+
+  const navigation = useNavigation<Navigation>();
+  const route = useRoute<RouteProp<StackParamList, 'ResultGiveUp'>>();
+  const { breadId } = route.params;
+
   return (
     <View style={styles.container}>
           <View style={styles.hukidashiTop}>
@@ -63,7 +69,7 @@ export default function ResultGiveUpScreen() {
           borderWidth={5}
           color="#FBF7EF"
           height={50}
-          onClick={() => navigationP.navigate('Start')}
+          onClick={() => navigation.navigate('Start')}
           radius={90}
           width={300}
           children="スタート画面に戻る" 

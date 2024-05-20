@@ -9,11 +9,10 @@ interface Props {
     source: any; //画像ソース
     rank?: React.ReactNode; //ランク
     detail?: React.ReactNode;   //パン説明
-    long: number;    //距離
     onPress: () => void;    //ボタン反応
 }
 
-const ChooseBread = ({ onPress, source, rank, detail, long}: Props) => {
+const ChooseBread = ({ onPress, source, rank, detail}: Props) => {
 
     const [fontsLoaded, fontError] = useFonts({
         'SmileySans-Oblique': require('../assets/fonts/SmileySans-Oblique.otf'),
@@ -38,7 +37,6 @@ const ChooseBread = ({ onPress, source, rank, detail, long}: Props) => {
                     />
                     <Text style= {styles.rankText}>ランク{rank}</Text>
                     <Text style = {styles.detailText}>{detail}</Text>
-                    <Text style = {styles.detailText}>ここから{long}km</Text>
                 <View style={styles.spaceW} />{/* 空白 */}
         </View>
     );

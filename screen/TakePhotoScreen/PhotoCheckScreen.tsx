@@ -1,21 +1,93 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackParamList } from '../../route';
-import { PhotoParamList } from './routePhoto';
 import { NavigationProp } from '@react-navigation/native';
+import * as MediaLibrary from 'expo-media-library';
+import * as ImagePicker from 'expo-image-picker';
 
-//遷移の型指定　P：フォルダ間の遷移　K：フォルダ内の遷移
-type NavigationP = NavigationProp<StackParamList>;
-type NavigationK = NavigationProp<PhotoParamList>;
+//遷移の型指定
+type Navigation = NavigationProp<StackParamList, 'PhotoCheck'>;
+
+
 
 //Viewという要素を作ってそこにstyleを適用する
-export default function TakePhotoScreenL() {
-  //Pはフォルダ間の遷移、Kはフォルダ内の遷移
-  const navigationP = useNavigation<NavigationP>();
-  const navigationK = useNavigation<NavigationK>();
+export default function PhotoCheckScreen() {
+
+  const navigation = useNavigation<Navigation>();
+  const route = useRoute<RouteProp<StackParamList, 'PhotoCheck'>>();
+  const { breadId } = route.params;
+  const { photoUri: initialPhotoUri } = route.params as { photoUri: string }; // 撮影した写真のURIを受け取る
+
+  const [photoUri, setPhotoUri] = useState(initialPhotoUri);
+  const [hasCameraPermission, setHasCameraPermission] = useState(false);
+  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(false);
+
+  //ライブラリから画像選択
+  useEffect(() => {
+    const requestPermissions = async () => {
+      const { status: cameraStatus } = await ImagePicker.requestCameraPermissionsAsync();
+      if (cameraStatus === 'granted') {
+        setHasCameraPermission(true);
+      } else {
+        Alert.alert(
+          'Permission Denied',
+          'You need to grant camera permission to use this feature.',
+          [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+        );
+      }
+    
+      const { status: mediaLibraryStatus } = await MediaLibrary.requestPermissionsAsync();
+      if (mediaLibraryStatus === 'granted') {
+        setHasMediaLibraryPermission(true);
+      } else {
+        Alert.alert(
+          'Media Library Permission Denied',
+          'You need to grant media library permission to use this feature.',
+          [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+        );
+      }
+    };
+
+    requestPermissions();
+  }, []);
+
+  const selectPictureAndSave = async () => {
+    if (!hasCameraPermission || !hasMediaLibraryPermission) {
+      Alert.alert(
+        'Permission Required',
+        'You need to grant camera and media library permissions to select pictures.',
+        [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+      );
+      return;
+    }
+
+    const options = {
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3] as [number, number],
+      quality: 1,
+    };
+
+    const response = await ImagePicker.launchImageLibraryAsync(options);
+    if (!response.canceled) {
+      try {
+        const assets = response.assets;
+        if (assets && assets.length > 0) {
+          const localUri = assets[0].uri;
+          setPhotoUri(localUri); // 選択された写真のURIを状態変数に保存
+          await MediaLibrary.saveToLibraryAsync(localUri);
+          console.log('Photo saved to camera roll');
+        }
+      } catch (error) {
+        console.error('Error saving photo to camera roll:', error);
+      }
+    }
+  };
+
 
   return (
     <View style={styles.container}>
@@ -33,7 +105,7 @@ export default function TakePhotoScreenL() {
       </View>
       <View style={styles.images}>
         <Image
-          source={require('../../assets/testPan.jpeg')}
+          source={{ uri: photoUri }} // 撮影した写真を表示
           style={styles.bread}
           />
         <Image
@@ -47,7 +119,7 @@ export default function TakePhotoScreenL() {
             borderWidth={5}
             color="#FF8628"
             height={80}
-            onClick={() => console.log("Push OKボタン")}
+            onClick={() => navigation.navigate('ResultCorrect', { breadId: breadId })}//画像認識の場合分けで遷移変更する関数作る
             radius={45}
             width={300}
             children="OK!" 
@@ -63,7 +135,7 @@ export default function TakePhotoScreenL() {
           borderWidth={5}
           color="#FBF7EF"
           height={120}
-          onClick={() => navigationK.navigate('TakePhotoF')}
+          onClick={() => navigation.navigate('TakePhoto', { breadId: breadId})} 
           radius={45}
           width={120}
           children="戻る" 
@@ -78,7 +150,7 @@ export default function TakePhotoScreenL() {
           borderWidth={5}
           color="#FBF7EF"
           height={120}
-          onClick={() => console.log("Push ライブラリボタン")}
+          onClick={selectPictureAndSave}
           radius={45}
           width={120}
           children="ライブラリから選択" 
@@ -93,7 +165,7 @@ export default function TakePhotoScreenL() {
   );
 }
 
-registerRootComponent(TakePhotoScreenL);
+registerRootComponent(PhotoCheckScreen);
 
 //containerは背景 flexは重み比率 justifycontentはflexdirection方向(デフォ縦)に位置揃える
 //alignitemsはflexdirection方向と別の軸（デフォ横）でそろえる

@@ -14,7 +14,7 @@
 
 ```bash
 git clone https://github.com/harukymmm/breadHunter.git
-cd pump
+cd breadhunter
 ```
 
 ### PC 上で動作確認する場合
