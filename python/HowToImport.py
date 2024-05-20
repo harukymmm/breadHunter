@@ -9,4 +9,4 @@ from Forward import ClassifyBreadImg
 #ClassifyBreadImg関数を使うとForwardImgフォルダに入れた画像の予測クラスを返してくれます
 result=ClassifyBreadImg()
 
-print(result)
+print(str(result))
