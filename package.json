@@ -1,7 +1,7 @@
 {
   "name": "breadhunter",
   "version": "1.0.0",
-  "main": "./screen/TakePhotoScreen/TakePhotoScreenS3_3.tsx",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -16,9 +16,9 @@
     "@babel/plugin-transform-object-rest-spread": "^7.24.5",
     "@babel/plugin-transform-optional-catch-binding": "^7.24.1",
     "@babel/plugin-transform-optional-chaining": "^7.24.5",
-    "@react-native-community/geolocation": "^3.2.1",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
+    "@react-native-community/geolocation": "^3.2.1",
     "expo": "~51.0.8",
     "expo-camera": "^15.0.9",
     "expo-file-system": "^17.0.1",
@@ -30,24 +30,17 @@
     "expo-status-bar": "~1.12.1",
     "import": "^0.0.6",
     "react": "18.2.0",
-<<<<<<< HEAD
-    "react-native": "^0.73.6",
-    "react-native-gesture-handler": "~2.14.0",
-    "react-native-reanimated": "~3.6.2",
-    "react-native-safe-area-context": "4.8.2"
-=======
     "react-native": "0.74.1",
     "react-native-camera": "3.41.0",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-image-crop-picker": "^0.41.1",
     "react-native-image-picker": "^7.1.2",
-    "react-native-maps": "1.14.0",
     "react-native-permissions": "^4.1.5",
     "react-native-reanimated": "~3.10.1",
+    "react-native-maps": "1.14.0",
     "react-native-safe-area-context": "4.10.1",
     "react-native-vector-icons": "^10.1.0",
     "uuid": "^9.0.1"
->>>>>>> 4b6ce7532abbbef05bd12f486c4f3b4e2d9d670a
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
