@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
-import { StackParamList} from '../../route'
+import { StackParamList} from '../../route';
 import { NavigationProp, useRoute, RouteProp } from '@react-navigation/native';
 
 import ButtonCustom from "../../components/CustomButtonComponent";
@@ -19,13 +19,11 @@ export default function QuizSelectScreen() {
   const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'QuizSelect'>>();
  
-  const [rank_count, setrank_count] = useState<{ rank_S: number; rank_A: number, rank_B:number}>({ rank_S: 1, rank_A: 1, rank_B: 1});
   const [Ids, setIds] = useState<{ IdS: number; IdA: number; IdB: number } | null>(null);
   const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
-  const [bread_S, setbread_S] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
-  const [bread_A, setbread_A] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
-  const [bread_B, setbread_B] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
-
+  const [bread_S, setbread_S] = useState(null);
+  const [bread_A, setbread_A] = useState(null);
+  const [bread_B, setbread_B] = useState(null);
 
 
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
@@ -44,7 +42,7 @@ export default function QuizSelectScreen() {
   }, []);
 
 
-
+  const [breadInfo, setBreadInfo] = useState(null);
   // 重複しないように3つの乱数を生成する関数
   const generateRandomNumbers = async() => {
     try {
@@ -53,34 +51,20 @@ export default function QuizSelectScreen() {
         throw new Error('Network response was not ok');
       }
       const count = await response.json();
-      console.log(count);
-      const { rankS_count, rankA_count, rankB_count } = count;
+      //ここに全てのDB要素を保存しておく
+      setBreadInfo(count.info);
+      setIds(count.id);
+      setbread_S(count.info.bread_info_S);
+      setbread_A(count.info.bread_info_A);
+      setbread_B(count.info.bread_info_B);
+      console.log(bread_A);
+      console.log(Ids);
       
-      let rS = (count.rankS_count-1) as number;
-      let rA = (count.rankA_count-1) as number;
-      let rB = (count.rankB_count-1) as number;
-      console.log(rS);
-      console.log(rA);
-      console.log(rB);
-      setrank_count({
-        rank_S: rS,
-        rank_A: rA,
-        rank_B: rB,
-    });
     } catch (error) {
         console.error('Error fetching data:', error);
         // エラーハンドリングを行う
       }
-    
-
-    const breadIdS = generateUniqueRandomNumber(rank_count.rank_S);
-    const breadIdA = generateUniqueRandomNumber(rank_count.rank_A); 
-    const breadIdB = generateUniqueRandomNumber(rank_count.rank_B); 
-    // 生成した乱数を配列に追加
-    setUsedNumbers([breadIdS, breadIdA, breadIdB]);
-    console.log(breadIdS, breadIdA, breadIdB);
   };
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
