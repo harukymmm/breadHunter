@@ -1,16 +1,6 @@
 version: '3'
 services:
-  # front:
-  #   container_name: front
-  #   tty: true
-  #   build: ./myapp
-  #   volumes:
-  #     - ./myapp/project:/myapp
-  #   command: yarn start 
-  #   ports:
-  #     - 19000:19000
-  #     - 19001:19001
-  #     - 19002:19002d
+
   python:
     container_name: django
     tty: true
@@ -20,10 +10,10 @@ services:
     volumes:
       - ./python:/python
     command: flask run --host=0.0.0.0
-  sqlite:
-    container_name: DB
-    tty: true
-    build: ./DB
-    volumes:
-      - ./DB:/sqlite
+  # sqlite:
+  #   container_name: DB
+  #   tty: true
+  #   build: ./DB
+  #   volumes:
+  #     - ./DB:/sqlite
 

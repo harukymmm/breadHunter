@@ -18,14 +18,22 @@ export default function QuizSelectScreen() {
   
   const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'QuizSelect'>>();
+ 
+  const [rank_count, setrank_count] = useState<{ rank_S: number; rank_A: number, rank_B:number}>({ rank_S: 1, rank_A: 1, rank_B: 1});
+  const [Ids, setIds] = useState<{ IdS: number; IdA: number; IdB: number } | null>(null);
+  const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
+  const [bread_S, setbread_S] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
+  const [bread_A, setbread_A] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
+  const [bread_B, setbread_B] = useState<{shop_id: number, img: string, explanation: string} | null>(null);
+
+
 
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
   // 0から999までのランダムな整数を生成する関数
-  const generateUniqueRandomNumber = (usedNumbers: number[]): number => {
+  // 0からnまでのランダムな整数を生成する関数->つまりrankの個数に応じたランダム整数を生成////////////
+  const generateUniqueRandomNumber = (n: number): number => {
     let randomNumber;
-    do {
-      randomNumber = Math.floor(Math.random() * 1000);
-    } while (usedNumbers.includes(randomNumber));
+    randomNumber = Math.floor(Math.random() * n + 1);
     return randomNumber;
   };
   // 使用された数値を追跡するための配列
@@ -34,14 +42,45 @@ export default function QuizSelectScreen() {
   useEffect(() => {
     generateRandomNumbers();
   }, []);
+
+
+
   // 重複しないように3つの乱数を生成する関数
-  const generateRandomNumbers = () => {
-    const breadIdA = generateUniqueRandomNumber(usedNumbers);
-    const breadIdB = generateUniqueRandomNumber(usedNumbers.concat(breadIdA)); // breadIdAと重複しないように
-    const breadIdC = generateUniqueRandomNumber(usedNumbers.concat(breadIdA, breadIdB)); // breadIdAとbreadIdBと重複しないように
+  const generateRandomNumbers = async() => {
+    try {
+      const response = await fetch('http://localhost:5001/data');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const count = await response.json();
+      console.log(count);
+      const { rankS_count, rankA_count, rankB_count } = count;
+      
+      let rS = (count.rankS_count-1) as number;
+      let rA = (count.rankA_count-1) as number;
+      let rB = (count.rankB_count-1) as number;
+      console.log(rS);
+      console.log(rA);
+      console.log(rB);
+      setrank_count({
+        rank_S: rS,
+        rank_A: rA,
+        rank_B: rB,
+    });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        // エラーハンドリングを行う
+      }
+    
+
+    const breadIdS = generateUniqueRandomNumber(rank_count.rank_S);
+    const breadIdA = generateUniqueRandomNumber(rank_count.rank_A); 
+    const breadIdB = generateUniqueRandomNumber(rank_count.rank_B); 
     // 生成した乱数を配列に追加
-    setUsedNumbers([breadIdA, breadIdB, breadIdC]);
+    setUsedNumbers([breadIdS, breadIdA, breadIdB]);
+    console.log(breadIdS, breadIdA, breadIdB);
   };
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
