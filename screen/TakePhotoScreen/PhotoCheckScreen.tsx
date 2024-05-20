@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
+import { StyleSheet, View, Image, Alert } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import HukidashiCustom from '../../components/HukidashiComponent';
 import ButtonCustom from "../../components/CustomButtonComponent";
@@ -8,13 +8,12 @@ import { StackParamList } from '../../route';
 import { NavigationProp } from '@react-navigation/native';
 import * as MediaLibrary from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
 
 //遷移の型指定
 type Navigation = NavigationProp<StackParamList, 'PhotoCheck'>;
 
 
-
-//Viewという要素を作ってそこにstyleを適用する
 export default function PhotoCheckScreen() {
 
   const navigation = useNavigation<Navigation>();
@@ -88,6 +87,38 @@ export default function PhotoCheckScreen() {
     }
   };
 
+  //フォルダに画像を格納する関数
+  const savePhotoToFolder = async (uri: string) => {
+    const folderUri = `${FileSystem.documentDirectory}python/ImgRecog/ForwardImg/`;
+    try {
+      // Create directory if it doesn't exist
+      const dirInfo = await FileSystem.getInfoAsync(folderUri);
+      if (!dirInfo.exists) {
+        await FileSystem.makeDirectoryAsync(folderUri, { intermediates: true });
+      }
+
+      // Get filename from uri
+      const filename = uri.split('/').pop();
+      const newPath = `${folderUri}${filename}`;
+
+      // Copy file to the new directory
+      await FileSystem.copyAsync({
+        from: uri,
+        to: newPath,
+      });
+
+      console.log(`Photo saved to ${newPath}`);
+    } catch (error) {
+      console.error('Error saving photo to folder:', error);
+    }
+  };
+
+  //Okボタンが押されたとき動作する関数
+  const handleOkButtonPress = async () => {
+    await savePhotoToFolder(photoUri);
+    navigation.navigate('ResultCorrect', { breadId: breadId });
+  };
+
 
   return (
     <View style={styles.container}>
@@ -119,7 +150,7 @@ export default function PhotoCheckScreen() {
             borderWidth={5}
             color="#FF8628"
             height={80}
-            onClick={() => navigation.navigate('ResultCorrect', { breadId: breadId })}//画像認識の場合分けで遷移変更する関数作る
+            onClick={handleOkButtonPress}
             radius={45}
             width={300}
             children="OK!" 
@@ -167,8 +198,7 @@ export default function PhotoCheckScreen() {
 
 registerRootComponent(PhotoCheckScreen);
 
-//containerは背景 flexは重み比率 justifycontentはflexdirection方向(デフォ縦)に位置揃える
-//alignitemsはflexdirection方向と別の軸（デフォ横）でそろえる
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -178,7 +208,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center', // 水平方向の中央に配置する
+    justifyContent: 'center', 
     marginTop: 50,
     marginBottom: 5,
   },
@@ -213,7 +243,6 @@ const styles = StyleSheet.create({
   },
   headingtext:{
     color: '#fbf7ef',
-    //alignselfで見出し文字の親オブジェクト（オレンジの四角形）に合わせてセンタリング
     alignSelf: 'center',
     marginLeft: '15%',
     fontSize: 20
@@ -222,14 +251,14 @@ const styles = StyleSheet.create({
     flex: 0,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center', // 水平方向の中央に配置する
+    justifyContent: 'center', 
     marginBottom: 15,
   },
   buttoncontainer:{
     flex: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center', // 水平方向の中央に配置する
+    justifyContent: 'center',
     marginBottom: 15,
   },
 });
