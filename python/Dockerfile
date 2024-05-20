@@ -1,6 +1,6 @@
 FROM python:3.9.11
 USER root
-ENV PYTHONUNBUFFERED 1
+ENV FLASK_APP=app
 
 RUN apt-get update
 RUN apt-get -y install locales && \
@@ -11,6 +11,8 @@ ENV LANGUAGE ja_JP:ja
 ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
 ENV TERM xterm
+
+
 
 RUN apt-get install -y vim less
 RUN pip install --upgrade pip
@@ -25,3 +27,8 @@ RUN pip3 install torch torchvision
 RUN pip install -r requirements.txt
 
 
+# ポートの公開
+EXPOSE 5000
+CMD ["flask", "run", "--host=0.0.0.0"]
+# コンテナ起動時にapp.pyを実行
+CMD ["python3", "app.py"]
