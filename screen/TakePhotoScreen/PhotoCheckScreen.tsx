@@ -113,9 +113,27 @@ export default function PhotoCheckScreen() {
     }
   };
 
+
+  const GetClassifyResult = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/classify');
+      if (!response.ok) {
+        console.error('Network response was not ok');
+      }
+      const ClassifyResult = await response.json();
+      console.log(ClassifyResult)
+    }
+    catch(e){
+      console.error('Getting Classification Result not OK');
+    }
+  }
+  
+  GetClassifyResult();
+
   //OKボタンが押されたとき動作する関数
   const handleOkButtonPress = async () => {
     await savePhotoToFolder(photoUri);
+
     navigation.navigate('ResultCorrect', { breadId: breadId });
   };
 
