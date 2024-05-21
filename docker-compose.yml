@@ -1,6 +1,5 @@
 version: '3'
 services:
-
   python:
     container_name: django
     tty: true
@@ -16,4 +15,3 @@ services:
     build: ./python/DB
     volumes:
       - ./python/DB:/sqlite
-
