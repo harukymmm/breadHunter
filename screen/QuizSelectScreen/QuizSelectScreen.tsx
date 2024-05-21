@@ -18,22 +18,42 @@ export default function QuizSelectScreen() {
   
   const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'QuizSelect'>>();
+
+  type IdsType = {
+    idS: number;
+    idA: number;
+    idB: number;
+  } | null;
+  type BreadInfoType = {
+    bread_info_S: string;
+    bread_info_A: string;
+    bread_info_B: string;
+  };
+  type CountType = {
+    id: {
+      bread_id_S: number;
+      bread_id_A: number;
+      bread_id_B: number;
+    };
+    info: BreadInfoType;
+  };
  
-  const [Ids, setIds] = useState<{ IdS: number; IdA: number; IdB: number } | null>(null);
+  const [ids, setIds] = useState<IdsType>(null);
   const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
   const [bread_S, setbread_S] = useState(null);
   const [bread_A, setbread_A] = useState(null);
   const [bread_B, setbread_B] = useState(null);
 
 
+
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
   // 0から999までのランダムな整数を生成する関数
   // 0からnまでのランダムな整数を生成する関数->つまりrankの個数に応じたランダム整数を生成////////////
-  const generateUniqueRandomNumber = (n: number): number => {
-    let randomNumber;
-    randomNumber = Math.floor(Math.random() * n + 1);
-    return randomNumber;
-  };
+  // const generateUniqueRandomNumber = (n: number): number => {
+  //   let randomNumber;
+  //   randomNumber = Math.floor(Math.random() * n + 1);
+  //   return randomNumber;
+  // };
   // 使用された数値を追跡するための配列
   const [usedNumbers, setUsedNumbers] = useState<number[]>([]);
   // コンポーネントがマウントされた時に乱数を生成する
@@ -52,13 +72,24 @@ export default function QuizSelectScreen() {
       }
       const count = await response.json();
       //ここに全てのDB要素を保存しておく
-      setBreadInfo(count.info);
-      setIds(count.id);
+      //setIds(count.id);
+
       setbread_S(count.info.bread_info_S);
       setbread_A(count.info.bread_info_A);
       setbread_B(count.info.bread_info_B);
-      console.log(bread_A);
-      console.log(Ids);
+
+      const idS=count.id.bread_id_S;
+      const idA=count.id.bread_id_A;
+      const idB=count.id.bread_id_B;
+
+      setIds({
+        idS, 
+        idA, 
+        idB});
+      console.log(ids);
+      console.log(bread_S);
+      console.log(bread_S.img);
+
       
     } catch (error) {
         console.error('Error fetching data:', error);
