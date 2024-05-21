@@ -116,7 +116,7 @@ export default function PhotoCheckScreen() {
 
   const GetClassifyResult = async () => {
     try {
-      const response = await fetch('http://localhost:5001/classify');
+      const response = await fetch('http://172.20.10.5:5001/classify');
       if (!response.ok) {
         console.error('Network response was not ok');
       }
@@ -124,7 +124,7 @@ export default function PhotoCheckScreen() {
       console.log(ClassifyResult)
     }
     catch(e){
-      console.error('Getting Classification Result not OK');
+      console.error('Getting Classification Result not OK:', e);
     }
   }
   
