@@ -47,17 +47,11 @@ export default function QuizSelectScreen() {
 
 
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
-  // 0から999までのランダムな整数を生成する関数
-  // 0からnまでのランダムな整数を生成する関数->つまりrankの個数に応じたランダム整数を生成////////////
-  // const generateUniqueRandomNumber = (n: number): number => {
-  //   let randomNumber;
-  //   randomNumber = Math.floor(Math.random() * n + 1);
-  //   return randomNumber;
-  // };
   // 使用された数値を追跡するための配列
   const [usedNumbers, setUsedNumbers] = useState<number[]>([]);
   // コンポーネントがマウントされた時に乱数を生成する
   useEffect(() => {
+    console.log("gen ran num");
     generateRandomNumbers();
   }, []);
 
@@ -66,6 +60,7 @@ export default function QuizSelectScreen() {
   // 重複しないように3つの乱数を生成する関数
   const generateRandomNumbers = async() => {
     try {
+      console.log("A");
       const response = await fetch('http://localhost:5001/data');
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -99,6 +94,7 @@ export default function QuizSelectScreen() {
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
+
 // ChangeColorButton の状態を管理する関数
 const [isChangeColorButtonPressed, setIsChangeColorButtonPressed] = useState(false);
 // BreadIdの状態を管理する関数
@@ -106,6 +102,7 @@ const [selectedBreadId, setSelectedBreadId] = useState<number | null>(null);
 
 // START ボタンが押された時の処理
 const handleStartButtonPress = () => {
+  
   // ChangeColorButton が押された状態でなければ何もしない
   if (!isChangeColorButtonPressed) {
     console.log("ChangeColorButton must be pressed first!");
@@ -114,7 +111,7 @@ const handleStartButtonPress = () => {
   // ChangeColorButton が押された時の処理
   console.log("START button pressed!");
   // ここで画面遷移等の処理を追加する
-  navigation.navigate('MapDefault', { breadId: selectedBreadId })
+  navigation.navigate('MapDefault', { breadId: selectedBreadId });
 };
 
   return (
@@ -139,13 +136,13 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
                   navigation.navigate(
-                    'QuizDetail',{breadId: usedNumbers[0],})
+                    'QuizDetail',{breadId: ids.idS,})
                 }
                 rank = "S"
-                source={require('../../assets/testPan.jpeg')}
+                source={{uri : bread_S.img}}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={usedNumbers[0]} // ランダムな数字を割り当てる
+                breadId={ids.idS} // ランダムな数字を割り当てる
                 setSelectedBreadId={setSelectedBreadId}
               />
             
@@ -154,13 +151,13 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
                   navigation.navigate(
-                    'QuizDetail',{breadId: usedNumbers[1],})
+                    'QuizDetail',{breadId: ids.idA,})
                 }
                 rank = "A"
-                source={require('../../assets/testPan.jpeg')}
+                source={{uri : bread_A.img}}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={usedNumbers[1]} // ランダムな数字を割り当てる
+                breadId={ids.idA} // ランダムな数字を割り当てる
                 setSelectedBreadId={setSelectedBreadId}
               />
             
@@ -170,13 +167,13 @@ const handleStartButtonPress = () => {
           
               <SelectFigComp
                 onPress={() => 
-                  navigation.navigate('QuizDetail',{breadId: usedNumbers[2],})
+                  navigation.navigate('QuizDetail',{breadId: ids.idB,})
                 }
-                rank = "C"
-                source={require('../../assets/testPan.jpeg')}
+                rank = "B"
+                source={{uri : bread_B.img}}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={usedNumbers[2]} // ランダムな数字を割り当てる
+                breadId={ids.idB} // ランダムな数字を割り当てる
                 setSelectedBreadId={setSelectedBreadId}
               />
 
