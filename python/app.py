@@ -78,10 +78,6 @@ def get_rank_count():
         'bread_id_A': bread_id_A,
         'bread_id_B': bread_id_B}
    
-        
-
-        
-    
 
     cursor.execute("SELECT shop_id, img, explanation FROM breads WHERE id = ?", (bread_id_S,))
     row = cursor.fetchone()
