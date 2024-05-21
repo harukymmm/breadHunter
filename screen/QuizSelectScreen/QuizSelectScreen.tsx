@@ -58,7 +58,7 @@ export default function QuizSelectScreen() {
     generateRandomNumbers();
   }, []);
 
-  const [breadInfo, setBreadInfo] = useState(null);
+  //const [breadInfo, setBreadInfo] = useState(null);
   // 重複しないように3つの乱数を生成する関数
   const generateRandomNumbers = async() => {
     try {
@@ -86,6 +86,7 @@ export default function QuizSelectScreen() {
       console.log(ids);
       console.log(bread_S);
       console.log(bread_S?.img);
+
         
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -137,14 +138,16 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
                   navigation.navigate(
-                    'QuizDetail',{breadId: ids?.idS,})
+                    'QuizDetail',{breadId: ids?.idS, breadExp: bread_S?.explanation, breadImg: bread_S?.img,})
                 }
                 rank = "S"
                 source={require('../../assets/testPan.jpeg')}
-                //source={bread_S.img}
+                //source={{uri:bread_S.img}}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
                 breadId={ids?.idS} // ランダムな数字を割り当てる
+                breadExp={bread_S?.explanation}
+                breadImg={bread_S?.img}
                 setSelectedBreadId={setSelectedBreadId}
               />
             
@@ -153,14 +156,16 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
                   navigation.navigate(
-                    'QuizDetail',{breadId: ids?.idA,})
+                    'QuizDetail',{breadId: ids?.idA, breadExp: bread_A?.explanation, breadImg: bread_A?.img,})
                 }
                 rank = "A"
-                //source={bread_A.img}
+                //source={{uri:bread_A.img}}
                 source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
                 breadId={ids?.idA} // ランダムな数字を割り当てる
+                breadExp={bread_A?.explanation}
+                breadImg={bread_A?.img}
                 setSelectedBreadId={setSelectedBreadId}
               />
             
@@ -170,14 +175,16 @@ const handleStartButtonPress = () => {
           
               <SelectFigComp
                 onPress={() => 
-                  navigation.navigate('QuizDetail',{breadId: ids?.idB,})
+                  navigation.navigate('QuizDetail',{breadId: ids?.idB, breadExp: bread_B?.explanation, breadImg: bread_B?.img,})
                 }
                 rank = "B"
-                //source={bread_B?.img}
+                //source={{uri:bread_B?.img}}
                 source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
                 breadId={ids?.idB} // ランダムな数字を割り当てる
+                breadExp={bread_B?.explanation}
+                breadImg={bread_B?.img}
                 setSelectedBreadId={setSelectedBreadId}
               />
 
