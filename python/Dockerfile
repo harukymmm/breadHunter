@@ -26,6 +26,7 @@ WORKDIR /python
 # RUN pip3 install torch torchvision 
 RUN pip install -r requirements.txt
 
+RUN apt-get install -y libgl1-mesa-dev
 
 # ポートの公開
 EXPOSE 5000
