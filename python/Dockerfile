@@ -23,7 +23,7 @@ RUN mkdir /python
 ADD . /python
 WORKDIR /python
 
-# RUN pip3 install torch torchvision 
+RUN pip3 install torch torchvision 
 RUN pip install -r requirements.txt
 
 RUN apt-get install -y libgl1-mesa-dev

@@ -37,13 +37,16 @@ export default function QuizSelectScreen() {
     };
     info: BreadInfoType;
   };
- 
+  //ids:bread_idの引渡し
   const [ids, setIds] = useState<IdsType>(null);
-  const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
+  //const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
+  //breadsの中身入れてるbread_S.explanation, bread_S.img, bread_S.shop_idでそれぞれ取れます
   const [bread_S, setbread_S] = useState(null);
   const [bread_A, setbread_A] = useState(null);
   const [bread_B, setbread_B] = useState(null);
-
+  const [imgS, setImgS] = useState<any>(null);
+  const [imgA, setImgA] = useState<any>(null);
+  const [imgB, setImgB] = useState<any>(null);
 
 
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
@@ -54,7 +57,6 @@ export default function QuizSelectScreen() {
     console.log("gen ran num");
     generateRandomNumbers();
   }, []);
-
 
   const [breadInfo, setBreadInfo] = useState(null);
   // 重複しないように3つの乱数を生成する関数
@@ -83,9 +85,8 @@ export default function QuizSelectScreen() {
         idB});
       console.log(ids);
       console.log(bread_S);
-      console.log(bread_S.img);
-
-      
+      console.log(bread_S?.img);
+        
     } catch (error) {
         console.error('Error fetching data:', error);
         // エラーハンドリングを行う
@@ -136,13 +137,14 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
                   navigation.navigate(
-                    'QuizDetail',{breadId: ids.idS,})
+                    'QuizDetail',{breadId: ids?.idS,})
                 }
                 rank = "S"
-                source={{uri : bread_S.img}}
+                source={require('../../assets/testPan.jpeg')}
+                //source={bread_S.img}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={ids.idS} // ランダムな数字を割り当てる
+                breadId={ids?.idS} // ランダムな数字を割り当てる
                 setSelectedBreadId={setSelectedBreadId}
               />
             
@@ -151,13 +153,14 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
                   navigation.navigate(
-                    'QuizDetail',{breadId: ids.idA,})
+                    'QuizDetail',{breadId: ids?.idA,})
                 }
                 rank = "A"
-                source={{uri : bread_A.img}}
+                //source={bread_A.img}
+                source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={ids.idA} // ランダムな数字を割り当てる
+                breadId={ids?.idA} // ランダムな数字を割り当てる
                 setSelectedBreadId={setSelectedBreadId}
               />
             
@@ -167,13 +170,14 @@ const handleStartButtonPress = () => {
           
               <SelectFigComp
                 onPress={() => 
-                  navigation.navigate('QuizDetail',{breadId: ids.idB,})
+                  navigation.navigate('QuizDetail',{breadId: ids?.idB,})
                 }
                 rank = "B"
-                source={{uri : bread_B.img}}
+                //source={bread_B?.img}
+                source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={ids.idB} // ランダムな数字を割り当てる
+                breadId={ids?.idB} // ランダムな数字を割り当てる
                 setSelectedBreadId={setSelectedBreadId}
               />
 
