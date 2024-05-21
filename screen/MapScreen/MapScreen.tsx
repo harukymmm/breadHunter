@@ -29,11 +29,13 @@ export default function MapScreen() {
     longitudeDelta: 0.0024, //縮尺
   });
   const [angle, setAngle] = useState(0);
+  const [distance, setDistance] = useState(0);
 
   useEffect(() => {
     console.log(region.latitude, region.longitude);
-    const distance = getDistance(region.latitude, region.longitude, goal_latitude, goal_longitude);
-    if (distance < 0.2) { // 目的地と現在地の距離が近くなると遷移
+    const calculatedDistance = getDistance(region.latitude, region.longitude, goal_latitude, goal_longitude);
+    setDistance(calculatedDistance);
+    if (calculatedDistance < 0.2) { // 目的地と現在地の距離が近くなると遷移
       navigation.navigate('NearBakery', {breadId: breadId}); 
     }
   ;
@@ -120,7 +122,7 @@ export default function MapScreen() {
           <View style={ styles.buttonContainer }>
               <View style={ styles.distance }>
                 <DistanceView 
-                long={20}
+                long={distance.toFixed(2)} // 小数点以下2桁にフォーマット
                 height={80} 
                 width={150}
                 radius={5}
