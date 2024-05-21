@@ -170,8 +170,8 @@ const handleStartButtonPress = () => {
                 breadExp={bread_A?.explanation}
                 breadImg={bread_A?.img}
                 setSelectedBreadId={setSelectedBreadId}
-                setSelectedShopla={shop_A?.latitude}
-                setSelectedShoplo={shop_A?.longitude}
+                setSelectedShopla={setSelectedShopla}
+                setSelectedShoplo={setSelectedShoplo}
               />
             
             </View>
@@ -191,8 +191,8 @@ const handleStartButtonPress = () => {
                 breadExp={bread_B?.explanation}
                 breadImg={bread_B?.img}
                 setSelectedBreadId={setSelectedBreadId}
-                setSelectedShopla={shop_B?.latitude}
-                setSelectedShoplo={shop_B?.longitude}
+                setSelectedShopla={setSelectedShopla}
+                setSelectedShoplo={setSelectedShoplo}
               />
 
               <View style={{flex: 0, width: 10}} />{/* 空白 */} 
