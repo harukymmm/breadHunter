@@ -15,7 +15,7 @@ export default function QuizDetailScreen() {
   const navigation = useNavigation<Navigation>();
   //QuizSelectScreenから渡された変数breadId
   const route = useRoute<RouteProp<StackParamList, 'QuizDetail'>>();
-  const { breadId } = route.params;
+  const { breadId, breadExp, breadImg } = route.params;
   
 return (
   <View style={styles.container}>
@@ -25,7 +25,7 @@ return (
       <ChooseBread
           source={require('../../assets/testPan.jpeg')}
           rank= {breadId.toString()}  //rank内にbreadIdを表示（応急処置）
-          detail="ここにパンの説明が入ります"
+          detail={breadExp.toString()}
           onPress={() => navigation.navigate('QuizSelect')}
       ></ChooseBread>
 

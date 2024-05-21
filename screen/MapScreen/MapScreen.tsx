@@ -18,9 +18,9 @@ export default function MapScreen() {
 
   const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'MapDefault'>>();
-  const { breadId } = route.params;
-  const goal_latitude = 35.02526; 
-  const goal_longitude = 135.78158;
+  const { breadId, latitude, longitude } = route.params;
+  const goal_latitude = latitude; 
+  const goal_longitude = longitude;
   
   const [region, setRegion] = useState({
     latitude: 35.02886,
@@ -33,6 +33,7 @@ export default function MapScreen() {
 
   useEffect(() => {
     console.log(region.latitude, region.longitude);
+    console.log(goal_latitude, goal_longitude);
     const calculatedDistance = getDistance(region.latitude, region.longitude, goal_latitude, goal_longitude);
     setDistance(calculatedDistance);
     if (calculatedDistance < 0.2) { // 目的地と現在地の距離が近くなると遷移

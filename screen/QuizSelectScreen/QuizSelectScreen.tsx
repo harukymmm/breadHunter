@@ -29,43 +29,35 @@ export default function QuizSelectScreen() {
     bread_info_A: string;
     bread_info_B: string;
   };
-  type CountType = {
-    id: {
-      bread_id_S: number;
-      bread_id_A: number;
-      bread_id_B: number;
-    };
-    info: BreadInfoType;
-  };
- 
+  //ids:bread_idの引渡し
   const [ids, setIds] = useState<IdsType>(null);
-  const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
+  //const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
+  //breadsの中身入れてるbread_S.explanation, bread_S.img, bread_S.shop_idでそれぞれ取れます
   const [bread_S, setbread_S] = useState(null);
   const [bread_A, setbread_A] = useState(null);
   const [bread_B, setbread_B] = useState(null);
-
+  const [imgS, setImgS] = useState<any>(null);
+  const [imgA, setImgA] = useState<any>(null);
+  const [imgB, setImgB] = useState<any>(null);
+  const [shop_S, setshop_S] = useState(null);
+  const [shop_A, setshop_A] = useState(null);
+  const [shop_B, setshop_B] = useState(null);
 
 
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
-  // 0から999までのランダムな整数を生成する関数
-  // 0からnまでのランダムな整数を生成する関数->つまりrankの個数に応じたランダム整数を生成////////////
-  // const generateUniqueRandomNumber = (n: number): number => {
-  //   let randomNumber;
-  //   randomNumber = Math.floor(Math.random() * n + 1);
-  //   return randomNumber;
-  // };
   // 使用された数値を追跡するための配列
   const [usedNumbers, setUsedNumbers] = useState<number[]>([]);
   // コンポーネントがマウントされた時に乱数を生成する
   useEffect(() => {
+    console.log("gen ran num");
     generateRandomNumbers();
   }, []);
 
-
-  const [breadInfo, setBreadInfo] = useState(null);
+  //const [breadInfo, setBreadInfo] = useState(null);
   // 重複しないように3つの乱数を生成する関数
   const generateRandomNumbers = async() => {
     try {
+      console.log("A");
       const response = await fetch('http://localhost:5001/data');
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -77,6 +69,9 @@ export default function QuizSelectScreen() {
       setbread_S(count.info.bread_info_S);
       setbread_A(count.info.bread_info_A);
       setbread_B(count.info.bread_info_B);
+      setshop_S(count.shop.shop_S);
+      setshop_A(count.shop.shop_A);
+      setshop_B(count.shop.shop_B);
 
       const idS=count.id.bread_id_S;
       const idA=count.id.bread_id_A;
@@ -88,9 +83,10 @@ export default function QuizSelectScreen() {
         idB});
       console.log(ids);
       console.log(bread_S);
-      console.log(bread_S.img);
+      console.log(bread_S?.img);
+      console.log(shop_S);
 
-      
+        
     } catch (error) {
         console.error('Error fetching data:', error);
         // エラーハンドリングを行う
@@ -99,13 +95,17 @@ export default function QuizSelectScreen() {
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
+
 // ChangeColorButton の状態を管理する関数
 const [isChangeColorButtonPressed, setIsChangeColorButtonPressed] = useState(false);
 // BreadIdの状態を管理する関数
 const [selectedBreadId, setSelectedBreadId] = useState<number | null>(null);
+const [selectedShopla, setSelectedShopla] = useState<number | null>(null);
+const [selectedShoplo, setSelectedShoplo] = useState<number | null>(null);
 
 // START ボタンが押された時の処理
 const handleStartButtonPress = () => {
+  
   // ChangeColorButton が押された状態でなければ何もしない
   if (!isChangeColorButtonPressed) {
     console.log("ChangeColorButton must be pressed first!");
@@ -114,7 +114,7 @@ const handleStartButtonPress = () => {
   // ChangeColorButton が押された時の処理
   console.log("START button pressed!");
   // ここで画面遷移等の処理を追加する
-  navigation.navigate('MapDefault', { breadId: selectedBreadId })
+  navigation.navigate('MapDefault', { breadId: selectedBreadId, latitude: selectedShopla,longitude: selectedShoplo,});
 };
 
   return (
@@ -139,14 +139,19 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
                   navigation.navigate(
-                    'QuizDetail',{breadId: usedNumbers[0],})
+                    'QuizDetail',{breadId: ids?.idS, breadExp: bread_S?.explanation, breadImg: bread_S?.img,})
                 }
                 rank = "S"
                 source={require('../../assets/testPan.jpeg')}
+                //source={{uri:bread_S.img}}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={usedNumbers[0]} // ランダムな数字を割り当てる
+                breadId={ids?.idS} // ランダムな数字を割り当てる
+                breadExp={bread_S?.explanation}
+                breadImg={bread_S?.img}
                 setSelectedBreadId={setSelectedBreadId}
+                setSelectedShopla={setSelectedShopla}
+                setSelectedShoplo={setSelectedShoplo}
               />
             
                   <View style={styles.spaceW} />{/* 空白 */} 
@@ -154,14 +159,19 @@ const handleStartButtonPress = () => {
               <SelectFigComp
                 onPress={() => 
                   navigation.navigate(
-                    'QuizDetail',{breadId: usedNumbers[1],})
+                    'QuizDetail',{breadId: ids?.idA, breadExp: bread_A?.explanation, breadImg: bread_A?.img,})
                 }
                 rank = "A"
+                //source={{uri:bread_A.img}}
                 source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={usedNumbers[1]} // ランダムな数字を割り当てる
+                breadId={ids?.idA} // ランダムな数字を割り当てる
+                breadExp={bread_A?.explanation}
+                breadImg={bread_A?.img}
                 setSelectedBreadId={setSelectedBreadId}
+                setSelectedShopla={setSelectedShopla}
+                setSelectedShoplo={setSelectedShoplo}
               />
             
             </View>
@@ -170,14 +180,19 @@ const handleStartButtonPress = () => {
           
               <SelectFigComp
                 onPress={() => 
-                  navigation.navigate('QuizDetail',{breadId: usedNumbers[2],})
+                  navigation.navigate('QuizDetail',{breadId: ids?.idB, breadExp: bread_B?.explanation, breadImg: bread_B?.img,})
                 }
-                rank = "C"
+                rank = "B"
+                //source={{uri:bread_B?.img}}
                 source={require('../../assets/testPan.jpeg')}
                 isChangeColorButtonPressed={isChangeColorButtonPressed} // ChangeColorButton の押された状態を渡す
                 setIsChangeColorButtonPressed={setIsChangeColorButtonPressed} // ChangeColorButton の押された状態を更新する関数を渡す
-                breadId={usedNumbers[2]} // ランダムな数字を割り当てる
+                breadId={ids?.idB} // ランダムな数字を割り当てる
+                breadExp={bread_B?.explanation}
+                breadImg={bread_B?.img}
                 setSelectedBreadId={setSelectedBreadId}
+                setSelectedShopla={setSelectedShopla}
+                setSelectedShoplo={setSelectedShoplo}
               />
 
               <View style={{flex: 0, width: 10}} />{/* 空白 */} 
