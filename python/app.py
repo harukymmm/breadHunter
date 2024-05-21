@@ -96,14 +96,27 @@ def get_rank_count():
     conn.close()
     
     return jsonify({'id': id, 'info': info})
-@app.route("/")
-def index():
+# @app.route("/")
+# def index():
     
-    try:
-        conn = sqlite3.connect(db_path)
-        conn.cursor().execute("SELECT*FROM rankS")  # 簡単なクエリを実行
-        conn.close()
-        return "DB OK"
-    except sqlite3.Error as e:
-        return f"DB Error: {e}"
+#     try:
+#         conn = sqlite3.connect(db_path)
+#         conn.cursor().execute("SELECT*FROM rankS")  # 簡単なクエリを実行
+#         conn.close()
+#         return "DB OK"
+#     except sqlite3.Error as e:
+#         return f"DB Error: {e}"
+
+from Forward import ClassifyBreadImg
+
+# app = Flask(__name__)
+# CORS(app)
+# app.run(debug=True)
+
+#トップページへのリクエストが来た時に関数を返す
+@app.route("/")
+def Classify_toFront():
+    result=ClassifyBreadImg()
+    result=str(result)
+    return result
 
