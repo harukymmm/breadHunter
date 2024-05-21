@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 import { useNavigation } from '@react-navigation/native';
-import { StackParamList} from '../../route'
+import { StackParamList} from '../../route';
 import { NavigationProp, useRoute, RouteProp } from '@react-navigation/native';
 
 import ButtonCustom from "../../components/CustomButtonComponent";
@@ -19,28 +19,82 @@ export default function QuizSelectScreen() {
   const navigation = useNavigation<Navigation>();
   const route = useRoute<RouteProp<StackParamList, 'QuizSelect'>>();
 
+  type IdsType = {
+    idS: number;
+    idA: number;
+    idB: number;
+  } | null;
+  type BreadInfoType = {
+    bread_info_S: string;
+    bread_info_A: string;
+    bread_info_B: string;
+  };
+  type CountType = {
+    id: {
+      bread_id_S: number;
+      bread_id_A: number;
+      bread_id_B: number;
+    };
+    info: BreadInfoType;
+  };
+ 
+  const [ids, setIds] = useState<IdsType>(null);
+  const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
+  const [bread_S, setbread_S] = useState(null);
+  const [bread_A, setbread_A] = useState(null);
+  const [bread_B, setbread_B] = useState(null);
+
+
+
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
   // 0から999までのランダムな整数を生成する関数
-  const generateUniqueRandomNumber = (usedNumbers: number[]): number => {
-    let randomNumber;
-    do {
-      randomNumber = Math.floor(Math.random() * 1000);
-    } while (usedNumbers.includes(randomNumber));
-    return randomNumber;
-  };
+  // 0からnまでのランダムな整数を生成する関数->つまりrankの個数に応じたランダム整数を生成////////////
+  // const generateUniqueRandomNumber = (n: number): number => {
+  //   let randomNumber;
+  //   randomNumber = Math.floor(Math.random() * n + 1);
+  //   return randomNumber;
+  // };
   // 使用された数値を追跡するための配列
   const [usedNumbers, setUsedNumbers] = useState<number[]>([]);
   // コンポーネントがマウントされた時に乱数を生成する
   useEffect(() => {
     generateRandomNumbers();
   }, []);
+
+
+  const [breadInfo, setBreadInfo] = useState(null);
   // 重複しないように3つの乱数を生成する関数
-  const generateRandomNumbers = () => {
-    const breadIdA = generateUniqueRandomNumber(usedNumbers);
-    const breadIdB = generateUniqueRandomNumber(usedNumbers.concat(breadIdA)); // breadIdAと重複しないように
-    const breadIdC = generateUniqueRandomNumber(usedNumbers.concat(breadIdA, breadIdB)); // breadIdAとbreadIdBと重複しないように
-    // 生成した乱数を配列に追加
-    setUsedNumbers([breadIdA, breadIdB, breadIdC]);
+  const generateRandomNumbers = async() => {
+    try {
+      const response = await fetch('http://localhost:5001/data');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const count = await response.json();
+      //ここに全てのDB要素を保存しておく
+      //setIds(count.id);
+
+      setbread_S(count.info.bread_info_S);
+      setbread_A(count.info.bread_info_A);
+      setbread_B(count.info.bread_info_B);
+
+      const idS=count.id.bread_id_S;
+      const idA=count.id.bread_id_A;
+      const idB=count.id.bread_id_B;
+
+      setIds({
+        idS, 
+        idA, 
+        idB});
+      console.log(ids);
+      console.log(bread_S);
+      console.log(bread_S.img);
+
+      
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        // エラーハンドリングを行う
+      }
   };
 ///////////////////////////////////////////////////////////////////////////////////////////
 
