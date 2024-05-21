@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
 
 interface Props {
-    long: number;    //距離
+    long: string;    //距離
     height: number;       //高さ
     width: number;         //幅
     radius: number;        //角の丸さ

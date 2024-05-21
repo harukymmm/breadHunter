@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request, make_response, jsonify
 from flask_cors import CORS
+
 #from flask_sqlalchemy import SQLAlchemy #これがflaskのSQLiteらしい？分からん
 import sqlite3
 import os
@@ -105,3 +106,4 @@ def index():
         return "DB OK"
     except sqlite3.Error as e:
         return f"DB Error: {e}"
+
