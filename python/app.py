@@ -65,15 +65,12 @@ def get_rank_count():
         'bread_id_B': bread_id_B}
 
 
-
-
-
-
     cursor.execute("SELECT shop_id, img, explanation FROM breads WHERE id = ?", (bread_id_S,))
     row = cursor.fetchone()
     bread_info_S = {'shop_id': row[0],
         'img': row[1],
         'explanation': row[2]}
+    shop_id_S=row[0]
         
     
     cursor.execute("SELECT shop_id, img, explanation FROM breads WHERE id = ?", (bread_id_A,))
@@ -81,21 +78,37 @@ def get_rank_count():
     bread_info_A = {'shop_id': row[0],
         'img': row[1],
         'explanation': row[2]}
+    shop_id_A=row[0]
     cursor.execute("SELECT shop_id, img, explanation FROM breads WHERE id = ?", (bread_id_B,))
     row = cursor.fetchone()
     bread_info_B = {'shop_id': row[0],'img': row[1],'explanation': row[2]}
     info={'bread_info_S': bread_info_S,
         'bread_info_A': bread_info_A,
         'bread_info_B': bread_info_B}
+    shop_id_B=row[0]
         
         
+    cursor.execute("SELECT latitude, longitude FROM shops WHERE shop_id = ?", (shop_id_S,))
+    row = cursor.fetchone()
+    shop_S = {'latitude': row[0], 'longitude': row[1]}
+    cursor.execute("SELECT latitude, longitude FROM shops WHERE shop_id = ?", (shop_id_A,))
+    row = cursor.fetchone()
+    shop_A = {'latitude': row[0], 'longitude': row[1]}
+    cursor.execute("SELECT latitude, longitude FROM shops WHERE shop_id = ?", (shop_id_B,))
+    row = cursor.fetchone()
+    shop_B = {'latitude': row[0], 'longitude': row[1]}
+    shop={
+         'shop_S':shop_S,
+         'shop_A':shop_A,
+         'shop_B':shop_B
+         }
     
         
     
     print(info)
     conn.close()
     
-    return jsonify({'id': id, 'info': info})
+    return jsonify({'id': id, 'info': info, 'shop':shop})
 # @app.route("/")
 # def index():
     

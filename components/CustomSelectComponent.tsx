@@ -11,16 +11,22 @@ interface Props {
     isChangeColorButtonPressed: boolean;
     setIsChangeColorButtonPressed: React.Dispatch<React.SetStateAction<boolean>>;
     setSelectedBreadId: React.Dispatch<React.SetStateAction<number | null>>;
+    setSelectedShopla: React.Dispatch<React.SetStateAction<number | null>>;
+    setSelectedShoplo: React.Dispatch<React.SetStateAction<number | null>>;
     breadId: number;
+    longitude: number;
+    latitude: number;
 }
 
-const SelectFigComp = ({onPress, rank, source, isChangeColorButtonPressed, setIsChangeColorButtonPressed, setSelectedBreadId, breadId}: Props) => {
+const SelectFigComp = ({onPress, rank, source, isChangeColorButtonPressed, setIsChangeColorButtonPressed, setSelectedBreadId, setSelectedShopla,setSelectedShoplo,breadId, longitude, latitude}: Props) => {
   const [isButtonPressed, setIsButtonPressed] = useState(false); // ボタンが押されたかどうかの状態
   const handleButtonPress = () => {
     // ChangeColorButton の押下状態を更新
     setIsChangeColorButtonPressed(!isChangeColorButtonPressed);
     // 選択されたパンのIDを記録
     setSelectedBreadId(breadId);
+    setSelectedShopla(latitude);
+    setSelectedShoplo(longitude);
 };
 
     return (
@@ -68,3 +74,5 @@ const SelectFigComp = ({onPress, rank, source, isChangeColorButtonPressed, setIs
 
   
   export default SelectFigComp;
+
+

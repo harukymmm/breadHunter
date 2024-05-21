@@ -29,14 +29,6 @@ export default function QuizSelectScreen() {
     bread_info_A: string;
     bread_info_B: string;
   };
-  type CountType = {
-    id: {
-      bread_id_S: number;
-      bread_id_A: number;
-      bread_id_B: number;
-    };
-    info: BreadInfoType;
-  };
   //ids:bread_idの引渡し
   const [ids, setIds] = useState<IdsType>(null);
   //const [bread_ids, setbread_ids] = useState<{ bread_id_S: number; bread_id_A: number, bread_id_B:number}>({ bread_id_S: 0, bread_id_A: 0, bread_id_B: 0 });
@@ -47,6 +39,9 @@ export default function QuizSelectScreen() {
   const [imgS, setImgS] = useState<any>(null);
   const [imgA, setImgA] = useState<any>(null);
   const [imgB, setImgB] = useState<any>(null);
+  const [shop_S, setshop_S] = useState(null);
+  const [shop_A, setshop_A] = useState(null);
+  const [shop_B, setshop_B] = useState(null);
 
 
   ////////////////////////////////////数字のランダム生成と再生成//////////////////////////////
@@ -74,6 +69,9 @@ export default function QuizSelectScreen() {
       setbread_S(count.info.bread_info_S);
       setbread_A(count.info.bread_info_A);
       setbread_B(count.info.bread_info_B);
+      setshop_S(count.shop.shop_S);
+      setshop_A(count.shop.shop_A);
+      setshop_B(count.shop.shop_B);
 
       const idS=count.id.bread_id_S;
       const idA=count.id.bread_id_A;
@@ -86,6 +84,7 @@ export default function QuizSelectScreen() {
       console.log(ids);
       console.log(bread_S);
       console.log(bread_S?.img);
+      console.log(shop_S);
 
         
     } catch (error) {
@@ -101,6 +100,8 @@ export default function QuizSelectScreen() {
 const [isChangeColorButtonPressed, setIsChangeColorButtonPressed] = useState(false);
 // BreadIdの状態を管理する関数
 const [selectedBreadId, setSelectedBreadId] = useState<number | null>(null);
+const [selectedShopla, setSelectedShopla] = useState<number | null>(null);
+const [selectedShoplo, setSelectedShoplo] = useState<number | null>(null);
 
 // START ボタンが押された時の処理
 const handleStartButtonPress = () => {
@@ -113,7 +114,7 @@ const handleStartButtonPress = () => {
   // ChangeColorButton が押された時の処理
   console.log("START button pressed!");
   // ここで画面遷移等の処理を追加する
-  navigation.navigate('MapDefault', { breadId: selectedBreadId });
+  navigation.navigate('MapDefault', { breadId: selectedBreadId, latitude: selectedShopla,longitude: selectedShoplo,});
 };
 
   return (
@@ -149,6 +150,8 @@ const handleStartButtonPress = () => {
                 breadExp={bread_S?.explanation}
                 breadImg={bread_S?.img}
                 setSelectedBreadId={setSelectedBreadId}
+                setSelectedShopla={setSelectedShopla}
+                setSelectedShoplo={setSelectedShoplo}
               />
             
                   <View style={styles.spaceW} />{/* 空白 */} 
@@ -167,6 +170,8 @@ const handleStartButtonPress = () => {
                 breadExp={bread_A?.explanation}
                 breadImg={bread_A?.img}
                 setSelectedBreadId={setSelectedBreadId}
+                setSelectedShopla={shop_A?.latitude}
+                setSelectedShoplo={shop_A?.longitude}
               />
             
             </View>
@@ -186,6 +191,8 @@ const handleStartButtonPress = () => {
                 breadExp={bread_B?.explanation}
                 breadImg={bread_B?.img}
                 setSelectedBreadId={setSelectedBreadId}
+                setSelectedShopla={shop_B?.latitude}
+                setSelectedShoplo={shop_B?.longitude}
               />
 
               <View style={{flex: 0, width: 10}} />{/* 空白 */} 
